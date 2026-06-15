@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>document</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="language-grammar-reference">Language Grammar Reference</h1>
+<p>This document describes the syntax and grammar of the cubical Lisp
+interpreter, covering all special forms, builtin procedures, type
+formers, and their reduction rules.</p>
+<hr />
+<h2 id="lexical-structure">Lexical Structure</h2>
+<p>The reader tokenises source text by splitting on whitespace after
+expanding parentheses and the quote shorthand into separate tokens.</p>
+<pre><code>token  ::= &#39;(&#39; | &#39;)&#39; | &quot;&#39;&quot; | number | symbol
+number ::= [-]?[0-9]+ (&#39;.&#39; [0-9]+)?
+symbol ::= any sequence of non-whitespace, non-paren characters</code></pre>
+<p>The <code>'expr</code> shorthand is expanded by the reader into
+<code>(quote expr)</code> before parsing. There are no string literals,
+booleans, or comments in the base language.</p>
+<hr />
+<h2 id="top-level-grammar">Top-level Grammar</h2>
+<p>A source file is a sequence of one or more expressions.</p>
+<pre><code>program  ::= expr+
+expr     ::= atom | list
+atom     ::= number | symbol
+list     ::= &#39;(&#39; expr* &#39;)&#39;</code></pre>
+<hr />
+<h2 id="special-forms">Special Forms</h2>
+<p>Special forms are recognised by their leading symbol and are
+<em>not</em> evaluated as ordinary function calls. Their arguments may
+be unevaluated, bound, or treated structurally.</p>
+<h3 id="quote"><code>quote</code></h3>
+<pre><code>(quote expr)
+&#39;expr          ; reader shorthand</code></pre>
+<p>Returns <code>expr</code> unevaluated. No sub-expressions are
+evaluated.</p>
+<hr />
+<h3 id="quasiquote-unquote-unquote-splicing"><code>quasiquote</code>,
+<code>unquote</code>, <code>unquote-splicing</code></h3>
+<pre><code>(quasiquote template)
+`template                     ; reader shorthand (if supported)
+
+(unquote expr)                ; inside a quasiquote — splices one value
+,expr
+
+(unquote-splicing list-expr)  ; inside a quasiquote — splices a list inline
+,@list-expr</code></pre>
+<p>Within a <code>quasiquote</code>, sub-expressions are returned
+literally <em>except</em> where <code>unquote</code> or
+<code>unquote-splicing</code> appear at the current nesting depth.
+Nested <code>quasiquote</code> forms increase the depth; nested
+<code>unquote</code> forms decrease it.</p>
+<hr />
+<h3 id="define"><code>define</code></h3>
+<pre><code>(define name expr)</code></pre>
+<p>Evaluates <code>expr</code> and binds the result to <code>name</code>
+in the global environment. <code>name</code> must be a symbol. Returns
+the bound value.</p>
+<hr />
+<h3 id="lambda"><code>lambda</code></h3>
+<p><strong>Surface syntax</strong> (before compilation):</p>
+<pre><code>(lambda (param ...) body)</code></pre>
+<p><strong>Core syntax</strong> (after compilation, De Bruijn form):</p>
+<pre><code>(lambda arity body)</code></pre>
+<p>Creates a closure over the current lexical environment. Parameters
+are referenced in <code>body</code> via De Bruijn indices
+(<code>#0</code>, <code>#1</code>, …) rather than names.
+<code>arity</code> is a number literal recording the parameter
+count.</p>
+<hr />
+<h3 id="if"><code>if</code></h3>
+<pre><code>(if condition then-expr)
+(if condition then-expr else-expr)</code></pre>
+<p>Evaluates <code>condition</code>. If it is truthy (non-zero number or
+non-empty list), evaluates and returns <code>then-expr</code>; otherwise
+evaluates and returns <code>else-expr</code>. If no
+<code>else-expr</code> is given and the condition is falsy, returns
+<code>()</code>.</p>
+<p>Truthiness rules: - <code>0</code> and <code>()</code> are
+<strong>falsy</strong>. - Every other value is
+<strong>truthy</strong>.</p>
+<hr />
+<h3 id="let"><code>let</code></h3>
+<p><strong>Surface syntax</strong>:</p>
+<pre><code>(let ((name expr) ...) body ...)</code></pre>
+<p>Evaluates each binding expression in the current environment
+(bindings are <em>not</em> mutually recursive; later bindings cannot see
+earlier ones). Extends the lexical environment with the bound values,
+then evaluates each <code>body</code> expression in sequence, returning
+the last.</p>
+<hr />
+<h3 id="begin"><code>begin</code></h3>
+<pre><code>(begin expr ...)</code></pre>
+<p>Evaluates each expression in order and returns the value of the last
+one. Primarily used to sequence side effects.</p>
+<hr />
+<h3 id="defmacro"><code>defmacro</code></h3>
+<pre><code>(defmacro name (param ...) body)</code></pre>
+<p>Defines a macro. When <code>(name arg ...)</code> is later
+encountered, the <em>unevaluated</em> argument expressions are
+substituted for <code>param ...</code> in <code>body</code>, and the
+resulting expression is compiled and evaluated. Macros operate on
+surface S-expressions, not on values.</p>
+<hr />
+<h2 id="path-interval-forms-cubical">Path / Interval Forms
+(Cubical)</h2>
+<p>These forms implement a simplified model of cubical type theory where
+the interval <code>I = [0, 1]</code> is a numeric range.</p>
+<h3 id="path"><code>path</code></h3>
+<p><strong>Surface syntax</strong>:</p>
+<pre><code>(path (i) body)</code></pre>
+<p><strong>Core syntax</strong>:</p>
+<pre><code>(path 1.0 body)</code></pre>
+<p>Creates a path value: a function <code>I → A</code> that binds the
+interval variable <code>i</code> (De Bruijn index <code>#0</code> in the
+compiled body). Analogous to a <code>lambda</code> of arity 1 whose
+domain is the interval <code>[0, 1]</code>.</p>
+<hr />
+<h3 id="papply"><code>papply</code></h3>
+<pre><code>(papply path t)</code></pre>
+<p>Applies a path at interval point <code>t</code>, which must be a
+number in <code>[0, 1]</code>. Reduces to <code>body[i := t]</code>. The
+endpoints recover the path’s boundary:</p>
+<pre><code>(papply p i0)  ≡  p(0)   ; left endpoint
+(papply p i1)  ≡  p(1)   ; right endpoint</code></pre>
+<hr />
+<h3 id="refl-builtin"><code>refl</code> (builtin)</h3>
+<pre><code>(refl x)</code></pre>
+<p>Returns the constant path at <code>x</code>: a path that ignores its
+interval argument and always evaluates to <code>x</code>. This is the
+reflexivity/identity path — evidence that <code>x</code> is equal to
+itself.</p>
+<pre><code>(papply (refl x) t)  ≡  x    for all t ∈ [0, 1]</code></pre>
+<hr />
+<h3 id="interval-constants-builtins">Interval constants (builtins)</h3>
+<pre><code>i0   ; = 0.0, the left  endpoint of I
+i1   ; = 1.0, the right endpoint of I</code></pre>
+<hr />
+<h2 id="dependent-type-forms">Dependent Type Forms</h2>
+<h3 id="pi-dependent-function-type-π-type"><code>pi</code> — Dependent
+Function Type (Π-type)</h3>
+<p><strong>Surface syntax</strong>:</p>
+<pre><code>(pi (x) domain codomain)</code></pre>
+<p><strong>Core syntax</strong> (after compilation):</p>
+<pre><code>(pi domain codomain)</code></pre>
+<p>Constructs a Π-type value: the type of functions from
+<code>domain</code> to <code>codomain</code>, where
+<code>codomain</code> may mention the bound variable <code>x</code> (De
+Bruijn <code>#0</code>). For a non-dependent arrow,
+<code>codomain</code> simply ignores <code>x</code>.</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(pi (x) Nat Nat)          <span class="co">; the non-dependent arrow Nat → Nat</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>(pi (n) Nat (Vec n))      <span class="co">; a genuinely dependent type: vectors of length n</span></span></code></pre></div>
+<hr />
+<h3 id="piapply"><code>piapply</code></h3>
+<pre><code>(piapply pi-type value)</code></pre>
+<p>Instantiates a Π-type at <code>value</code>, evaluating the codomain
+with the bound variable set to <code>value</code>. Returns the
+<em>type</em> of applying a function of this Π-type to that concrete
+argument.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(piapply (pi (n) Nat (Vec n)) <span class="dv">3</span>)   <span class="co">; =&gt; (Vec 3)</span></span></code></pre></div>
+<hr />
+<h3 id="sigma-dependent-pair-type-σ-type"><code>sigma</code> — Dependent
+Pair Type (Σ-type)</h3>
+<p><strong>Surface syntax</strong>:</p>
+<pre><code>(sigma (x) domain codomain)</code></pre>
+<p><strong>Core syntax</strong>:</p>
+<pre><code>(sigma domain codomain)</code></pre>
+<p>Constructs a Σ-type value: the type of pairs <code>(a, b)</code>
+where <code>a : domain</code> and <code>b : codomain(a)</code>, where
+<code>codomain</code> may mention the bound variable <code>x</code>.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(sigma (n) Nat (Vec n))   <span class="co">; pairs of a length n and a vector of that length</span></span></code></pre></div>
+<hr />
+<h3 id="sigmacod"><code>sigmacod</code></h3>
+<pre><code>(sigmacod sigma-type value)</code></pre>
+<p>Instantiates the codomain of a Σ-type at <code>value</code> (the
+first component of a pair). Returns the <em>type</em> of the second
+component when the first component equals <code>value</code>.</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(sigmacod (sigma (n) Nat (Vec n)) <span class="dv">3</span>)   <span class="co">; =&gt; (Vec 3)</span></span></code></pre></div>
+<hr />
+<h2 id="glue-types-cubical-equivalence">Glue Types (Cubical
+Equivalence)</h2>
+<p>Glue types encode equivalences between types, following the cubical
+notion of glueing a fiber type onto a base type along a face.</p>
+<h3 id="glue-type"><code>glue-type</code></h3>
+<pre><code>(glue-type base-type equiv)</code></pre>
+<p>The Glue type former. <code>base-type</code> is the base type
+<code>A</code>; <code>equiv</code> is a function <code>f : B → A</code>
+witnessing an equivalence from fiber type <code>B</code> to
+<code>A</code>. Returns a <code>GlueType</code> value.</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(glue-type Num double)   <span class="co">; Num glued to Num via the doubling map</span></span></code></pre></div>
+<hr />
+<h3 id="glue"><code>glue</code></h3>
+<pre><code>(glue val equiv)</code></pre>
+<p>Introduction form. <code>val</code> is a value on the
+<code>B</code>-side (the fiber); <code>equiv</code> is the forward
+function <code>f : B → A</code>. Produces a <code>Glue</code> term that
+records both the fiber value and the equivalence.</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(glue <span class="dv">21</span> double)   <span class="co">; the fiber value 21, glued via doubling</span></span></code></pre></div>
+<hr />
+<h3 id="unglue"><code>unglue</code></h3>
+<pre><code>(unglue glue-term)</code></pre>
+<p>Elimination form. Extracts the base-type (<code>A</code>-side) image
+of a <code>Glue</code> term by applying the stored equivalence to the
+stored fiber value.</p>
+<p><strong>Reduction rule (β):</strong></p>
+<pre><code>(unglue (glue v f))  ≡  (f v)</code></pre>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>(unglue (glue <span class="dv">21</span> double))   <span class="co">; =&gt; 42</span></span></code></pre></div>
+<hr />
+<h2 id="builtin-procedures">Builtin Procedures</h2>
+<p>Builtins are ordinary first-class values in the global environment.
+They are called like any function: <code>(name arg ...)</code>.</p>
+<h3 id="arithmetic">Arithmetic</h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(+ x ...)</code></td>
+<td>Sum of zero or more numbers.</td>
+</tr>
+<tr>
+<td><code>(- x)</code></td>
+<td>Negation.</td>
+</tr>
+<tr>
+<td><code>(- x y ...)</code></td>
+<td>Left-associative subtraction.</td>
+</tr>
+<tr>
+<td><code>(* x ...)</code></td>
+<td>Product of zero or more numbers.</td>
+</tr>
+<tr>
+<td><code>(/ x y ...)</code></td>
+<td>Left-associative division. Errors on divide-by-zero.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comparisons">Comparisons</h3>
+<p>All comparison operators return <code>1.0</code> for true and
+<code>0.0</code> for false.</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(= a b)</code></td>
+<td>Numeric equality.</td>
+</tr>
+<tr>
+<td><code>(&lt; a b)</code></td>
+<td>Less than.</td>
+</tr>
+<tr>
+<td><code>(&gt; a b)</code></td>
+<td>Greater than.</td>
+</tr>
+<tr>
+<td><code>(&lt;= a b)</code></td>
+<td>Less than or equal.</td>
+</tr>
+<tr>
+<td><code>(&gt;= a b)</code></td>
+<td>Greater than or equal.</td>
+</tr>
+<tr>
+<td><code>(not x)</code></td>
+<td><code>1.0</code> if <code>x</code> is falsy, <code>0.0</code>
+otherwise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lists">Lists</h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(list x ...)</code></td>
+<td>Constructs a list from its arguments.</td>
+</tr>
+<tr>
+<td><code>(car lst)</code></td>
+<td>Returns the first element of a non-empty list.</td>
+</tr>
+<tr>
+<td><code>(cdr lst)</code></td>
+<td>Returns the list with its first element removed.</td>
+</tr>
+<tr>
+<td><code>(cons x lst)</code></td>
+<td>Prepends <code>x</code> to <code>lst</code>.</td>
+</tr>
+<tr>
+<td><code>(null? x)</code></td>
+<td><code>1.0</code> if <code>x</code> is the empty list,
+<code>0.0</code> otherwise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="miscellaneous">Miscellaneous</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Form</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(print x ...)</code></td>
+<td>Prints all arguments with <code>{:?}</code> formatting, then a
+newline. Returns <code>()</code>.</td>
+</tr>
+<tr>
+<td><code>(read)</code></td>
+<td>Reads a line of input from standard input, parses it as a single
+S-expression, and returns it.</td>
+</tr>
+<tr>
+<td><code>(write x)</code></td>
+<td>Prints the representation of <code>x</code> to standard output
+without a newline, and flushes output. Returns <code>()</code>.</td>
+</tr>
+<tr>
+<td><code>(newline)</code></td>
+<td>Prints a newline to standard output. Returns <code>()</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="runtime-type-predicates">Runtime Type Predicates</h3>
+<p>All predicates take exactly one argument and return <code>1.0</code>
+(true) or <code>0.0</code> (false).</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>True when argument is…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(pi? x)</code></td>
+<td>A <code>Pi</code> type value.</td>
+</tr>
+<tr>
+<td><code>(sigma? x)</code></td>
+<td>A <code>Sigma</code> type value.</td>
+</tr>
+<tr>
+<td><code>(path? x)</code></td>
+<td>A <code>Path</code> value.</td>
+</tr>
+<tr>
+<td><code>(glue? x)</code></td>
+<td>A <code>Glue</code> introduction term.</td>
+</tr>
+<tr>
+<td><code>(glue-type? x)</code></td>
+<td>A <code>GlueType</code> type former.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="de-bruijn-compilation">De Bruijn Compilation</h2>
+<p>User-written code uses named variables; the compiler
+(<code>compiler.rs</code>) converts these to <strong>De Bruijn
+indices</strong> before evaluation.</p>
+<ul>
+<li>Variables bound by <code>lambda</code>, <code>path</code>,
+<code>pi</code>, <code>sigma</code>, or <code>let</code> are replaced
+with <code>#N</code> where <code>N</code> is the number of enclosing
+binders between the use and the binding site.</li>
+<li><code>#0</code> refers to the innermost (most recently bound)
+variable.</li>
+<li>Global names (not in any enclosing binder) are left as symbols and
+resolved at runtime from the global environment.</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">; surface syntax</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">lambda</span> (x) (<span class="kw">lambda</span> (y) (<span class="op">+</span> x y)))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">; compiled core</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>(<span class="kw">lambda</span> <span class="dv">1</span> (<span class="kw">lambda</span> <span class="dv">1</span> (<span class="op">+</span> #<span class="dv">1</span> #<span class="dv">0</span>)))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">;                        ^  ^</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">;                        |  y  (innermost binder, index 0)</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">;                        x  (one binder out, index 1)</span></span></code></pre></div>
+<p>The <code>let</code> form is also compiled into De Bruijn form;
+bindings are pushed left-to-right, so the last binding is at index
+<code>#0</code> in the body.</p>
+<hr />
+<h2 id="lexical-environments">Lexical Environments</h2>
+<p>Evaluation uses two parallel environments:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global (<code>Env</code>)</td>
+<td><code>Rc&lt;RefCell&lt;HashMap&lt;String, Expr&gt;&gt;&gt;</code></td>
+<td>Global name → value bindings, shared and mutable.</td>
+</tr>
+<tr>
+<td>Lexical (<code>LexEnv</code>)</td>
+<td>Linked list of <code>Expr</code></td>
+<td>Local variable stack, indexed by De Bruijn index. Immutable;
+extended by <code>lambda</code> application,
+<code>path</code>/<code>pi</code>/<code>sigma</code>/<code>let</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><code>LexEnv::get(i)</code> walks <code>i</code> steps down the
+linked list and returns the value at that depth.</p>
+<hr />
+<h2 id="type-system-sentinels">Type System Sentinels</h2>
+<p>The typechecker (<code>typechecker.rs</code>) represents types as
+<code>Expr</code> values using sentinel symbols which are accessible
+from user code for type annotations and signatures.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Sentinel</th>
+<th>Meaning</th>
+<th>Evaluation Behavior</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>__Num__</code></td>
+<td>The type of all number literals.</td>
+<td>Evaluates to itself.</td>
+<td><code>__Type__</code></td>
+</tr>
+<tr>
+<td><code>__Type__</code></td>
+<td>The universe containing <code>Pi</code>, <code>Sigma</code>,
+<code>GlueType</code>, and <code>Path</code> types.</td>
+<td>Evaluates to itself.</td>
+<td><code>__Type__</code></td>
+</tr>
+<tr>
+<td><code>__Any__</code></td>
+<td>Top / unknown type; subsumes everything.</td>
+<td>Evaluates to itself.</td>
+<td><code>__Type__</code></td>
+</tr>
+<tr>
+<td><code>(__Path__ T)</code></td>
+<td>The type of path values whose body has type <code>T</code>.</td>
+<td>Evaluates structurally: <code>(__Path__ eval(T))</code>.</td>
+<td><code>__Type__</code></td>
+</tr>
+<tr>
+<td><code>__GlueType__</code></td>
+<td>The type of <code>GlueType</code> type-former values.</td>
+<td>Evaluates to itself.</td>
+<td><code>__Type__</code></td>
+</tr>
+<tr>
+<td><code>(__Glue__ T)</code></td>
+<td>The type of <code>Glue</code> intro terms whose base type is
+<code>T</code>.</td>
+<td>Evaluates structurally: <code>(__Glue__ eval(T))</code>.</td>
+<td><code>__Type__</code></td>
+</tr>
+</tbody>
+</table>
+<p>Type checking is <strong>bidirectional</strong>: <code>infer</code>
+synthesises a type from an expression; <code>check</code> verifies an
+expression against an expected type. <code>__Any__</code> on either side
+of a <code>check</code> succeeds unconditionally, making the system
+gradually typed.</p>
+<hr />
+<h2 id="cli-and-repl-modes">CLI and REPL Modes</h2>
+<p>The interpreter supports multiple execution modes:</p>
+<ul>
+<li><strong>Interactive REPL</strong>: Run <code>cargo run</code>
+without arguments in a terminal.</li>
+<li><strong>Batch Stdio</strong>: Pipe expressions into
+<code>cargo run</code>
+(e.g. <code>echo "(+ 1 2)" | cargo run</code>).</li>
+<li><strong>File Mode</strong>: Run
+<code>cargo run &lt;filepath&gt;</code> to execute a Lisp file.</li>
+<li><strong>Test Mode</strong>: Run <code>cargo run -- --test</code> to
+execute the internal test harness.</li>
+</ul>
+<hr />
+<h2 id="example-programs">Example Programs</h2>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">; Factorial (recursive)</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>(<span class="ex">define</span><span class="fu"> fact </span>(<span class="kw">lambda</span> (n) (<span class="kw">if</span> (<span class="op">&lt;</span> n <span class="dv">1</span>) <span class="dv">1</span> (<span class="op">*</span> n (fact (<span class="op">-</span> n <span class="dv">1</span>))))))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>(fact <span class="dv">10</span>)   <span class="co">; =&gt; 3628800</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">; Linear interpolation path from 1 to 5</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>(<span class="ex">define</span><span class="fu"> interp </span>(path (i) (<span class="op">+</span> (<span class="op">*</span> (<span class="op">-</span> <span class="dv">1</span> i) <span class="dv">1</span>) (<span class="op">*</span> i <span class="dv">5</span>))))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>(papply interp <span class="fl">0.5</span>)   <span class="co">; =&gt; 3.0</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">; Dependent vector-length type</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>(<span class="ex">define</span><span class="fu"> vec-type </span>(pi (n) Nat (<span class="op">*</span> n n)))</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>(piapply vec-type <span class="dv">4</span>)   <span class="co">; =&gt; 16</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">; Glue: doubling equivalence</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>(<span class="ex">define</span><span class="fu"> double </span>(<span class="kw">lambda</span> (x) (<span class="op">*</span> x <span class="dv">2</span>)))</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>(<span class="ex">define</span><span class="fu"> gv </span>(glue <span class="dv">21</span> double))</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>(unglue gv)   <span class="co">; =&gt; 42</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co">; Path of Glue terms, unglued at each endpoint</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>(<span class="ex">define</span><span class="fu"> gpath </span>(path (i) (glue (<span class="op">*</span> i <span class="dv">10</span>) double)))</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>(unglue (papply gpath <span class="fl">0.0</span>))   <span class="co">; =&gt; 0.0</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>(unglue (papply gpath <span class="fl">0.5</span>))   <span class="co">; =&gt; 10.0</span></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>(unglue (papply gpath <span class="fl">1.0</span>))   <span class="co">; =&gt; 20.0</span></span></code></pre></div>
+</body>
+</html>

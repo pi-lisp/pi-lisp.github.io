@@ -44,47 +44,131 @@
     padding: 0 1.5rem;
   }
 
-  /* ---------- Nav ---------- */
-  nav {
+  /* ---------- Top bar ---------- */
+  .topbar {
+    background: var(--purple-900);
+    color: var(--purple-100);
+    font-size: 13px;
+    font-family: var(--font-mono);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.25rem 0;
-    border-bottom: 0.5px solid var(--border);
+    height: 60px;
   }
 
-  .logo {
+  .topbar-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    color: var(--purple-100);
     font-weight: 600;
-    font-size: 18px;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-decoration: none;
   }
 
-  .logo img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
+  .topbar-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .nav-link {
+  .topbar-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     text-decoration: none;
-    color: var(--text-primary);
-    font-size: 14px;
+    color: var(--purple-200);
+    font-size: 13px;
     font-weight: 500;
-    border: 0.5px solid var(--border);
+    font-family: var(--font-mono);
+    padding: 6px 12px;
     border-radius: var(--radius-md);
-    padding: 8px 14px;
-    transition: background 0.15s ease, border-color 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease;
   }
 
-  .nav-link:hover {
-    background: var(--purple-50);
-    border-color: var(--purple-200);
+  .topbar-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 6px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease;
+  }
+
+  .hamburger:hover {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--purple-200);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile drawer */
+  .topbar-drawer {
+    display: none;
+    flex-direction: column;
+    background: var(--purple-900);
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    padding: 0.5rem 1.5rem 1rem;
+  }
+
+  .topbar-drawer.open {
+    display: flex;
+  }
+
+  .topbar-drawer .topbar-link {
+    padding: 10px 12px;
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+
+  .topbar-drawer .topbar-link.docs {
+    margin-left: 0;
+    margin-top: 4px;
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .topbar-links {
+      display: none;
+    }
+    .hamburger {
+      display: flex;
+    }
   }
 
   /* ---------- Hero ---------- */
@@ -93,7 +177,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
-    padding: 4rem 0;
+    padding: 4rem 0 4rem;
     flex-wrap: wrap;
   }
 
@@ -372,18 +456,29 @@
 </head>
 <body>
 
-<div class="container">
-
-  <!-- Nav -->
-  <nav>
-    <div class="logo">
-      <img src="lispy.jpg" alt="uwulisp mascot" />
-      <span>uwulisp</span>
-    </div>
-    <a class="nav-link" href="https://github.com/uwulisp" target="_blank" rel="noopener">
-      GitHub ↗
+<!-- Top bar -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-brand" href="#">
+      uwulisp
     </a>
+    <nav class="topbar-links" aria-label="Top navigation">
+      <a class="topbar-link" href="lispy.html">lispy</a>
+      <a class="topbar-link" href="document.html">Docs</a>
+    </nav>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <nav class="topbar-drawer" id="mobile-menu" aria-label="Mobile navigation">
+    <a class="topbar-link" href="lispy.html">lispy</a>
+    <a class="topbar-link" href="document.html">Docs</a>
   </nav>
+</header>
+
+<div class="container">
 
   <!-- Hero -->
   <section class="hero">
@@ -481,5 +576,21 @@
 
 </div>
 
+<script>
+  function toggleMenu(btn) {
+    const drawer = document.getElementById('mobile-menu');
+    const isOpen = drawer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  function closeMenu() {
+    const drawer = document.getElementById('mobile-menu');
+    const btn = document.querySelector('.hamburger');
+    drawer.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+</script>
 </body>
 </html>
