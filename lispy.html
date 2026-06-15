@@ -179,35 +179,88 @@
     text-align: center;
     padding: 4rem 0;
   }
-
-  .mascot-frame {
-    background: var(--purple-50);
-    border-radius: var(--radius-xl);
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
+  /* ---------- Story section ---------- */
+  .story-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding-bottom: 3rem;
+    color: var(--text-primary);
   }
 
-  .mascot-frame img {
-    width: 280px;
-    height: 280px;
-    object-fit: contain;
-    display: block;
-    border-radius: var(--radius-lg);
-  }
-
-  .mascot-section h1 {
-    font-size: 32px;
+  .story-section h2 {
+    font-size: 24px;
     font-weight: 700;
-    margin: 0 0 0.5rem;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
+    margin: 0 0 1.5rem;
+    text-align: center;
   }
 
-  .mascot-section p.subtitle {
-    font-size: 16px;
-    color: var(--text-secondary);
+  .story-section p {
+    margin: 0 0 1rem;
+    color: var(--text-primary);
+  }
+
+  .story-section strong {
+    color: var(--purple-800);
+  }
+
+  .story-section code {
+    font-family: var(--font-mono);
+    background: var(--purple-50);
+    color: var(--purple-800);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .story-section pre {
+    background: var(--purple-900);
+    color: var(--purple-50);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 0 0 1rem;
+  }
+
+  .story-section pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: 0.9em;
+  }
+
+  .story-section hr {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .story-section ul {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .story-section li {
+    margin-bottom: 0.4rem;
+  }
+
+  .story-section .motto-label {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+
+  .story-section blockquote {
+    border-left: 3px solid var(--purple-400);
+    background: var(--purple-50);
+    border-radius: var(--radius-md);
+    margin: 0;
+    padding: 1rem 1.25rem;
+    color: var(--purple-800);
+    font-style: italic;
+  }
+
+  .story-section blockquote p {
     margin: 0;
   }
 
@@ -281,11 +334,131 @@
 
   <!-- Mascot -->
   <section class="mascot-section">
-    <div class="mascot-frame">
-      <img src="lispy.jpg" alt="lispy the uwulisp mascot — a cute purple cat wearing a bandana with a parenthesis symbol" />
-    </div>
-    <h1>lispy</h1>
-    <p class="subtitle">the uwulisp mascot</p>
+    <img src="lispy.jpg" alt="lispy the uwulisp mascot — a cute purple cat wearing a bandana with a parenthesis symbol" />
+  </section>
+
+  <!-- Story -->
+  <section class="story-section">
+    <h2>Lispy, the Cubical Cat of uwulisp</h2>
+
+    <p>Long ago, deep inside the Memory Forest where forgotten programs wandered and unfinished functions dreamed, there lived a tiny white creature named <strong>Lispy</strong>.</p>
+
+    <p>Lispy wasn't an ordinary cat.</p>
+
+    <p>While other cats chased laser pointers, Lispy chased <strong>parentheses</strong>.</p>
+
+    <p>Whenever a programmer accidentally lost a closing <code>)</code>, Lispy could hear its lonely echo from miles away.</p>
+
+    <p>One day, while exploring an ancient archive of programming languages, Lispy discovered a glowing purple scarf woven from pure syntax. Embroidered on it was a mysterious symbol:</p>
+
+    <pre><code>()</code></pre>
+
+    <p>The moment Lispy put on the scarf, something magical happened.</p>
+
+    <p>The cat gained the ability to see the hidden structure of all code.</p>
+
+    <p>Trees became ASTs.</p>
+
+    <p>Paths became actual Path Types.</p>
+
+    <p>Every idea in the world revealed its underlying expression.</p>
+
+    <hr />
+
+    <p>As Lispy wandered further, it discovered a strange realm called <strong>uwulisp</strong>.</p>
+
+    <p>Most Lisp languages were flat lands of symbols and lists, but uwulisp was different.</p>
+
+    <p>Floating cubes drifted through the sky.</p>
+
+    <p>Intervals stretched between stars.</p>
+
+    <p>Functions carried entire universes as arguments.</p>
+
+    <p>Paths connected ideas that seemed impossible to connect.</p>
+
+    <p>Many travelers found the realm confusing.</p>
+
+    <p>"How do I understand dependent types?"</p>
+
+    <p>"Where does this Path lead?"</p>
+
+    <p>"What is this mysterious Interval?"</p>
+
+    <p>Whenever someone asked these questions, Lispy would appear with a cheerful:</p>
+
+    <p><strong>"uwu!"</strong></p>
+
+    <p>Then, instead of giving an explanation, Lispy would gently rearrange the code until its structure became obvious.</p>
+
+    <p>A complicated theorem would become a cute little expression.</p>
+
+    <p>A tangled proof would unfold into a smooth path.</p>
+
+    <p>A frightening type signature would reveal itself as a friendly companion.</p>
+
+    <hr />
+
+    <p>Over time, Lispy became the unofficial guardian of uwulisp.</p>
+
+    <p>Programmers began leaving tiny offerings:</p>
+
+    <ul>
+      <li>Perfectly matched parentheses</li>
+      <li>Elegant macros</li>
+      <li>Beautiful recursive functions</li>
+      <li>Particularly cute lambda expressions</li>
+    </ul>
+
+    <p>In return, Lispy granted blessings.</p>
+
+    <p>Not magical powers.</p>
+
+    <p>Something better:</p>
+
+    <p><strong>Code that worked on the first try.</strong></p>
+
+    <p>A miracle so rare that many believed Lispy to be a deity.</p>
+
+    <hr />
+
+    <p>Despite its wisdom, Lispy remained playful.</p>
+
+    <p>It spent afternoons sleeping on compiler passes.</p>
+
+    <p>It batted around stray parentheses like toys.</p>
+
+    <p>It occasionally replaced error messages with:</p>
+
+    <pre><code>OwO
+Unexpected sadness at line 42.
+Perhaps another parenthesis would help?</code></pre>
+
+    <p>Nobody ever complained.</p>
+
+    <hr />
+
+    <p>Legend says that deep within uwulisp's core language, beyond the surface syntax and beneath the compiler's transformations, there exists a tiny hidden expression:</p>
+
+    <pre><code>(define lispy
+  (lambda ()
+    'uwu))</code></pre>
+
+    <p>Whenever a programmer discovers it, Lispy appears for a moment, waves its little purple scarf, and vanishes back into the cubical dimensions.</p>
+
+    <p>And somewhere, in a terminal glowing softly in the night, a successful build finishes with a gentle message:</p>
+
+    <pre><code>Compilation complete.
+
+uwu</code></pre>
+
+    <p class="motto-label">✨ Lispy's Motto</p>
+
+    <blockquote>
+      <p>"Every program has a shape.<br />
+      Every shape has a path.<br />
+      Every path leads to uwu."</p>
+    </blockquote>
   </section>
 
   <!-- Footer -->
