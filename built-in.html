@@ -166,6 +166,71 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 </head>
 <body>
@@ -348,8 +413,9 @@ range.</p>
 <hr />
 <h2 id="miscellaneous">Miscellaneous</h2>
 <h3 id="print"><code>print</code></h3>
-<p>Prints each argument separated by spaces, followed by a newline, then
-returns an empty list.</p>
+<p>Prints each argument followed by a space, then a newline, then
+returns an empty list. Note that a trailing space is emitted after the
+last argument (not just between arguments).</p>
 <pre><code>(print x1 x2 ...)  →  ()</code></pre>
 <p>Strings are printed as raw text (without surrounding quotes); all
 other values use their debug representation.</p>
@@ -380,28 +446,24 @@ terms must themselves be <code>Expr::CubicalTerm</code> values.</p>
 <p>The meet (minimum / conjunction) of two interval expressions,
 normalised to DNF immediately.</p>
 <pre><code>(interval-meet a b)  →  TCube(dnf)</code></pre>
-<p>Both arguments must be <code>TInterval</code> terms. Passing a
-pre-normalised <code>TCube</code> is an error; construct with
+<p>Both arguments must be <code>TInterval</code> terms (i.e. produced by
 <code>interval-var</code>, <code>interval-zero</code>, or
-<code>interval-one</code> first.</p>
+<code>interval-one</code>). Passing a pre-normalised <code>TCube</code>
+is an error.</p>
 <hr />
 <h4 id="interval-join"><code>interval-join</code></h4>
 <p>The join (maximum / disjunction) of two interval expressions,
 normalised to DNF immediately.</p>
 <pre><code>(interval-join a b)  →  TCube(dnf)</code></pre>
-<p>Same constraints as <code>interval-meet</code>.</p>
+<p>Both arguments must be <code>TInterval</code> terms. Passing a
+pre-normalised <code>TCube</code> is an error.</p>
 <hr />
 <h4 id="interval-neg"><code>interval-neg</code></h4>
 <p>The negation of an interval expression, normalised to DNF
 immediately.</p>
 <pre><code>(interval-neg a)  →  TCube(dnf)</code></pre>
-<p>Same constraints as <code>interval-meet</code>.</p>
-<hr />
-<h4 id="interval-type"><code>interval-type</code></h4>
-<p>The interval type constant <code>𝕀</code> itself (not a term of the
-interval).</p>
-<pre><code>(interval-type)  →  TIntervalTy</code></pre>
-<p>No arguments.</p>
+<p>Argument must be a <code>TInterval</code> term. Passing a
+pre-normalised <code>TCube</code> is an error.</p>
 <hr />
 <h3 id="variables-and-universes">Variables and Universes</h3>
 <h4 id="var"><code>var</code></h4>
@@ -413,6 +475,12 @@ interval).</p>
 <p>A universe at the given level.</p>
 <pre><code>(univ level)  →  TUniv(level)</code></pre>
 <p><code>level</code> is cast to <code>i32</code>.</p>
+<hr />
+<h4 id="interval-type"><code>interval-type</code></h4>
+<p>The interval type constant <code>𝕀</code> itself (not a term of the
+interval).</p>
+<pre><code>(interval-type)  →  TIntervalTy</code></pre>
+<p>No arguments.</p>
 <hr />
 <h3 id="functions">Functions</h3>
 <h4 id="lambda"><code>lambda</code></h4>
@@ -655,5 +723,264 @@ type-checking failure.</p>
 <pre><code>(ctt-equal? t u)  →  1.0 or 0.0</code></pre>
 <p>Returns <code>1.0</code> if <code>t</code> and <code>u</code> are
 definitionally equal, <code>0.0</code> otherwise.</p>
+<hr />
+<h2 id="assembler">Assembler</h2>
+<h3 id="asm"><code>asm</code></h3>
+<p>Assembles and JIT-executes a list of x86-64 instructions, returning
+the value left in <code>RAX</code> as a number.</p>
+<pre><code>(asm instructions)  →  Number</code></pre>
+<p><code>instructions</code> must be a list of instruction lists. Each
+instruction list begins with a mnemonic symbol followed by its operands.
+The assembled machine code is written to executable memory and called
+immediately; the <code>i64</code> value in <code>RAX</code> at the time
+of <code>ret</code> is returned as a Lisp <code>Number</code> (cast to
+<code>f64</code>).</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
+<h4 id="operand-forms">Operand forms</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 39%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th>Form</th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Register</td>
+<td>symbol</td>
+<td><code>rax</code>, <code>r8</code></td>
+</tr>
+<tr>
+<td>Immediate (i32)</td>
+<td>number</td>
+<td><code>42</code>, <code>-1</code></td>
+</tr>
+<tr>
+<td>Memory (base + disp)</td>
+<td><code>(mem &lt;reg&gt; &lt;disp&gt;)</code></td>
+<td><code>(mem rsp -8)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Immediate values must fit in a signed 32-bit integer.</p>
+<h4 id="supported-registers">Supported registers</h4>
+<p><code>rax</code>, <code>rcx</code>, <code>rdx</code>,
+<code>rbx</code>, <code>rsp</code>, <code>rbp</code>, <code>rsi</code>,
+<code>rdi</code>, <code>r8</code>–<code>r15</code>
+(case-insensitive).</p>
+<h4 id="supported-instructions">Supported instructions</h4>
+<p><strong>Data movement</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mnemonic</th>
+<th>Operands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mov</code></td>
+<td>dst src</td>
+<td>Move</td>
+</tr>
+<tr>
+<td><code>push</code></td>
+<td>src</td>
+<td>Push onto stack</td>
+</tr>
+<tr>
+<td><code>pop</code></td>
+<td>dst</td>
+<td>Pop from stack</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Arithmetic</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mnemonic</th>
+<th>Operands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add</code></td>
+<td>dst src</td>
+<td>Add</td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>dst src</td>
+<td>Subtract</td>
+</tr>
+<tr>
+<td><code>imul</code></td>
+<td>dst src</td>
+<td>Signed multiply (two-operand)</td>
+</tr>
+<tr>
+<td><code>mul</code></td>
+<td>src</td>
+<td>Unsigned multiply (<code>rax × src</code>)</td>
+</tr>
+<tr>
+<td><code>div</code></td>
+<td>src</td>
+<td>Unsigned divide (<code>rax ÷ src</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bitwise / shift</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mnemonic</th>
+<th>Operands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>and</code></td>
+<td>dst src</td>
+<td>Bitwise AND</td>
+</tr>
+<tr>
+<td><code>or</code></td>
+<td>dst src</td>
+<td>Bitwise OR</td>
+</tr>
+<tr>
+<td><code>xor</code></td>
+<td>dst src</td>
+<td>Bitwise XOR</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td>dst</td>
+<td>Bitwise NOT</td>
+</tr>
+<tr>
+<td><code>shl</code></td>
+<td>dst count</td>
+<td>Shift left</td>
+</tr>
+<tr>
+<td><code>shr</code></td>
+<td>dst count</td>
+<td>Shift right (logical)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Compare / test</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mnemonic</th>
+<th>Operands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmp</code></td>
+<td>a b</td>
+<td>Set flags for <code>a − b</code></td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>a b</td>
+<td>Set flags for <code>a &amp; b</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control flow</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mnemonic</th>
+<th>Operand</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>call</code></td>
+<td>target</td>
+<td>Call</td>
+</tr>
+<tr>
+<td><code>ret</code></td>
+<td>—</td>
+<td>Return</td>
+</tr>
+<tr>
+<td><code>syscall</code></td>
+<td>—</td>
+<td>System call</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>name</td>
+<td>Define a label (symbol)</td>
+</tr>
+<tr>
+<td><code>jmp</code></td>
+<td>label</td>
+<td>Unconditional jump</td>
+</tr>
+<tr>
+<td><code>je</code></td>
+<td>label</td>
+<td>Jump if equal (ZF=1)</td>
+</tr>
+<tr>
+<td><code>jne</code></td>
+<td>label</td>
+<td>Jump if not equal (ZF=0)</td>
+</tr>
+<tr>
+<td><code>jl</code></td>
+<td>label</td>
+<td>Jump if less (SF≠OF)</td>
+</tr>
+<tr>
+<td><code>jle</code></td>
+<td>label</td>
+<td>Jump if less or equal</td>
+</tr>
+<tr>
+<td><code>jge</code></td>
+<td>label</td>
+<td>Jump if greater or equal</td>
+</tr>
+<tr>
+<td><code>jg</code></td>
+<td>label</td>
+<td>Jump if greater</td>
+</tr>
+</tbody>
+</table>
+<p>Errors if an unrecognised mnemonic is encountered, an operand is out
+of range, or assembly/JIT allocation fails.</p>
 </body>
 </html>
