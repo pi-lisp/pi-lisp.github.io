@@ -1,174 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>document</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #1a1a1a;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-</head>
-<body>
 <h1 id="language-grammar-reference">Language Grammar Reference</h1>
 <p>This document describes the syntax and grammar of the cubical Lisp
 interpreter, covering all special forms, builtin procedures, type
@@ -260,11 +89,28 @@ evaluates and returns <code>else-expr</code>. If no
 <p><strong>Surface syntax</strong>:</p>
 <pre><code>(let ((name expr) ...) body ...)
 </code></pre>
-<p>Evaluates each binding expression in the current environment
-(bindings are <em>not</em> mutually recursive; later bindings cannot see
-earlier ones). Extends the lexical environment with the bound values,
-then evaluates each <code>body</code> expression in sequence, returning
-the last.</p>
+<p>Evaluates each binding expression sequentially. Later binding
+expressions are evaluated in the environment already extended by all
+preceding bindings, so a later RHS <em>can</em> refer to an earlier
+binding by name. Bindings are however <em>not</em> mutually recursive —
+a binding’s own RHS cannot refer to itself (use <code>letrec</code> for
+that). Evaluates each <code>body</code> expression in sequence,
+returning the last.</p>
+<hr />
+<h3 id="letrec"><code>letrec</code></h3>
+<p><strong>Surface syntax</strong>:</p>
+<pre><code>(letrec ((name expr) ...) body ...)
+</code></pre>
+<p>Like <code>let</code>, but all binding names are in scope for
+<em>every</em> RHS expression and for the body, enabling mutual
+recursion and self-referential definitions. Evaluation pre-allocates
+slots for every binding before evaluating any RHS; lambdas defined here
+close over the fully-resolved environment so recursive calls work
+correctly at runtime.</p>
+<pre class="uwu"><code>(letrec ((even? (lambda (n) (if (= n 0) 1 (odd?  (- n 1)))))
+         (odd?  (lambda (n) (if (= n 0) 0 (even? (- n 1))))))
+  (even? 10))   ; =&gt; 1.0
+</code></pre>
 <hr />
 <h3 id="begin"><code>begin</code></h3>
 <pre><code>(begin expr ...)
@@ -307,7 +153,55 @@ endpoints recover the path’s boundary:</p>
 (papply p i1)  ≡  p(1)   ; right endpoint
 </code></pre>
 <hr />
-<h3 id="refl-builtin"><code>refl</code> (builtin)</h3>
+<h3 id="funext-function-extensionality"><code>funext</code> — Function
+Extensionality</h3>
+<pre><code>(funext f g p)
+</code></pre>
+<p>Given two functions <code>f</code> and <code>g</code> of the same
+Π-type and a pointwise homotopy <code>p</code> between them, produces a
+<code>Path</code> value witnessing that <code>f</code> and
+<code>g</code> are equal as functions.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Expected type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td><code>Π(x : A), B x</code></td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><code>Π(x : A), B x</code></td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td><code>Π(x : A), Path(B x) (f x) (g x)</code> — a function returning,
+for each <code>x</code>, a path from <code>f x</code> to
+<code>g x</code></td>
+</tr>
+</tbody>
+</table>
+<p>The resulting path satisfies the β-rules at its endpoints:</p>
+<pre><code>(papply (funext f g p) i0)  ≡  f
+(papply (funext f g p) i1)  ≡  g
+</code></pre>
+<p>At any interior point <code>i</code>, applying the result gives
+<code>λ x. (papply (p x) i)</code>.</p>
+<pre class="uwu"><code>(define add0-path
+  (funext (lambda (n) (+ n 0))
+          (lambda (n) n)
+          (lambda (n) (refl n))))
+; (papply add0-path i0) ≡ (lambda (n) (+ n 0))
+; (papply add0-path i1) ≡ (lambda (n) n)
+</code></pre>
 <pre><code>(refl x)
 </code></pre>
 <p>Returns the constant path at <code>x</code>: a path that ignores its
@@ -674,9 +568,10 @@ without a newline, and flushes output. Returns <code>()</code>.</td>
 indices</strong> before evaluation.</p>
 <ul>
 <li>Variables bound by <code>lambda</code>, <code>path</code>,
-<code>pi</code>, <code>sigma</code>, or <code>let</code> are replaced
-with <code>#N</code> where <code>N</code> is the number of enclosing
-binders between the use and the binding site.</li>
+<code>pi</code>, <code>sigma</code>, <code>let</code>, or
+<code>letrec</code> are replaced with <code>#N</code> where
+<code>N</code> is the number of enclosing binders between the use and
+the binding site.</li>
 <li><code>#0</code> refers to the innermost (most recently bound)
 variable.</li>
 <li>Global names (not in any enclosing binder) are left as symbols and
@@ -726,7 +621,9 @@ extended by <code>lambda</code> application,
 </tbody>
 </table>
 <p><code>LexEnv::get(i)</code> walks <code>i</code> steps down the
-linked list and returns the value at that depth.</p>
+linked list and returns the value at that depth. Extended by
+<code>lambda</code> application,
+<code>path</code>/<code>pi</code>/<code>sigma</code>/<code>let</code>/<code>letrec</code>.</p>
 <hr />
 <h2 id="type-system-sentinels">Type System Sentinels</h2>
 <p>The typechecker (<code>typechecker.rs</code>) represents types as
@@ -832,6 +729,24 @@ execute the internal test harness.</li>
 (unglue (papply gpath 0.5))   ; =&gt; 10.0
 (unglue (papply gpath 1.0))   ; =&gt; 20.0
 
+; letrec: mutually recursive even/odd predicates
+(letrec ((even? (lambda (n) (if (= n 0) 1 (odd?  (- n 1)))))
+         (odd?  (lambda (n) (if (= n 0) 0 (even? (- n 1))))))
+  (list (even? 4) (odd? 3)))   ; =&gt; (1.0 1.0)
+
+; let: sequential bindings (later RHSes see earlier bindings)
+(let ((x 3)
+      (y (* x 2)))   ; x is already bound here
+  (+ x y))           ; =&gt; 9.0
+
+; funext: path between definitionally equal functions
+(define add0-path
+  (funext (lambda (n) (+ n 0))
+          (lambda (n) n)
+          (lambda (n) (refl n))))
+(papply add0-path i0)   ; =&gt; (lambda 1 (+ #0 0))  — recovers the left function
+(papply add0-path i1)   ; =&gt; (lambda 1 #0)        — recovers the right function
+
 ; JIT Assembler Loop: Counts up to 5 and returns RAX
 (asm &#39;(
   (mov rax 0)
@@ -842,5 +757,3 @@ execute the internal test harness.</li>
   (ret)
 )) ; =&gt; 5.0
 </code></pre>
-</body>
-</html>
