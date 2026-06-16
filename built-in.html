@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>builtins</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="builtin-functions-reference">Builtin Functions Reference</h1>
+<p>This document describes all builtin procedures registered in the
+global environment. Functions are grouped by category.</p>
+<hr />
+<h2 id="arithmetic">Arithmetic</h2>
+<h3 id="section"><code>+</code></h3>
+<p>Sums zero or more numbers.</p>
+<pre><code>(+ n1 n2 ...)  →  Number</code></pre>
+<p>Returns <code>0</code> when called with no arguments.</p>
+<hr />
+<h3 id="section-1"><code>-</code></h3>
+<p>Subtracts numbers. With a single argument, negates it.</p>
+<pre><code>(- n)           →  Number   ; negation
+(- n1 n2 ...)   →  Number   ; subtraction</code></pre>
+<p>Requires at least one argument.</p>
+<hr />
+<h3 id="section-2"><code>*</code></h3>
+<p>Multiplies zero or more numbers.</p>
+<pre><code>(* n1 n2 ...)  →  Number</code></pre>
+<p>Returns <code>1</code> when called with no arguments.</p>
+<hr />
+<h3 id="section-3"><code>/</code></h3>
+<p>Divides the first number by each subsequent number.</p>
+<pre><code>(/ n1 n2 ...)  →  Number</code></pre>
+<p>Requires at least one argument. Raises an error on division by
+zero.</p>
+<hr />
+<h2 id="comparisons">Comparisons</h2>
+<p>All numeric comparisons take exactly two number arguments and return
+<code>1.0</code> for true, <code>0.0</code> for false.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>=</code></td>
+<td>Equal</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal</td>
+</tr>
+</tbody>
+</table>
+<pre><code>(= a b)   →  1.0 or 0.0
+(&lt; a b)   →  1.0 or 0.0</code></pre>
+<hr />
+<h3 id="not"><code>not</code></h3>
+<p>Logical negation. Returns <code>1.0</code> if the argument is falsy,
+<code>0.0</code> otherwise.</p>
+<pre><code>(not x)  →  1.0 or 0.0</code></pre>
+<p>Expects exactly one argument.</p>
+<hr />
+<h2 id="lists">Lists</h2>
+<h3 id="list"><code>list</code></h3>
+<p>Constructs a list from its arguments.</p>
+<pre><code>(list x1 x2 ...)  →  List</code></pre>
+<hr />
+<h3 id="car"><code>car</code></h3>
+<p>Returns the first element of a list.</p>
+<pre><code>(car lst)  →  Expr</code></pre>
+<p>Errors on an empty list or a non-list argument.</p>
+<hr />
+<h3 id="cdr"><code>cdr</code></h3>
+<p>Returns all elements of a list except the first.</p>
+<pre><code>(cdr lst)  →  List</code></pre>
+<p>Errors on an empty list or a non-list argument.</p>
+<hr />
+<h3 id="cons"><code>cons</code></h3>
+<p>Prepends a value to a list (or wraps two values into a list).</p>
+<pre><code>(cons x lst)  →  List</code></pre>
+<p>Expects exactly two arguments. If the second argument is a list,
+<code>x</code> is prepended; otherwise both values are collected into a
+new list.</p>
+<hr />
+<h3 id="null"><code>null?</code></h3>
+<p>Returns <code>1.0</code> if the argument is an empty list,
+<code>0.0</code> otherwise.</p>
+<pre><code>(null? x)  →  1.0 or 0.0</code></pre>
+<hr />
+<h2 id="strings">Strings</h2>
+<h3 id="string"><code>string?</code></h3>
+<p>Returns <code>1.0</code> if the argument is a string,
+<code>0.0</code> otherwise.</p>
+<pre><code>(string? x)  →  1.0 or 0.0</code></pre>
+<hr />
+<h3 id="string-append"><code>string-append</code></h3>
+<p>Concatenates zero or more strings.</p>
+<pre><code>(string-append s1 s2 ...)  →  String</code></pre>
+<hr />
+<h3 id="string-length"><code>string-length</code></h3>
+<p>Returns the number of Unicode characters in a string.</p>
+<pre><code>(string-length s)  →  Number</code></pre>
+<hr />
+<h3 id="string-comparisons">String comparisons</h3>
+<p>All string comparisons take exactly two string arguments and return
+<code>1.0</code> or <code>0.0</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string=?</code></td>
+<td>Equal</td>
+</tr>
+<tr>
+<td><code>string&lt;?</code></td>
+<td>Less than (lexicographic)</td>
+</tr>
+<tr>
+<td><code>string&gt;?</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>string&lt;=?</code></td>
+<td>Less than or equal</td>
+</tr>
+<tr>
+<td><code>string&gt;=?</code></td>
+<td>Greater than or equal</td>
+</tr>
+</tbody>
+</table>
+<pre><code>(string=? a b)  →  1.0 or 0.0</code></pre>
+<hr />
+<h3 id="string-number"><code>string-&gt;number</code></h3>
+<p>Parses a string as a floating-point number.</p>
+<pre><code>(string-&gt;number s)  →  Number</code></pre>
+<p>Errors if the string is not a valid number.</p>
+<hr />
+<h3 id="number-string"><code>number-&gt;string</code></h3>
+<p>Converts a number to its string representation.</p>
+<pre><code>(number-&gt;string n)  →  String</code></pre>
+<hr />
+<h3 id="string-symbol"><code>string-&gt;symbol</code></h3>
+<p>Converts a string to a symbol.</p>
+<pre><code>(string-&gt;symbol s)  →  Symbol</code></pre>
+<hr />
+<h3 id="symbol-string"><code>symbol-&gt;string</code></h3>
+<p>Converts a symbol to a string.</p>
+<pre><code>(symbol-&gt;string sym)  →  String</code></pre>
+<hr />
+<h3 id="string-upcase"><code>string-upcase</code></h3>
+<p>Returns the string converted to uppercase.</p>
+<pre><code>(string-upcase s)  →  String</code></pre>
+<hr />
+<h3 id="string-downcase"><code>string-downcase</code></h3>
+<p>Returns the string converted to lowercase.</p>
+<pre><code>(string-downcase s)  →  String</code></pre>
+<hr />
+<h3 id="substring"><code>substring</code></h3>
+<p>Extracts a slice of a string by character index (end-exclusive, like
+Scheme).</p>
+<pre><code>(substring s start end)  →  String</code></pre>
+<p>Errors if <code>start &gt; end</code> or either index is out of
+range.</p>
+<hr />
+<h2 id="miscellaneous">Miscellaneous</h2>
+<h3 id="print"><code>print</code></h3>
+<p>Prints each argument separated by spaces, followed by a newline, then
+returns an empty list.</p>
+<pre><code>(print x1 x2 ...)  →  ()</code></pre>
+<p>Strings are printed as raw text (without surrounding quotes); all
+other values use their debug representation.</p>
+<hr />
+<h2 id="cubical-type-theory">Cubical Type Theory</h2>
+<p>These builtins provide a surface-level Lisp API over the internal
+cubical type theory (CTT) kernel. Every cubical builtin returns an
+<code>Expr::CubicalTerm</code> wrapping the corresponding
+<code>Term</code> variant. Arguments that are expected to be cubical
+terms must themselves be <code>Expr::CubicalTerm</code> values.</p>
+<h3 id="interval-atoms">Interval Atoms</h3>
+<h4 id="interval-zero"><code>interval-zero</code></h4>
+<p>The interval endpoint <code>0</code>.</p>
+<pre><code>(interval-zero)  →  TInterval(I0)</code></pre>
+<p>No arguments.</p>
+<hr />
+<h4 id="interval-one"><code>interval-one</code></h4>
+<p>The interval endpoint <code>1</code>.</p>
+<pre><code>(interval-one)  →  TInterval(I1)</code></pre>
+<p>No arguments.</p>
+<hr />
+<h4 id="interval-var"><code>interval-var</code></h4>
+<p>An interval variable identified by a numeric index.</p>
+<pre><code>(interval-var n)  →  TInterval(IVar(n))</code></pre>
+<p><code>n</code> is cast to <code>i32</code>.</p>
+<hr />
+<h4 id="interval-meet"><code>interval-meet</code></h4>
+<p>The meet (minimum / conjunction) of two interval expressions,
+normalised to DNF immediately.</p>
+<pre><code>(interval-meet a b)  →  TCube(dnf)</code></pre>
+<p>Both arguments must be <code>TInterval</code> terms. Passing a
+pre-normalised <code>TCube</code> is an error; construct with
+<code>interval-var</code>, <code>interval-zero</code>, or
+<code>interval-one</code> first.</p>
+<hr />
+<h4 id="interval-join"><code>interval-join</code></h4>
+<p>The join (maximum / disjunction) of two interval expressions,
+normalised to DNF immediately.</p>
+<pre><code>(interval-join a b)  →  TCube(dnf)</code></pre>
+<p>Same constraints as <code>interval-meet</code>.</p>
+<hr />
+<h4 id="interval-neg"><code>interval-neg</code></h4>
+<p>The negation of an interval expression, normalised to DNF
+immediately.</p>
+<pre><code>(interval-neg a)  →  TCube(dnf)</code></pre>
+<p>Same constraints as <code>interval-meet</code>.</p>
+<hr />
+<h4 id="interval-type"><code>interval-type</code></h4>
+<p>The interval type constant <code>𝕀</code> itself (not a term of the
+interval).</p>
+<pre><code>(interval-type)  →  TIntervalTy</code></pre>
+<p>No arguments.</p>
+<hr />
+<h3 id="variables-and-universes">Variables and Universes</h3>
+<h4 id="var"><code>var</code></h4>
+<p>A de Bruijn-indexed term variable.</p>
+<pre><code>(var n)  →  TVar(n)</code></pre>
+<p><code>n</code> is cast to <code>i32</code>.</p>
+<hr />
+<h4 id="univ"><code>univ</code></h4>
+<p>A universe at the given level.</p>
+<pre><code>(univ level)  →  TUniv(level)</code></pre>
+<p><code>level</code> is cast to <code>i32</code>.</p>
+<hr />
+<h3 id="functions">Functions</h3>
+<h4 id="lambda"><code>lambda</code></h4>
+<p>A term-level lambda abstraction.</p>
+<pre><code>(lambda name body)  →  TAbs(name, body)</code></pre>
+<p><code>name</code> must be a symbol; <code>body</code> must be a
+cubical term.</p>
+<hr />
+<h4 id="app"><code>app</code></h4>
+<p>Function application.</p>
+<pre><code>(app f x)  →  TApp(f, x)</code></pre>
+<p>Both arguments must be cubical terms.</p>
+<hr />
+<h4 id="pi"><code>pi</code></h4>
+<p>A dependent function type (Π-type).</p>
+<pre><code>(pi name domain codomain)  →  TPi(name, domain, codomain)</code></pre>
+<p><code>name</code> must be a symbol; <code>domain</code> and
+<code>codomain</code> must be cubical terms.</p>
+<hr />
+<h3 id="path-types">Path Types</h3>
+<h4 id="path-type"><code>path-type</code></h4>
+<p>The identity/path type between two terms over a given type.</p>
+<pre><code>(path-type A a b)  →  TPath(A, a, b)</code></pre>
+<p>All three arguments must be cubical terms.</p>
+<hr />
+<h4 id="path-lambda"><code>path-lambda</code></h4>
+<p>A path abstraction (binder over the interval).</p>
+<pre><code>(path-lambda name body)  →  PLam(name, body)</code></pre>
+<p><code>name</code> must be a symbol; <code>body</code> must be a
+cubical term.</p>
+<hr />
+<h4 id="path-app"><code>path-app</code></h4>
+<p>Applies a path to an interval point.</p>
+<pre><code>(path-app p i)  →  PApp(p, i)</code></pre>
+<p>Both arguments must be cubical terms.</p>
+<hr />
+<h3 id="sigma-types-and-pairs">Sigma Types and Pairs</h3>
+<h4 id="sigma"><code>sigma</code></h4>
+<p>A dependent pair type (Σ-type).</p>
+<pre><code>(sigma name domain codomain)  →  TSigma(name, domain, codomain)</code></pre>
+<p><code>name</code> must be a symbol; <code>domain</code> and
+<code>codomain</code> must be cubical terms.</p>
+<hr />
+<h4 id="pair"><code>pair</code></h4>
+<p>A dependent pair value.</p>
+<pre><code>(pair a b)  →  TPair(a, b)</code></pre>
+<p>Both arguments must be cubical terms.</p>
+<hr />
+<h4 id="fst"><code>fst</code></h4>
+<p>Projects the first component of a pair.</p>
+<pre><code>(fst p)  →  TFst(p)</code></pre>
+<p><code>p</code> must be a cubical term.</p>
+<hr />
+<h4 id="snd"><code>snd</code></h4>
+<p>Projects the second component of a pair.</p>
+<pre><code>(snd p)  →  TSnd(p)</code></pre>
+<p><code>p</code> must be a cubical term.</p>
+<hr />
+<h3 id="composition-and-transport">Composition and Transport</h3>
+<h4 id="hcomp"><code>hcomp</code></h4>
+<p>Homogeneous composition. Fills a cube with a given face
+constraint.</p>
+<pre><code>(hcomp A phi tube base)  →  THComp(A, phi, tube, base)</code></pre>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>The type</td>
+</tr>
+<tr>
+<td><code>phi</code></td>
+<td>Face formula</td>
+</tr>
+<tr>
+<td><code>tube</code></td>
+<td>The partial element (the tube)</td>
+</tr>
+<tr>
+<td><code>base</code></td>
+<td>The base element at <code>i=0</code></td>
+</tr>
+</tbody>
+</table>
+<p>All four arguments must be cubical terms.</p>
+<hr />
+<h4 id="transport"><code>transport</code></h4>
+<p>Transports a term along a path of types.</p>
+<pre><code>(transport path x)  →  TTransport(path, x)</code></pre>
+<p>Both arguments must be cubical terms. <code>path</code> is a path in
+a universe; <code>x</code> is the element to transport.</p>
+<hr />
+<h3 id="equivalences-and-univalence">Equivalences and Univalence</h3>
+<h4 id="equiv"><code>equiv</code></h4>
+<p>The type of equivalences between two types.</p>
+<pre><code>(equiv A B)  →  TEquiv(A, B)</code></pre>
+<p>Both arguments must be cubical terms.</p>
+<hr />
+<h4 id="make-equiv"><code>make-equiv</code></h4>
+<p>Constructs an equivalence from its components.</p>
+<pre><code>(make-equiv A B f g eta eps)  →  TMkEquiv(A, B, f, g, eta, eps)</code></pre>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>Source type</td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>Target type</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>Forward map <code>A → B</code></td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>Backward map <code>B → A</code></td>
+</tr>
+<tr>
+<td><code>eta</code></td>
+<td>Left inverse homotopy</td>
+</tr>
+<tr>
+<td><code>eps</code></td>
+<td>Right inverse homotopy</td>
+</tr>
+</tbody>
+</table>
+<p>All six arguments must be cubical terms.</p>
+<hr />
+<h4 id="equiv-fwd"><code>equiv-fwd</code></h4>
+<p>Applies the forward direction of an equivalence to a term.</p>
+<pre><code>(equiv-fwd e x)  →  TEquivFwd(e, x)</code></pre>
+<p>Both arguments must be cubical terms.</p>
+<hr />
+<h4 id="ua"><code>ua</code></h4>
+<p>Univalence: converts an equivalence into a path between types.</p>
+<pre><code>(ua e)  →  TUa(e)</code></pre>
+<p><code>e</code> must be a cubical term representing an
+equivalence.</p>
+<hr />
+<h3 id="glue-types">Glue Types</h3>
+<p>Glue types are used to implement the computational content of
+univalence.</p>
+<h4 id="glue"><code>glue</code></h4>
+<p>Forms a Glue type. The third argument <code>T</code> must bundle the
+equivalent-type family and the equivalence together as a
+<code>pair</code> term.</p>
+<pre><code>(glue A phi T)  →  TGlue(A, phi, T)</code></pre>
+<p><code>T</code> should be constructed as
+<code>(pair type equiv)</code>. All three arguments must be cubical
+terms.</p>
+<hr />
+<h4 id="glue-elem"><code>glue-elem</code></h4>
+<p>Constructs a term of a Glue type.</p>
+<pre><code>(glue-elem phi t a)  →  TGlueElem(phi, t, a)</code></pre>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>phi</code></td>
+<td>Face formula</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>Element on the glued side</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Underlying element in the base type</td>
+</tr>
+</tbody>
+</table>
+<p>All three arguments must be cubical terms.</p>
+<hr />
+<h4 id="unglue"><code>unglue</code></h4>
+<p>Extracts the underlying base-type element from a glued term.</p>
+<pre><code>(unglue phi te g)  →  TUnglue(phi, te, g)</code></pre>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>phi</code></td>
+<td>Face formula</td>
+</tr>
+<tr>
+<td><code>te</code></td>
+<td>Bundled <code>(type, equiv)</code> pair</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>The glued term to unglue</td>
+</tr>
+</tbody>
+</table>
+<p>All three arguments must be cubical terms.</p>
+<hr />
+<h3 id="evaluation-and-type-checking">Evaluation and Type-Checking</h3>
+<h4 id="ctt-eval"><code>ctt-eval</code></h4>
+<p>Normalises a closed cubical term.</p>
+<pre><code>(ctt-eval t)  →  CubicalTerm</code></pre>
+<p>Returns the normal form of <code>t</code>.</p>
+<hr />
+<h4 id="ctt-infer"><code>ctt-infer</code></h4>
+<p>Infers the type of a closed cubical term.</p>
+<pre><code>(ctt-infer t)  →  CubicalTerm</code></pre>
+<p>Returns the inferred type as a cubical term. Errors if type inference
+fails.</p>
+<hr />
+<h4 id="ctt-check"><code>ctt-check</code></h4>
+<p>Checks that a term has a given type in the empty context.</p>
+<pre><code>(ctt-check t ty)  →  1.0</code></pre>
+<p>Returns <code>1.0</code> on success. Raises a Lisp error on
+type-checking failure.</p>
+<hr />
+<h4 id="ctt-equal"><code>ctt-equal?</code></h4>
+<p>Tests definitional equality of two closed cubical terms.</p>
+<pre><code>(ctt-equal? t u)  →  1.0 or 0.0</code></pre>
+<p>Returns <code>1.0</code> if <code>t</code> and <code>u</code> are
+definitionally equal, <code>0.0</code> otherwise.</p>
+</body>
+</html>
