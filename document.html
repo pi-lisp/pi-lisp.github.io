@@ -1,3 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>document</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
 <h1 id="language-grammar-reference">Language Grammar Reference</h1>
 <p>This document describes the syntax and grammar of the cubical Lisp
 interpreter, covering all special forms, builtin procedures, type
@@ -142,13 +313,21 @@ the interval <code>I = [0, 1]</code> is a numeric range.</p>
 interval variable <code>i</code> (De Bruijn index <code>#0</code> in the
 compiled body). Analogous to a <code>lambda</code> of arity 1 whose
 domain is the interval <code>[0, 1]</code>.</p>
+<p>The arity argument must be the literal <code>1.0</code>; any other
+value is an error. Free variables in <code>body</code> are captured from
+the current lexical environment at construction time; the interval
+variable <code>i</code> is pushed at index <code>0</code> by
+<code>papply</code> when the path is applied.</p>
 <hr />
 <h3 id="papply"><code>papply</code></h3>
 <pre><code>(papply path t)
 </code></pre>
 <p>Applies a path at interval point <code>t</code>, which must be a
-number in <code>[0, 1]</code>. Reduces to <code>body[i := t]</code>. The
-endpoints recover the path’s boundary:</p>
+number in <code>[0, 1]</code>. Any value in the closed interval is
+accepted — including interior points such as <code>0.5</code> — making
+composition, transport, and <code>hcomp</code> possible. Reduces to
+<code>body[i := t]</code>. The endpoints recover the path’s
+boundary:</p>
 <pre><code>(papply p i0)  ≡  p(0)   ; left endpoint
 (papply p i1)  ≡  p(1)   ; right endpoint
 </code></pre>
@@ -210,10 +389,55 @@ reflexivity/identity path — evidence that <code>x</code> is equal to
 itself.</p>
 <pre><code>(papply (refl x) t)  ≡  x    for all t ∈ [0, 1]
 </code></pre>
+<p><strong>Implementation note:</strong> <code>x</code> is captured at
+De Bruijn index <code>1</code> in the path’s lexical environment (not
+quoted). <code>papply</code> pushes the interval value at index
+<code>0</code>, shifting <code>x</code> to index <code>1</code>; the
+body <code>#1</code> then retrieves it correctly at every interval
+point.</p>
 <hr />
 <h3 id="interval-constants-builtins">Interval constants (builtins)</h3>
 <pre><code>i0   ; = 0.0, the left  endpoint of I
 i1   ; = 1.0, the right endpoint of I
+</code></pre>
+<hr />
+<h3 id="symm-path-reversal"><code>symm</code> — Path Reversal</h3>
+<pre><code>(symm p)
+</code></pre>
+<p>Given <code>p : Path a b</code>, returns a path <code>Path b a</code>
+traversing <code>p</code> in reverse.</p>
+<pre><code>(papply (symm p) t)  ≡  (papply p (- 1 t))
+</code></pre>
+<hr />
+<h3 id="trans-path-composition"><code>trans</code> — Path
+Composition</h3>
+<pre><code>(trans p q)
+</code></pre>
+<p>Given <code>p : Path a b</code> and <code>q : Path b c</code>,
+returns a path <code>Path a c</code> that concatenates them. Uses
+double-speed scheduling: the first half of <code>[0, 1]</code> runs
+<code>p</code> and the second half runs <code>q</code>.</p>
+<pre><code>(papply (trans p q) t)  ≡  (papply p (* 2 t))        when t &lt; 0.5
+                        ≡  (papply q (- (* 2 t) 1))   when t ≥ 0.5
+</code></pre>
+<p>The endpoints satisfy <code>(papply (trans p q) i0) ≡ a</code> and
+<code>(papply (trans p q) i1) ≡ c</code>.</p>
+<hr />
+<h3 id="cong-congruence-ap"><code>cong</code> — Congruence
+(<code>ap</code>)</h3>
+<pre><code>(cong f p)
+</code></pre>
+<p>Given a function <code>f : A → B</code> and <code>p : Path a b</code>
+in <code>A</code>, returns a path <code>Path (f a) (f b)</code> in
+<code>B</code>. This is the standard <code>ap</code>/congruence
+principle.</p>
+<pre><code>(papply (cong f p) t)  ≡  (f (papply p t))
+</code></pre>
+<pre class="uwu"><code>(define double (lambda (x) (* x 2)))
+(define p (path (i) (+ i 1)))          ; path from 1 to 2
+(papply (cong double p) i0)             ; =&gt; 2.0  (double of p(0) = 1)
+(papply (cong double p) i1)             ; =&gt; 4.0  (double of p(1) = 2)
+(papply (cong double p) 0.5)            ; =&gt; 3.0  (double of p(0.5) = 1.5)
 </code></pre>
 <hr />
 <h2 id="dependent-type-forms">Dependent Type Forms</h2>
@@ -509,8 +733,8 @@ otherwise.</td>
 <tbody>
 <tr>
 <td><code>(print x ...)</code></td>
-<td>Prints all arguments with <code>{:?}</code> formatting, then a
-newline. Returns <code>()</code>.</td>
+<td>Prints all arguments with <code>{}</code> (Display) formatting, then
+a newline. Returns <code>()</code>.</td>
 </tr>
 <tr>
 <td><code>(read)</code></td>
@@ -624,6 +848,38 @@ extended by <code>lambda</code> application,
 linked list and returns the value at that depth. Extended by
 <code>lambda</code> application,
 <code>path</code>/<code>pi</code>/<code>sigma</code>/<code>let</code>/<code>letrec</code>.</p>
+<p>Two helpers are available for the global environment:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Function</th>
+<th>Signature</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>env_get</code></td>
+<td><code>(&amp;Env, &amp;str) -&gt; Result&lt;Expr, String&gt;</code></td>
+<td>Returns the value or an <em>undefined symbol</em> error.</td>
+</tr>
+<tr>
+<td><code>env_get_opt</code></td>
+<td><code>(&amp;Env, &amp;str) -&gt; Option&lt;Expr&gt;</code></td>
+<td>Returns <code>None</code> instead of an error when the name is
+absent. Prefer this for optional lookups (e.g. macro dispatch).</td>
+</tr>
+</tbody>
+</table>
+<p><code>make_env()</code> (re-exported from <code>env.rs</code>) is an
+alias for <code>new_env()</code> intended for use in cubical closures
+that need a throwaway global env to satisfy the <code>eval</code>
+signature when evaluating closed path bodies.</p>
 <hr />
 <h2 id="type-system-sentinels">Type System Sentinels</h2>
 <p>The typechecker (<code>typechecker.rs</code>) represents types as
@@ -739,6 +995,22 @@ execute the internal test harness.</li>
       (y (* x 2)))   ; x is already bound here
   (+ x y))           ; =&gt; 9.0
 
+; symm: reverse a path
+(define p (path (i) (+ i 1)))    ; path from 1 to 2
+(papply (symm p) i0)              ; =&gt; 2.0
+(papply (symm p) i1)              ; =&gt; 1.0
+
+; trans: concatenate two paths
+(define p1 (path (i) i))          ; path from 0 to 1
+(define p2 (path (i) (+ i 1)))    ; path from 1 to 2
+(papply (trans p1 p2) i0)          ; =&gt; 0.0
+(papply (trans p1 p2) 0.5)         ; =&gt; 1.0
+(papply (trans p1 p2) i1)          ; =&gt; 2.0
+
+; cong: apply a function pointwise along a path
+(define double (lambda (x) (* x 2)))
+(papply (cong double p1) 0.5)      ; =&gt; 1.0  (double of 0.5)
+
 ; funext: path between definitionally equal functions
 (define add0-path
   (funext (lambda (n) (+ n 0))
@@ -757,3 +1029,5 @@ execute the internal test harness.</li>
   (ret)
 )) ; =&gt; 5.0
 </code></pre>
+</body>
+</html>
