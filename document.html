@@ -1,1033 +1,762 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>document</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #1a1a1a;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>uwulisp — Grammar Reference</title>
+<style>
+  :root {
+    --purple-50:  #EEEDFE;
+    --purple-100: #CECBF6;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --bg:              #FAFAF8;
+    --surface:         #FFFFFF;
+    --text-primary:    #1C1C1A;
+    --text-secondary:  #5F5E5A;
+    --text-tertiary:   #888780;
+    --border:          rgba(0,0,0,0.08);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--purple-900);
+    color: var(--purple-100);
+    font-size: 13px;
+    font-family: var(--font-mono);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--purple-100);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .topbar-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .topbar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--purple-200);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .topbar-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
+
+  .topbar-link.active {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 6px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease;
+  }
+  .hamburger:hover { background: rgba(255,255,255,0.08); }
+  .hamburger span {
+    display: block; width: 20px; height: 2px;
+    background: var(--purple-200); border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .topbar-drawer {
+    display: none;
+    flex-direction: column;
+    background: var(--purple-900);
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    padding: 0.5rem 1.5rem 1rem;
+  }
+  .topbar-drawer.open { display: flex; }
+  .topbar-drawer .topbar-link { padding: 10px 12px; justify-content: flex-start; font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .topbar-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    padding: 3rem 0 2rem;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .page-header .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--purple-50);
+    color: var(--purple-800);
+    border-radius: 999px;
+    padding: 5px 13px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .page-header p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    max-width: 580px;
+  }
+
+  /* ── Sections ── */
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--purple-800);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.5px solid var(--border);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.4rem;
+  }
+
+  p { margin-bottom: 0.75rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── Inline code ── */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--purple-50);
+    color: var(--purple-800);
+    border-radius: 4px;
+    padding: 0.1em 0.45em;
+  }
+
+  /* ── Code blocks ── */
+  pre {
+    background: var(--purple-900);
+    color: var(--purple-50);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 0.75rem 0 1.25rem;
+  }
+
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* token colours */
+  .kw  { color: var(--purple-200); }
+  .sym { color: #a5c8ff; }
+  .num { color: #ffd580; }
+  .str { color: #7ec89b; }
+  .cmt { color: #6e6a86; }
+  .pun { color: #f28779; }
+
+  /* ── Grammar rule block ── */
+  .rule {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--purple-400);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin: 0.6rem 0 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text-primary);
+  }
+
+  .rule-name { color: var(--purple-600); font-weight: 700; }
+  .rule-op   { color: var(--text-tertiary); }
+  .rule-lit  { color: #2a7a4f; font-weight: 600; }
+  .rule-nt   { color: var(--purple-600); font-style: italic; }
+  .rule-opt  { color: #b06a00; }
+
+  /* ── Tables ── */
+  .form-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+  }
+
+  .form-table th,
+  .form-table td {
+    text-align: left;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 0.5px solid var(--border);
+    vertical-align: top;
+  }
+
+  .form-table th {
+    color: var(--text-tertiary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    background: var(--purple-50);
+  }
+
+  .form-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+  .form-table th:last-child  { border-radius: 0 var(--radius-md) 0 0; }
+  .form-table tr:last-child td { border-bottom: none; }
+  .form-table td:first-child { white-space: nowrap; }
+
+  /* ── Callout ── */
+  .callout {
+    background: var(--purple-50);
+    border: 0.5px solid var(--purple-200);
+    border-left: 3px solid var(--purple-400);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    color: var(--purple-800);
+    font-size: 14px;
+  }
+
+  .callout strong { color: var(--purple-900); }
+
+  /* ── Tag pill ── */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    margin-left: 0.4em;
+    vertical-align: middle;
+  }
+  .tag-special { background: var(--purple-100); color: var(--purple-800); }
+  .tag-reader  { background: #d4f0de; color: #1e5c32; }
+
+  /* ── Lists ── */
+  ol, ul {
+    margin-left: 1.4rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.9;
+  }
+
+  li { margin-bottom: 0.15rem; }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 2rem;
+  }
+
+  footer a {
+    color: var(--purple-600);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  footer a:hover { color: var(--purple-800); }
+
+  @media (max-width: 640px) {
+    .page-header h1 { font-size: 26px; }
+    pre { font-size: 12.5px; padding: 1rem 1.1rem; }
+  }
+</style>
 </head>
 <body>
-<h1 id="language-grammar-reference">Language Grammar Reference</h1>
-<p>This document describes the syntax and grammar of the cubical Lisp
-interpreter, covering all special forms, builtin procedures, type
-formers, and their reduction rules.</p>
-<hr />
-<h2 id="lexical-structure">Lexical Structure</h2>
-<p>The reader tokenises source text by splitting on whitespace after
-expanding parentheses and the quote shorthand into separate tokens.</p>
-<pre><code>token  ::= &#39;(&#39; | &#39;)&#39; | &quot;&#39;&quot; | number | symbol
-number ::= [-]?[0-9]+ (&#39;.&#39; [0-9]+)?
-symbol ::= any sequence of non-whitespace, non-paren characters
-</code></pre>
-<p>The <code>'expr</code> shorthand is expanded by the reader into
-<code>(quote expr)</code> before parsing. There are no string literals,
-booleans, or comments in the base language.</p>
-<hr />
-<h2 id="top-level-grammar">Top-level Grammar</h2>
-<p>A source file is a sequence of one or more expressions.</p>
-<pre><code>program  ::= expr+
-expr     ::= atom | list
-atom     ::= number | symbol
-list     ::= &#39;(&#39; expr* &#39;)&#39;
-</code></pre>
-<hr />
-<h2 id="special-forms">Special Forms</h2>
-<p>Special forms are recognised by their leading symbol and are
-<em>not</em> evaluated as ordinary function calls. Their arguments may
-be unevaluated, bound, or treated structurally.</p>
-<h3 id="quote"><code>quote</code></h3>
-<pre><code>(quote expr)
-&#39;expr          ; reader shorthand
-</code></pre>
-<p>Returns <code>expr</code> unevaluated. No sub-expressions are
-evaluated.</p>
-<hr />
-<h3 id="quasiquote-unquote-unquote-splicing"><code>quasiquote</code>,
-<code>unquote</code>, <code>unquote-splicing</code></h3>
-<pre><code>(quasiquote template)
-`template                     ; reader shorthand (if supported)
 
-(unquote expr)                ; inside a quasiquote — splices one value
-,expr
+<!-- Top bar -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-brand" href="index.html">uwulisp</a>
+    <nav class="topbar-links" aria-label="Top navigation">
+      <a class="topbar-link" href="index.html">go back</a>
+      <a class="topbar-link" href="lispy.html">lispy</a>
+      <a class="topbar-link active" href="document.html">Docs</a>
+    </nav>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="topbar-drawer" id="mobile-menu" aria-label="Mobile navigation">
+    <a class="topbar-link" href="index.html">go back</a>
+    <a class="topbar-link" href="lispy.html">lispy</a>
+    <a class="topbar-link active" href="document.html">Docs</a>
+  </nav>
+</header>
 
-(unquote-splicing list-expr)  ; inside a quasiquote — splices a list inline
-,@list-expr
-</code></pre>
-<p>Within a <code>quasiquote</code>, sub-expressions are returned
-literally <em>except</em> where <code>unquote</code> or
-<code>unquote-splicing</code> appear at the current nesting depth.
-Nested <code>quasiquote</code> forms increase the depth; nested
-<code>unquote</code> forms decrease it.</p>
-<hr />
-<h3 id="define"><code>define</code></h3>
-<pre><code>(define name expr)
-</code></pre>
-<p>Evaluates <code>expr</code> and binds the result to <code>name</code>
-in the global environment. <code>name</code> must be a symbol. Returns
-the bound value.</p>
-<hr />
-<h3 id="lambda"><code>lambda</code></h3>
-<p><strong>Surface syntax</strong> (before compilation):</p>
-<pre><code>(lambda (param ...) body)
-</code></pre>
-<p><strong>Core syntax</strong> (after compilation, De Bruijn form):</p>
-<pre><code>(lambda arity body)
-</code></pre>
-<p>Creates a closure over the current lexical environment. Parameters
-are referenced in <code>body</code> via De Bruijn indices
-(<code>#0</code>, <code>#1</code>, …) rather than names.
-<code>arity</code> is a number literal recording the parameter
-count.</p>
-<hr />
-<h3 id="if"><code>if</code></h3>
-<pre><code>(if condition then-expr)
-(if condition then-expr else-expr)
-</code></pre>
-<p>Evaluates <code>condition</code>. If it is truthy (non-zero number or
-non-empty list), evaluates and returns <code>then-expr</code>; otherwise
-evaluates and returns <code>else-expr</code>. If no
-<code>else-expr</code> is given and the condition is falsy, returns
-<code>()</code>.</p>
-<p>Truthiness rules:</p>
-<ul>
-<li><code>0</code> and <code>()</code> are <strong>falsy</strong>.</li>
-<li>Every other value is <strong>truthy</strong>.</li>
-</ul>
-<hr />
-<h3 id="let"><code>let</code></h3>
-<p><strong>Surface syntax</strong>:</p>
-<pre><code>(let ((name expr) ...) body ...)
-</code></pre>
-<p>Evaluates each binding expression sequentially. Later binding
-expressions are evaluated in the environment already extended by all
-preceding bindings, so a later RHS <em>can</em> refer to an earlier
-binding by name. Bindings are however <em>not</em> mutually recursive —
-a binding’s own RHS cannot refer to itself (use <code>letrec</code> for
-that). Evaluates each <code>body</code> expression in sequence,
-returning the last.</p>
-<hr />
-<h3 id="letrec"><code>letrec</code></h3>
-<p><strong>Surface syntax</strong>:</p>
-<pre><code>(letrec ((name expr) ...) body ...)
-</code></pre>
-<p>Like <code>let</code>, but all binding names are in scope for
-<em>every</em> RHS expression and for the body, enabling mutual
-recursion and self-referential definitions. Evaluation pre-allocates
-slots for every binding before evaluating any RHS; lambdas defined here
-close over the fully-resolved environment so recursive calls work
-correctly at runtime.</p>
-<pre class="uwu"><code>(letrec ((even? (lambda (n) (if (= n 0) 1 (odd?  (- n 1)))))
-         (odd?  (lambda (n) (if (= n 0) 0 (even? (- n 1))))))
-  (even? 10))   ; =&gt; 1.0
-</code></pre>
-<hr />
-<h3 id="begin"><code>begin</code></h3>
-<pre><code>(begin expr ...)
-</code></pre>
-<p>Evaluates each expression in order and returns the value of the last
-one. Primarily used to sequence side effects.</p>
-<hr />
-<h3 id="defmacro"><code>defmacro</code></h3>
-<pre><code>(defmacro name (param ...) body)
-</code></pre>
-<p>Defines a macro. When <code>(name arg ...)</code> is later
-encountered, the <em>unevaluated</em> argument expressions are
-substituted for <code>param ...</code> in <code>body</code>, and the
-resulting expression is compiled and evaluated. Macros operate on
-surface S-expressions, not on values.</p>
-<hr />
-<h2 id="path-interval-forms-cubical">Path / Interval Forms
-(Cubical)</h2>
-<p>These forms implement a simplified model of cubical type theory where
-the interval <code>I = [0, 1]</code> is a numeric range.</p>
-<h3 id="path"><code>path</code></h3>
-<p><strong>Surface syntax</strong>:</p>
-<pre><code>(path (i) body)
-</code></pre>
-<p><strong>Core syntax</strong>:</p>
-<pre><code>(path 1.0 body)
-</code></pre>
-<p>Creates a path value: a function <code>I → A</code> that binds the
-interval variable <code>i</code> (De Bruijn index <code>#0</code> in the
-compiled body). Analogous to a <code>lambda</code> of arity 1 whose
-domain is the interval <code>[0, 1]</code>.</p>
-<p>The arity argument must be the literal <code>1.0</code>; any other
-value is an error. Free variables in <code>body</code> are captured from
-the current lexical environment at construction time; the interval
-variable <code>i</code> is pushed at index <code>0</code> by
-<code>papply</code> when the path is applied.</p>
-<hr />
-<h3 id="papply"><code>papply</code></h3>
-<pre><code>(papply path t)
-</code></pre>
-<p>Applies a path at interval point <code>t</code>, which must be a
-number in <code>[0, 1]</code>. Any value in the closed interval is
-accepted — including interior points such as <code>0.5</code> — making
-composition, transport, and <code>hcomp</code> possible. Reduces to
-<code>body[i := t]</code>. The endpoints recover the path’s
-boundary:</p>
-<pre><code>(papply p i0)  ≡  p(0)   ; left endpoint
-(papply p i1)  ≡  p(1)   ; right endpoint
-</code></pre>
-<hr />
-<h3 id="funext-function-extensionality"><code>funext</code> — Function
-Extensionality</h3>
-<pre><code>(funext f g p)
-</code></pre>
-<p>Given two functions <code>f</code> and <code>g</code> of the same
-Π-type and a pointwise homotopy <code>p</code> between them, produces a
-<code>Path</code> value witnessing that <code>f</code> and
-<code>g</code> are equal as functions.</p>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Expected type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>f</code></td>
-<td><code>Π(x : A), B x</code></td>
-</tr>
-<tr>
-<td><code>g</code></td>
-<td><code>Π(x : A), B x</code></td>
-</tr>
-<tr>
-<td><code>p</code></td>
-<td><code>Π(x : A), Path(B x) (f x) (g x)</code> — a function returning,
-for each <code>x</code>, a path from <code>f x</code> to
-<code>g x</code></td>
-</tr>
-</tbody>
-</table>
-<p>The resulting path satisfies the β-rules at its endpoints:</p>
-<pre><code>(papply (funext f g p) i0)  ≡  f
-(papply (funext f g p) i1)  ≡  g
-</code></pre>
-<p>At any interior point <code>i</code>, applying the result gives
-<code>λ x. (papply (p x) i)</code>.</p>
-<pre class="uwu"><code>(define add0-path
-  (funext (lambda (n) (+ n 0))
-          (lambda (n) n)
-          (lambda (n) (refl n))))
-; (papply add0-path i0) ≡ (lambda (n) (+ n 0))
-; (papply add0-path i1) ≡ (lambda (n) n)
-</code></pre>
-<pre><code>(refl x)
-</code></pre>
-<p>Returns the constant path at <code>x</code>: a path that ignores its
-interval argument and always evaluates to <code>x</code>. This is the
-reflexivity/identity path — evidence that <code>x</code> is equal to
-itself.</p>
-<pre><code>(papply (refl x) t)  ≡  x    for all t ∈ [0, 1]
-</code></pre>
-<p><strong>Implementation note:</strong> <code>x</code> is captured at
-De Bruijn index <code>1</code> in the path’s lexical environment (not
-quoted). <code>papply</code> pushes the interval value at index
-<code>0</code>, shifting <code>x</code> to index <code>1</code>; the
-body <code>#1</code> then retrieves it correctly at every interval
-point.</p>
-<hr />
-<h3 id="interval-constants-builtins">Interval constants (builtins)</h3>
-<pre><code>i0   ; = 0.0, the left  endpoint of I
-i1   ; = 1.0, the right endpoint of I
-</code></pre>
-<hr />
-<h3 id="symm-path-reversal"><code>symm</code> — Path Reversal</h3>
-<pre><code>(symm p)
-</code></pre>
-<p>Given <code>p : Path a b</code>, returns a path <code>Path b a</code>
-traversing <code>p</code> in reverse.</p>
-<pre><code>(papply (symm p) t)  ≡  (papply p (- 1 t))
-</code></pre>
-<hr />
-<h3 id="trans-path-composition"><code>trans</code> — Path
-Composition</h3>
-<pre><code>(trans p q)
-</code></pre>
-<p>Given <code>p : Path a b</code> and <code>q : Path b c</code>,
-returns a path <code>Path a c</code> that concatenates them. Uses
-double-speed scheduling: the first half of <code>[0, 1]</code> runs
-<code>p</code> and the second half runs <code>q</code>.</p>
-<pre><code>(papply (trans p q) t)  ≡  (papply p (* 2 t))        when t &lt; 0.5
-                        ≡  (papply q (- (* 2 t) 1))   when t ≥ 0.5
-</code></pre>
-<p>The endpoints satisfy <code>(papply (trans p q) i0) ≡ a</code> and
-<code>(papply (trans p q) i1) ≡ c</code>.</p>
-<hr />
-<h3 id="cong-congruence-ap"><code>cong</code> — Congruence
-(<code>ap</code>)</h3>
-<pre><code>(cong f p)
-</code></pre>
-<p>Given a function <code>f : A → B</code> and <code>p : Path a b</code>
-in <code>A</code>, returns a path <code>Path (f a) (f b)</code> in
-<code>B</code>. This is the standard <code>ap</code>/congruence
-principle.</p>
-<pre><code>(papply (cong f p) t)  ≡  (f (papply p t))
-</code></pre>
-<pre class="uwu"><code>(define double (lambda (x) (* x 2)))
-(define p (path (i) (+ i 1)))          ; path from 1 to 2
-(papply (cong double p) i0)             ; =&gt; 2.0  (double of p(0) = 1)
-(papply (cong double p) i1)             ; =&gt; 4.0  (double of p(1) = 2)
-(papply (cong double p) 0.5)            ; =&gt; 3.0  (double of p(0.5) = 1.5)
-</code></pre>
-<hr />
-<h2 id="dependent-type-forms">Dependent Type Forms</h2>
-<h3 id="pi-dependent-function-type-π-type"><code>pi</code> — Dependent
-Function Type (Π-type)</h3>
-<p><strong>Surface syntax</strong>:</p>
-<pre><code>(pi (x) domain codomain)
-</code></pre>
-<p><strong>Core syntax</strong> (after compilation):</p>
-<pre><code>(pi domain codomain)
-</code></pre>
-<p>Constructs a Π-type value: the type of functions from
-<code>domain</code> to <code>codomain</code>, where
-<code>codomain</code> may mention the bound variable <code>x</code> (De
-Bruijn <code>#0</code>). For a non-dependent arrow,
-<code>codomain</code> simply ignores <code>x</code>.</p>
-<pre class="uwu"><code>(pi (x) Nat Nat)          ; the non-dependent arrow Nat → Nat
-(pi (n) Nat (Vec n))      ; a genuinely dependent type: vectors of length n
-</code></pre>
-<hr />
-<h3 id="piapply"><code>piapply</code></h3>
-<pre><code>(piapply pi-type value)
-</code></pre>
-<p>Instantiates a Π-type at <code>value</code>, evaluating the codomain
-with the bound variable set to <code>value</code>. Returns the
-<em>type</em> of applying a function of this Π-type to that concrete
-argument.</p>
-<pre class="uwu"><code>(piapply (pi (n) Nat (Vec n)) 3)   ; =&gt; (Vec 3)
-</code></pre>
-<hr />
-<h3 id="sigma-dependent-pair-type-σ-type"><code>sigma</code> — Dependent
-Pair Type (Σ-type)</h3>
-<p><strong>Surface syntax</strong>:</p>
-<pre><code>(sigma (x) domain codomain)
-</code></pre>
-<p><strong>Core syntax</strong>:</p>
-<pre><code>(sigma domain codomain)
-</code></pre>
-<p>Constructs a Σ-type value: the type of pairs <code>(a, b)</code>
-where <code>a : domain</code> and <code>b : codomain(a)</code>, where
-<code>codomain</code> may mention the bound variable <code>x</code>.</p>
-<pre class="uwu"><code>(sigma (n) Nat (Vec n))   ; pairs of a length n and a vector of that length
-</code></pre>
-<hr />
-<h3 id="sigmacod"><code>sigmacod</code></h3>
-<pre><code>(sigmacod sigma-type value)
-</code></pre>
-<p>Instantiates the codomain of a Σ-type at <code>value</code> (the
-first component of a pair). Returns the <em>type</em> of the second
-component when the first component equals <code>value</code>.</p>
-<pre class="uwu"><code>(sigmacod (sigma (n) Nat (Vec n)) 3)   ; =&gt; (Vec 3)
-</code></pre>
-<hr />
-<h2 id="glue-types-cubical-equivalence">Glue Types (Cubical
-Equivalence)</h2>
-<p>Glue types encode equivalences between types, following the cubical
-notion of glueing a fiber type onto a base type along a face.</p>
-<h3 id="glue-type"><code>glue-type</code></h3>
-<pre><code>(glue-type base-type equiv)
-</code></pre>
-<p>The Glue type former. <code>base-type</code> is the base type
-<code>A</code>; <code>equiv</code> is a function <code>f : B → A</code>
-witnessing an equivalence from fiber type <code>B</code> to
-<code>A</code>. Returns a <code>GlueType</code> value.</p>
-<pre class="uwu"><code>(glue-type Num double)   ; Num glued to Num via the doubling map
-</code></pre>
-<hr />
-<h3 id="glue"><code>glue</code></h3>
-<pre><code>(glue val equiv)
-</code></pre>
-<p>Introduction form. <code>val</code> is a value on the
-<code>B</code>-side (the fiber); <code>equiv</code> is the forward
-function <code>f : B → A</code>. Produces a <code>Glue</code> term that
-records both the fiber value and the equivalence.</p>
-<pre class="uwu"><code>(glue 21 double)   ; the fiber value 21, glued via doubling
-</code></pre>
-<hr />
-<h3 id="unglue"><code>unglue</code></h3>
-<pre><code>(unglue glue-term)
-</code></pre>
-<p>Elimination form. Extracts the base-type (<code>A</code>-side) image
-of a <code>Glue</code> term by applying the stored equivalence to the
-stored fiber value.</p>
-<p><strong>Reduction rule (β):</strong></p>
-<pre><code>(unglue (glue v f))  ≡  (f v)
-</code></pre>
-<pre class="uwu"><code>(unglue (glue 21 double))   ; =&gt; 42
-</code></pre>
-<hr />
-<h2 id="inline-assembler-jit">Inline Assembler (JIT)</h2>
-<p>The environment includes a low-level <code>asm</code> built-in that
-interfaces with a JIT compiler to emit and execute native x86-64 machine
-code directly from the interpreter.</p>
-<h3 id="asm"><code>asm</code></h3>
-<pre><code>(asm &#39;(instruction ...))
-</code></pre>
-<p>Accepts a <strong>single quoted list</strong> of instructions. It
-compiles them into an executable buffer, maps memory protections,
-executes the routine, and returns the numerical value left in the
-<code>RAX</code> register.</p>
-<blockquote>
-<p><strong>Note on Safety</strong>: This executes arbitrary machine
-instructions in the interpreter’s process space. Malformed instructions,
-bad memory addresses, or improper stack management will trigger a
-segmentation fault or unrecoverable crash.</p>
-</blockquote>
-<h3 id="operand-syntax">Operand Syntax</h3>
-<p>Instructions support three categories of operands, mapped to native
-x86-64 parameters:</p>
-<ol type="1">
-<li><strong>Registers</strong>: Evaluated from case-insensitive symbols
-matching standard x86-64 64-bit registers: <code>RAX</code>,
-<code>RCX</code>, <code>RDX</code>, <code>RBX</code>, <code>RSP</code>,
-<code>RBP</code>, <code>RSI</code>, <code>RDI</code>, <code>R8</code>,
-<code>R9</code>, <code>R10</code>, <code>R11</code>, <code>R12</code>,
-<code>R13</code>, <code>R14</code>, <code>R15</code>.</li>
-<li><strong>Immediates</strong>: Evaluated from raw numeric literals.
-Immediates must fit within a signed 32-bit integer range (<span
-class="math inline">[−2<sup>31</sup>, 2<sup>31</sup> − 1]</span>);
-numbers outside this range will trigger an out-of-bounds assembly
-error.</li>
-<li><strong>Memory Addresses</strong>: Expressed using the list form
-<code>(mem base displacement)</code> where <code>base</code> is a
-register symbol and <code>displacement</code> is an explicit index
-number (e.g., <code>(mem rbp -8)</code> or <code>(mem rax 0)</code>).
-Omitting a base register symbol builds an absolute numeric address.</li>
-</ol>
-<h3 id="supported-instruction-set">Supported Instruction Set</h3>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th>Instruction Type</th>
-<th>Forms</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Data Movement</strong></td>
-<td><code>(mov dest src)</code>, <code>(push op)</code>,
-<code>(pop op)</code></td>
-</tr>
-<tr>
-<td><strong>Arithmetic</strong></td>
-<td><code>(add dest src)</code>, <code>(sub dest src)</code>,
-<code>(imul dest src)</code>, <code>(mul op)</code>,
-<code>(div op)</code></td>
-</tr>
-<tr>
-<td><strong>Bitwise / Shifts</strong></td>
-<td><code>(and dest src)</code>, <code>(or dest src)</code>,
-<code>(xor dest src)</code>, <code>(not op)</code>,
-<code>(shl dest count)</code>, <code>(shr dest count)</code></td>
-</tr>
-<tr>
-<td><strong>Compare / Test</strong></td>
-<td><code>(cmp op1 op2)</code>, <code>(test op1 op2)</code></td>
-</tr>
-<tr>
-<td><strong>Control Flow</strong></td>
-<td><code>(call op)</code>, <code>(ret)</code>,
-<code>(syscall)</code></td>
-</tr>
-<tr>
-<td><strong>Labels &amp; Jumps</strong></td>
-<td><code>(label name)</code>, <code>(jmp name)</code>,
-<code>(je name)</code>, <code>(jne name)</code>, <code>(jl name)</code>,
-<code>(jle name)</code>, <code>(jge name)</code>,
-<code>(jg name)</code></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="builtin-procedures">Builtin Procedures</h2>
-<p>Builtins are ordinary first-class values in the global environment.
-They are called like any function: <code>(name arg ...)</code>.</p>
-<h3 id="arithmetic">Arithmetic</h3>
-<table>
-<thead>
-<tr>
-<th>Form</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(+ x ...)</code></td>
-<td>Sum of zero or more numbers.</td>
-</tr>
-<tr>
-<td><code>(- x)</code></td>
-<td>Negation.</td>
-</tr>
-<tr>
-<td><code>(- x y ...)</code></td>
-<td>Left-associative subtraction.</td>
-</tr>
-<tr>
-<td><code>(* x ...)</code></td>
-<td>Product of zero or more numbers.</td>
-</tr>
-<tr>
-<td><code>(/ x y ...)</code></td>
-<td>Left-associative division. Errors on divide-by-zero.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="comparisons">Comparisons</h3>
-<p>All comparison operators return <code>1.0</code> for true and
-<code>0.0</code> for false.</p>
-<table>
-<thead>
-<tr>
-<th>Form</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(= a b)</code></td>
-<td>Numeric equality.</td>
-</tr>
-<tr>
-<td><code>(&lt; a b)</code></td>
-<td>Less than.</td>
-</tr>
-<tr>
-<td><code>(&gt; a b)</code></td>
-<td>Greater than.</td>
-</tr>
-<tr>
-<td><code>(&lt;= a b)</code></td>
-<td>Less than or equal.</td>
-</tr>
-<tr>
-<td><code>(&gt;= a b)</code></td>
-<td>Greater than or equal.</td>
-</tr>
-<tr>
-<td><code>(not x)</code></td>
-<td><code>1.0</code> if <code>x</code> is falsy, <code>0.0</code>
-otherwise.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="lists">Lists</h3>
-<table>
-<thead>
-<tr>
-<th>Form</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(list x ...)</code></td>
-<td>Constructs a list from its arguments.</td>
-</tr>
-<tr>
-<td><code>(car lst)</code></td>
-<td>Returns the first element of a non-empty list.</td>
-</tr>
-<tr>
-<td><code>(cdr lst)</code></td>
-<td>Returns the list with its first element removed.</td>
-</tr>
-<tr>
-<td><code>(cons x lst)</code></td>
-<td>Prepends <code>x</code> to <code>lst</code>.</td>
-</tr>
-<tr>
-<td><code>(null? x)</code></td>
-<td><code>1.0</code> if <code>x</code> is the empty list,
-<code>0.0</code> otherwise.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="miscellaneous">Miscellaneous</h3>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th>Form</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(print x ...)</code></td>
-<td>Prints all arguments with <code>{}</code> (Display) formatting, then
-a newline. Returns <code>()</code>.</td>
-</tr>
-<tr>
-<td><code>(read)</code></td>
-<td>Reads a line of input from standard input, parses it as a single
-S-expression, and returns it.</td>
-</tr>
-<tr>
-<td><code>(write x)</code></td>
-<td>Prints the representation of <code>x</code> to standard output
-without a newline, and flushes output. Returns <code>()</code>.</td>
-</tr>
-<tr>
-<td><code>(newline)</code></td>
-<td>Prints a newline to standard output. Returns <code>()</code>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="runtime-type-predicates">Runtime Type Predicates</h3>
-<p>All predicates take exactly one argument and return <code>1.0</code>
-(true) or <code>0.0</code> (false).</p>
-<table>
-<thead>
-<tr>
-<th>Form</th>
-<th>True when argument is…</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(pi? x)</code></td>
-<td>A <code>Pi</code> type value.</td>
-</tr>
-<tr>
-<td><code>(sigma? x)</code></td>
-<td>A <code>Sigma</code> type value.</td>
-</tr>
-<tr>
-<td><code>(path? x)</code></td>
-<td>A <code>Path</code> value.</td>
-</tr>
-<tr>
-<td><code>(glue? x)</code></td>
-<td>A <code>Glue</code> introduction term.</td>
-</tr>
-<tr>
-<td><code>(glue-type? x)</code></td>
-<td>A <code>GlueType</code> type former.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="de-bruijn-compilation">De Bruijn Compilation</h2>
-<p>User-written code uses named variables; the compiler
-(<code>compiler.rs</code>) converts these to <strong>De Bruijn
-indices</strong> before evaluation.</p>
-<ul>
-<li>Variables bound by <code>lambda</code>, <code>path</code>,
-<code>pi</code>, <code>sigma</code>, <code>let</code>, or
-<code>letrec</code> are replaced with <code>#N</code> where
-<code>N</code> is the number of enclosing binders between the use and
-the binding site.</li>
-<li><code>#0</code> refers to the innermost (most recently bound)
-variable.</li>
-<li>Global names (not in any enclosing binder) are left as symbols and
-resolved at runtime from the global environment.</li>
-</ul>
-<pre class="uwu"><code>; surface syntax
-(lambda (x) (lambda (y) (+ x y)))
+<div class="container">
 
-; compiled core
-(lambda 1 (lambda 1 (+ #1 #0)))
-;                        ^  ^
-;                        |  y  (innermost binder, index 0)
-;                        x  (one binder out, index 1)
-</code></pre>
-<p>The <code>let</code> form is also compiled into De Bruijn form;
-bindings are pushed left-to-right, so the last binding is at index
-<code>#0</code> in the body.</p>
-<hr />
-<h2 id="lexical-environments">Lexical Environments</h2>
-<p>Evaluation uses two parallel environments:</p>
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr>
-<th>Environment</th>
-<th>Type</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Global (<code>Env</code>)</td>
-<td><code>Rc&lt;RefCell&lt;HashMap&lt;String, Expr&gt;&gt;&gt;</code></td>
-<td>Global name → value bindings, shared and mutable.</td>
-</tr>
-<tr>
-<td>Lexical (<code>LexEnv</code>)</td>
-<td>Linked list of <code>Expr</code></td>
-<td>Local variable stack, indexed by De Bruijn index. Immutable;
-extended by <code>lambda</code> application,
-<code>path</code>/<code>pi</code>/<code>sigma</code>/<code>let</code>.</td>
-</tr>
-</tbody>
-</table>
-<p><code>LexEnv::get(i)</code> walks <code>i</code> steps down the
-linked list and returns the value at that depth. Extended by
-<code>lambda</code> application,
-<code>path</code>/<code>pi</code>/<code>sigma</code>/<code>let</code>/<code>letrec</code>.</p>
-<p>Two helpers are available for the global environment:</p>
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr>
-<th>Function</th>
-<th>Signature</th>
-<th>Behaviour</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>env_get</code></td>
-<td><code>(&amp;Env, &amp;str) -&gt; Result&lt;Expr, String&gt;</code></td>
-<td>Returns the value or an <em>undefined symbol</em> error.</td>
-</tr>
-<tr>
-<td><code>env_get_opt</code></td>
-<td><code>(&amp;Env, &amp;str) -&gt; Option&lt;Expr&gt;</code></td>
-<td>Returns <code>None</code> instead of an error when the name is
-absent. Prefer this for optional lookups (e.g. macro dispatch).</td>
-</tr>
-</tbody>
-</table>
-<p><code>make_env()</code> (re-exported from <code>env.rs</code>) is an
-alias for <code>new_env()</code> intended for use in cubical closures
-that need a throwaway global env to satisfy the <code>eval</code>
-signature when evaluating closed path bodies.</p>
-<hr />
-<h2 id="type-system-sentinels">Type System Sentinels</h2>
-<p>The typechecker (<code>typechecker.rs</code>) represents types as
-<code>Expr</code> values using sentinel symbols which are accessible
-from user code for type annotations and signatures.</p>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr>
-<th>Sentinel</th>
-<th>Meaning</th>
-<th>Evaluation Behavior</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>__Num__</code></td>
-<td>The type of all number literals.</td>
-<td>Evaluates to itself.</td>
-<td><code>__Type__</code></td>
-</tr>
-<tr>
-<td><code>__Type__</code></td>
-<td>The universe containing <code>Pi</code>, <code>Sigma</code>,
-<code>GlueType</code>, and <code>Path</code> types.</td>
-<td>Evaluates to itself.</td>
-<td><code>__Type__</code></td>
-</tr>
-<tr>
-<td><code>__Any__</code></td>
-<td>Top / unknown type; subsumes everything.</td>
-<td>Evaluates to itself.</td>
-<td><code>__Type__</code></td>
-</tr>
-<tr>
-<td><code>(__Path__ T)</code></td>
-<td>The type of path values whose body has type <code>T</code>.</td>
-<td>Evaluates structurally: <code>(__Path__ eval(T))</code>.</td>
-<td><code>__Type__</code></td>
-</tr>
-<tr>
-<td><code>__GlueType__</code></td>
-<td>The type of <code>GlueType</code> type-former values.</td>
-<td>Evaluates to itself.</td>
-<td><code>__Type__</code></td>
-</tr>
-<tr>
-<td><code>(__Glue__ T)</code></td>
-<td>The type of <code>Glue</code> intro terms whose base type is
-<code>T</code>.</td>
-<td>Evaluates structurally: <code>(__Glue__ eval(T))</code>.</td>
-<td><code>__Type__</code></td>
-</tr>
-</tbody>
-</table>
-<p>Type checking is <strong>bidirectional</strong>: <code>infer</code>
-synthesises a type from an expression; <code>check</code> verifies an
-expression against an expected type. <code>__Any__</code> on either side
-of a <code>check</code> succeeds unconditionally, making the system
-gradually typed.</p>
-<hr />
-<h2 id="cli-and-repl-modes">CLI and REPL Modes</h2>
-<p>The interpreter supports multiple execution modes:</p>
-<ul>
-<li><strong>Interactive REPL</strong>: Run <code>cargo run</code>
-without arguments in a terminal.</li>
-<li><strong>Batch Stdio</strong>: Pipe expressions into
-<code>cargo run</code>
-(e.g. <code>echo "(+ 1 2)" | cargo run</code>).</li>
-<li><strong>File Mode</strong>: Run
-<code>cargo run &lt;filepath&gt;</code> to execute a Lisp file.</li>
-<li><strong>Test Mode</strong>: Run <code>cargo run -- --test</code> to
-execute the internal test harness.</li>
-</ul>
-<hr />
-<h2 id="example-programs">Example Programs</h2>
-<pre class="uwu"><code>; Factorial (recursive)
-(define fact (lambda (n) (if (&lt; n 1) 1 (* n (fact (- n 1))))))
-(fact 10)   ; =&gt; 3628800
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="badge">📖 reference</div>
+    <h1>Grammar Reference</h1>
+    <p>A complete description of the reader syntax, expression types, and special forms recognised by the evaluator defined in <code>reader.rs</code>, <code>eval.rs</code>, and <code>macros.rs</code>.</p>
+  </div>
 
-; Linear interpolation path from 1 to 5
-(define interp (path (i) (+ (* (- 1 i) 1) (* i 5))))
-(papply interp 0.5)   ; =&gt; 3.0
 
-; Dependent vector-length type
-(define vec-type (pi (n) Nat (* n n)))
-(piapply vec-type 4)   ; =&gt; 16
+  <!-- ═══════════════════════════════ 1. Lexical syntax -->
+  <section>
+    <h2>1 · Lexical Syntax</h2>
 
-; Glue: doubling equivalence
-(define double (lambda (x) (* x 2)))
-(define gv (glue 21 double))
-(unglue gv)   ; =&gt; 42
+    <p>Source text is scanned character-by-character by <code>tokenize()</code> in <code>reader.rs</code>.
+    The scanner produces five kinds of token:</p>
 
-; Path of Glue terms, unglued at each endpoint
-(define gpath (path (i) (glue (* i 10) double)))
-(unglue (papply gpath 0.0))   ; =&gt; 0.0
-(unglue (papply gpath 0.5))   ; =&gt; 10.0
-(unglue (papply gpath 1.0))   ; =&gt; 20.0
+    <table class="form-table">
+      <thead>
+        <tr><th>Token</th><th>Pattern</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>LParen</code></td>
+          <td><code>(</code></td>
+          <td>Opens a list form.</td>
+        </tr>
+        <tr>
+          <td><code>RParen</code></td>
+          <td><code>)</code></td>
+          <td>Closes a list form.</td>
+        </tr>
+        <tr>
+          <td><code>Quote</code></td>
+          <td><code>'</code></td>
+          <td>Reader shorthand; expands to <code>(quote …)</code>.</td>
+        </tr>
+        <tr>
+          <td><code>Str(s)</code></td>
+          <td><code>"…"</code></td>
+          <td>String literal. Supports <code>\n \t \r \" \\</code>; may span multiple lines.</td>
+        </tr>
+        <tr>
+          <td><code>Atom(s)</code></td>
+          <td>any other run of non-delimiter chars</td>
+          <td>Parsed into a <code>Number</code> if it is a valid <code>f64</code>, otherwise a <code>Symbol</code>.</td>
+        </tr>
+      </tbody>
+    </table>
 
-; letrec: mutually recursive even/odd predicates
-(letrec ((even? (lambda (n) (if (= n 0) 1 (odd?  (- n 1)))))
-         (odd?  (lambda (n) (if (= n 0) 0 (even? (- n 1))))))
-  (list (even? 4) (odd? 3)))   ; =&gt; (1.0 1.0)
+    <p><strong>Whitespace</strong> (spaces, tabs, newlines, carriage returns) is only a token separator — it carries no structural meaning.</p>
+    <p><strong>Line comments</strong> begin with <code>;</code> and run to the end of the line.</p>
 
-; let: sequential bindings (later RHSes see earlier bindings)
-(let ((x 3)
-      (y (* x 2)))   ; x is already bound here
-  (+ x y))           ; =&gt; 9.0
+    <pre><span class="cmt">; this is a comment — everything after ; is ignored</span>
+<span class="pun">'</span><span class="sym">x</span>              <span class="cmt">; reader shorthand → (quote x)</span>
+<span class="str">"hello\nworld"</span>  <span class="cmt">; a two-line string literal</span>
+<span class="num">3.14</span>            <span class="cmt">; number atom</span>
+<span class="sym">my-symbol</span>       <span class="cmt">; symbol atom</span></pre>
+  </section>
 
-; symm: reverse a path
-(define p (path (i) (+ i 1)))    ; path from 1 to 2
-(papply (symm p) i0)              ; =&gt; 2.0
-(papply (symm p) i1)              ; =&gt; 1.0
 
-; trans: concatenate two paths
-(define p1 (path (i) i))          ; path from 0 to 1
-(define p2 (path (i) (+ i 1)))    ; path from 1 to 2
-(papply (trans p1 p2) i0)          ; =&gt; 0.0
-(papply (trans p1 p2) 0.5)         ; =&gt; 1.0
-(papply (trans p1 p2) i1)          ; =&gt; 2.0
+  <!-- ═══════════════════════════════ 2. Expression types -->
+  <section>
+    <h2>2 · Expression Types</h2>
 
-; cong: apply a function pointwise along a path
-(define double (lambda (x) (* x 2)))
-(papply (cong double p1) 0.5)      ; =&gt; 1.0  (double of 0.5)
+    <p>After scanning, <code>parse()</code> in <code>reader.rs</code> builds an <code>Expr</code> tree.
+    There are seven variants (defined in <code>expr.rs</code>):</p>
 
-; funext: path between definitionally equal functions
-(define add0-path
-  (funext (lambda (n) (+ n 0))
-          (lambda (n) n)
-          (lambda (n) (refl n))))
-(papply add0-path i0)   ; =&gt; (lambda 1 (+ #0 0))  — recovers the left function
-(papply add0-path i1)   ; =&gt; (lambda 1 #0)        — recovers the right function
+    <table class="form-table">
+      <thead>
+        <tr><th>Variant</th><th>Source syntax</th><th>Self-evaluates?</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Number(f64)</code></td>
+          <td><code>42</code>, <code>-1.5</code>, <code>3.14e2</code></td>
+          <td>✅ yes</td>
+        </tr>
+        <tr>
+          <td><code>Str(String)</code></td>
+          <td><code>"hello"</code></td>
+          <td>✅ yes</td>
+        </tr>
+        <tr>
+          <td><code>CubicalTerm</code></td>
+          <td>opaque — produced by cubical builtins</td>
+          <td>✅ yes</td>
+        </tr>
+        <tr>
+          <td><code>Symbol(String)</code></td>
+          <td><code>x</code>, <code>my-var</code>, <code>+</code></td>
+          <td>❌ looks up name in the current environment</td>
+        </tr>
+        <tr>
+          <td><code>List(Vec&lt;Expr&gt;)</code></td>
+          <td><code>(f a b)</code>, <code>()</code></td>
+          <td>❌ evaluated as a call or special form; <code>()</code> is nil</td>
+        </tr>
+        <tr>
+          <td><code>Func</code></td>
+          <td>built-in native function</td>
+          <td>✅ yes (returned as-is)</td>
+        </tr>
+        <tr>
+          <td><code>Lambda</code> / <code>Macro</code></td>
+          <td>created by <code>lambda</code> / <code>defmacro</code></td>
+          <td>✅ yes (returned as-is)</td>
+        </tr>
+      </tbody>
+    </table>
 
-; JIT Assembler Loop: Counts up to 5 and returns RAX
-(asm &#39;(
-  (mov rax 0)
-  (label loop)
-  (add rax 1)
-  (cmp rax 5)
-  (jne loop)
-  (ret)
-)) ; =&gt; 5.0
-</code></pre>
+    <div class="rule">
+      <span class="rule-name">expr</span> <span class="rule-op">::=</span>
+        <span class="rule-nt">number</span>
+        <span class="rule-op">|</span> <span class="rule-nt">string</span>
+        <span class="rule-op">|</span> <span class="rule-nt">symbol</span>
+        <span class="rule-op">|</span> <span class="rule-lit">'</span><span class="rule-nt">expr</span>
+        <span class="rule-op">|</span> <span class="rule-lit">(</span> <span class="rule-nt">expr</span><span class="rule-opt">*</span> <span class="rule-lit">)</span>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ 3. Special forms -->
+  <section>
+    <h2>3 · Special Forms</h2>
+
+    <p>When a list's first element is one of the symbols below, <code>eval()</code> handles it
+    specially — arguments are <em>not</em> evaluated before dispatch.
+    <span class="tag tag-special">special form</span> marks each one.</p>
+
+
+    <!-- quote -->
+    <h3>
+      <code>quote</code> <span class="tag tag-special">special form</span>
+      <span style="color:var(--text-tertiary); font-size:0.85rem; font-weight:400; margin-left:0.5rem;">reader shorthand: <code>'expr</code></span>
+    </h3>
+    <div class="rule">
+      <span class="rule-lit">(quote</span> <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+    </div>
+    <p>Returns <code>expr</code> unevaluated. The reader expands <code>'x</code> into <code>(quote x)</code> automatically.</p>
+    <pre><span class="pun">'</span><span class="sym">hello</span>        <span class="cmt">; ⇒ hello  (symbol, not looked up)</span>
+<span class="pun">'</span>(<span class="num">1</span> <span class="num">2</span> <span class="num">3</span>)     <span class="cmt">; ⇒ (1 2 3)  (list, not called)</span></pre>
+
+
+    <!-- quasiquote -->
+    <h3>
+      <code>quasiquote</code> / <code>unquote</code> / <code>unquote-splicing</code>
+      <span class="tag tag-special">special form</span>
+    </h3>
+    <div class="rule">
+      <span class="rule-lit">(quasiquote</span> <span class="rule-nt">template</span><span class="rule-lit">)</span><br>
+      <span class="rule-op">within template:</span>
+        <span class="rule-lit">(unquote</span> <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+        <span class="rule-op">|</span>
+        <span class="rule-lit">(unquote-splicing</span> <span class="rule-nt">list-expr</span><span class="rule-lit">)</span>
+    </div>
+    <p>Produces a list template in which most sub-forms are left unevaluated, but
+    <code>(unquote e)</code> splices the evaluated value of <code>e</code> in-place, and
+    <code>(unquote-splicing e)</code> splices every element of the list returned by <code>e</code>
+    into the surrounding list. Nesting is tracked via a <em>depth counter</em>.</p>
+    <pre><span class="kw">(define</span> <span class="sym">x</span> <span class="num">42</span><span class="kw">)</span>
+`(<span class="sym">the answer is</span> ,<span class="sym">x</span>)    <span class="cmt">; ⇒ (the answer is 42)</span>
+
+<span class="kw">(define</span> <span class="sym">nums</span> <span class="pun">'</span>(<span class="num">1</span> <span class="num">2</span> <span class="num">3</span>)<span class="kw">)</span>
+`(<span class="sym">a</span> ,@<span class="sym">nums</span> <span class="sym">b</span>)           <span class="cmt">; ⇒ (a 1 2 3 b)</span></pre>
+
+
+    <!-- if -->
+    <h3><code>if</code> <span class="tag tag-special">special form</span></h3>
+    <div class="rule">
+      <span class="rule-lit">(if</span> <span class="rule-nt">cond</span> <span class="rule-nt">then</span> <span class="rule-opt">[else]</span><span class="rule-lit">)</span>
+    </div>
+    <p>Evaluates <code>cond</code>. If truthy, evaluates and returns <code>then</code>; otherwise evaluates
+    and returns <code>else</code> (or <code>()</code> / nil when <code>else</code> is omitted).</p>
+    <p><strong>Truthiness rules:</strong> <code>0</code>, the empty string <code>""</code>, and the empty list <code>()</code>
+    are falsy. Everything else — including every <code>CubicalTerm</code> — is truthy.</p>
+    <pre>(<span class="kw">if</span> (<span class="sym">&gt;</span> <span class="sym">x</span> <span class="num">0</span>) <span class="str">"positive"</span> <span class="str">"non-positive"</span>)
+(<span class="kw">if</span> <span class="sym">flag</span> (<span class="sym">do-something</span>))   <span class="cmt">; else branch is optional → returns ()</span></pre>
+
+
+    <!-- define -->
+    <h3><code>define</code> <span class="tag tag-special">special form</span></h3>
+    <div class="rule">
+      <span class="rule-lit">(define</span> <span class="rule-nt">symbol</span> <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+    </div>
+    <p>Evaluates <code>expr</code> and binds the result to <code>symbol</code> in the <em>current</em> environment.
+    The form returns the new value.</p>
+    <pre>(<span class="kw">define</span> <span class="sym">pi</span> <span class="num">3.14159</span>)
+(<span class="kw">define</span> <span class="sym">square</span> (<span class="kw">lambda</span> (<span class="sym">x</span>) (<span class="sym">*</span> <span class="sym">x</span> <span class="sym">x</span>)))</pre>
+
+
+    <!-- lambda -->
+    <h3><code>lambda</code> <span class="tag tag-special">special form</span></h3>
+    <div class="rule">
+      <span class="rule-lit">(lambda (</span><span class="rule-nt">param</span><span class="rule-opt">*</span><span class="rule-lit">)</span> <span class="rule-nt">body</span><span class="rule-lit">)</span>
+    </div>
+    <p>Creates a closure that captures the current environment via a <em>weak reference</em>
+    (to avoid <code>Rc</code> cycles when the lambda is stored back into the same env).
+    When called, a new child environment is created with each parameter bound to the
+    corresponding argument value.</p>
+    <pre>(<span class="kw">define</span> <span class="sym">add</span> (<span class="kw">lambda</span> (<span class="sym">a</span> <span class="sym">b</span>) (<span class="sym">+</span> <span class="sym">a</span> <span class="sym">b</span>)))
+(<span class="sym">add</span> <span class="num">3</span> <span class="num">4</span>)   <span class="cmt">; ⇒ 7</span>
+
+<span class="cmt">; Closures work as expected</span>
+(<span class="kw">define</span> <span class="sym">make-adder</span>
+  (<span class="kw">lambda</span> (<span class="sym">n</span>) (<span class="kw">lambda</span> (<span class="sym">x</span>) (<span class="sym">+</span> <span class="sym">x</span> <span class="sym">n</span>))))
+(<span class="kw">define</span> <span class="sym">add5</span> (<span class="sym">make-adder</span> <span class="num">5</span>))
+(<span class="sym">add5</span> <span class="num">10</span>)    <span class="cmt">; ⇒ 15</span></pre>
+
+
+    <!-- defmacro -->
+    <h3><code>defmacro</code> <span class="tag tag-special">special form</span></h3>
+    <div class="rule">
+      <span class="rule-lit">(defmacro</span> <span class="rule-nt">name</span> <span class="rule-lit">(</span><span class="rule-nt">param</span><span class="rule-opt">*</span><span class="rule-lit">)</span> <span class="rule-nt">body</span><span class="rule-lit">)</span>
+    </div>
+    <p>Defines a macro. At the <em>call site</em>, argument expressions are passed unevaluated
+    and substituted textually into <code>body</code> (hygienic substitution via
+    <code>expand_macro()</code> in <code>macros.rs</code>). The expanded form is then evaluated in the
+    caller's environment.</p>
+    <p>Macros differ from lambdas in two ways: arguments are not pre-evaluated, and macro
+    expansion happens at call time rather than producing a closure.</p>
+    <pre>(<span class="kw">defmacro</span> <span class="sym">my-and</span> (<span class="sym">a</span> <span class="sym">b</span>)
+  `(<span class="kw">if</span> ,<span class="sym">a</span> ,<span class="sym">b</span> <span class="num">0</span>))
+
+(<span class="sym">my-and</span> <span class="num">1</span> <span class="num">2</span>)   <span class="cmt">; expands to (if 1 2 0)  ⇒ 2</span>
+(<span class="sym">my-and</span> <span class="num">0</span> <span class="num">2</span>)   <span class="cmt">; expands to (if 0 2 0)  ⇒ 0</span></pre>
+
+
+    <!-- begin -->
+    <h3><code>begin</code> <span class="tag tag-special">special form</span></h3>
+    <div class="rule">
+      <span class="rule-lit">(begin</span> <span class="rule-nt">expr</span><span class="rule-opt">+</span><span class="rule-lit">)</span>
+    </div>
+    <p>Evaluates each sub-expression in order and returns the value of the last one.
+    Useful for sequencing side-effecting forms.</p>
+    <pre>(<span class="kw">begin</span>
+  (<span class="kw">define</span> <span class="sym">x</span> <span class="num">1</span>)
+  (<span class="kw">define</span> <span class="sym">y</span> <span class="num">2</span>)
+  (<span class="sym">+</span> <span class="sym">x</span> <span class="sym">y</span>))          <span class="cmt">; ⇒ 3</span></pre>
+
+
+    <!-- let -->
+    <h3><code>let</code> <span class="tag tag-special">special form</span></h3>
+    <div class="rule">
+      <span class="rule-lit">(let ((</span><span class="rule-nt">name</span> <span class="rule-nt">expr</span><span class="rule-lit">)</span><span class="rule-opt">*</span><span class="rule-lit">)</span> <span class="rule-nt">body</span><span class="rule-opt">*</span><span class="rule-lit">)</span>
+    </div>
+    <p>Creates a new child environment, evaluates each binding's <code>expr</code> in the
+    <em>outer</em> environment (not the new one — bindings cannot reference each other),
+    and binds the results. Then evaluates each <code>body</code> form in the new environment
+    and returns the last result.</p>
+    <pre>(<span class="kw">let</span> ((<span class="sym">a</span> <span class="num">3</span>)
+      (<span class="sym">b</span> <span class="num">4</span>))
+  (<span class="sym">+</span> <span class="sym">a</span> <span class="sym">b</span>))           <span class="cmt">; ⇒ 7</span></pre>
+  </section>
+
+
+  <!-- ═══════════════════════════════ 4. Function application -->
+  <section>
+    <h2>4 · Function Application</h2>
+
+    <p>Any list that does not match a special form is treated as a function call:</p>
+    <div class="rule">
+      <span class="rule-lit">(</span><span class="rule-nt">operator</span> <span class="rule-nt">arg</span><span class="rule-opt">*</span><span class="rule-lit">)</span>
+    </div>
+    <ol>
+      <li>Evaluate <code>operator</code> — must produce a <code>Func</code> or <code>Lambda</code>.</li>
+      <li>Evaluate each <code>arg</code> left-to-right.</li>
+      <li>Dispatch via <code>apply()</code> in <code>eval.rs</code>:
+        <ul>
+          <li><code>Func(f)</code> — calls the native Rust closure <code>f</code>.</li>
+          <li><code>Lambda(params, body, env)</code> — upgrades the captured weak env, creates a new child frame, binds arguments to parameters, and evaluates <code>body</code>.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <strong>Macro vs. function:</strong> if <code>operator</code> resolves to a <code>Macro</code>, the call is
+      intercepted <em>before</em> argument evaluation — raw unevaluated expressions are
+      substituted into the macro body, and the result is evaluated in the caller's
+      environment.
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ 5. Environment model -->
+  <section>
+    <h2>5 · Environment &amp; Scoping</h2>
+
+    <p>Environments (<code>Env</code> in <code>expr.rs</code>) are reference-counted maps
+    (<code>Rc&lt;RefCell&lt;EnvData&gt;&gt;</code>) arranged in a parent-chain (lexical scoping).
+    Name lookup walks the chain from innermost to outermost.</p>
+
+    <table class="form-table">
+      <thead><tr><th>Form</th><th>Creates a new env?</th><th>Parent env</th></tr></thead>
+      <tbody>
+        <tr><td><code>lambda</code> body</td><td>✅ at call time</td><td>closure's captured env</td></tr>
+        <tr><td><code>let</code> body</td><td>✅</td><td>current env</td></tr>
+        <tr><td><code>define</code></td><td>❌</td><td>mutates current env</td></tr>
+        <tr><td><code>begin</code></td><td>❌</td><td>evaluates in same env</td></tr>
+        <tr><td><code>if</code></td><td>❌</td><td>evaluates in same env</td></tr>
+      </tbody>
+    </table>
+
+    <p>Lambdas hold a <em>weak</em> reference (<code>WeakEnv</code>) to their defining environment so
+    that mutually recursive definitions (storing a lambda into the env that was
+    already captured) do not create a strong <code>Rc</code> cycle and leak memory.</p>
+  </section>
+
+
+  <!-- ═══════════════════════════════ 6. Built-in functions -->
+  <section>
+    <h2>6 · Built-in Functions</h2>
+
+    <p>The global environment is populated by <code>builtins::global_env()</code> (defined in
+    <code>builtins.rs</code>). Built-in functions are stored as <code>Expr::Func</code>
+    values — ordinary callable values indistinguishable from lambdas at the call site.</p>
+
+    <div class="callout">
+      <strong>See the separate Built-in Function Reference</strong> for the full list of
+      arithmetic, comparison, list, string, I/O, and cubical type theory operators
+      registered in the global environment.
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ 7. Complete grammar summary -->
+  <section>
+    <h2>7 · Complete Grammar Summary</h2>
+
+    <div class="rule">
+<span class="rule-name">program</span>  <span class="rule-op">::=</span> <span class="rule-nt">expr</span><span class="rule-opt">*</span>
+
+<span class="rule-name">expr</span>     <span class="rule-op">::=</span> <span class="rule-nt">number</span>
+           <span class="rule-op">|</span> <span class="rule-nt">string</span>
+           <span class="rule-op">|</span> <span class="rule-nt">symbol</span>
+           <span class="rule-op">|</span> <span class="rule-lit">'</span> <span class="rule-nt">expr</span>                          <span class="cmt">; reader shorthand for (quote …)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">()</span>                               <span class="cmt">; nil / empty list</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(quote</span>     <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(quasiquote</span> <span class="rule-nt">template</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(if</span>        <span class="rule-nt">expr expr</span> <span class="rule-opt">[expr]</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(define</span>    <span class="rule-nt">symbol expr</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(lambda</span>    <span class="rule-lit">(</span><span class="rule-nt">symbol</span><span class="rule-opt">*</span><span class="rule-lit">)</span> <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(defmacro</span>  <span class="rule-nt">symbol</span> <span class="rule-lit">(</span><span class="rule-nt">symbol</span><span class="rule-opt">*</span><span class="rule-lit">)</span> <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(begin</span>     <span class="rule-nt">expr</span><span class="rule-opt">+</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(let</span>       <span class="rule-lit">(</span><span class="rule-nt">binding</span><span class="rule-opt">*</span><span class="rule-lit">)</span> <span class="rule-nt">expr</span><span class="rule-opt">+</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(</span><span class="rule-nt">expr</span> <span class="rule-nt">expr</span><span class="rule-opt">*</span><span class="rule-lit">)</span>                    <span class="cmt">; function/macro call</span>
+
+<span class="rule-name">template</span> <span class="rule-op">::=</span> <span class="rule-nt">expr</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(unquote</span>          <span class="rule-nt">expr</span><span class="rule-lit">)</span>
+           <span class="rule-op">|</span> <span class="rule-lit">(unquote-splicing</span> <span class="rule-nt">list-expr</span><span class="rule-lit">)</span>
+
+<span class="rule-name">binding</span>  <span class="rule-op">::=</span> <span class="rule-lit">(</span><span class="rule-nt">symbol expr</span><span class="rule-lit">)</span>
+
+<span class="rule-name">number</span>   <span class="rule-op">::=</span> any token parseable as Rust <span class="rule-nt">f64</span>
+<span class="rule-name">string</span>   <span class="rule-op">::=</span> <span class="rule-lit">"</span> <span class="rule-nt">char</span><span class="rule-opt">*</span> <span class="rule-lit">"</span>   <span class="cmt">; escape sequences: \n \t \r \" \\</span>
+<span class="rule-name">symbol</span>   <span class="rule-op">::=</span> any non-delimiter, non-numeric atom
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>Written in Rust · macros, lexical scoping &amp; a cubical flavor</span>
+    <a href="https://github.com/uwulisp" target="_blank" rel="noopener">
+      github.com/uwulisp ↗
+    </a>
+  </footer>
+
+</div>
+
+<script>
+  function toggleMenu(btn) {
+    const drawer = document.getElementById('mobile-menu');
+    const isOpen = drawer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+</script>
 </body>
 </html>
