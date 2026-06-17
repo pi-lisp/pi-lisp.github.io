@@ -419,6 +419,67 @@ last argument (not just between arguments).</p>
 <pre><code>(print x1 x2 ...)  →  ()</code></pre>
 <p>Strings are printed as raw text (without surrounding quotes); all
 other values use their debug representation.</p>
+<h3 id="read-line"><code>read-line</code></h3>
+<p>Reads a single line of input from standard input.</p>
+<pre><code>(read-line)          →  String
+(read-line prompt)   →  String
+</code></pre>
+<p>If an optional <code>prompt</code> string or expression is provided,
+it is printed to stdout without a trailing newline before reading input.
+The returned string strips trailing <code>\n</code> and <code>\r</code>
+characters.</p>
+<hr />
+<h3 id="file-read"><code>file-read</code></h3>
+<p>Reads the entire contents of a file into a string.</p>
+<pre><code>(file-read path)  →  String
+</code></pre>
+<p><code>path</code> must be a string specifying the file location.
+Errors if the file cannot be opened or read.</p>
+<hr />
+<h3 id="file-write"><code>file-write</code></h3>
+<p>Overwrites a file with the provided string content. Creates the file
+if it does not exist.</p>
+<pre><code>(file-write path content)  →  ()
+</code></pre>
+<p>Both arguments must be strings. Returns an empty list on success.</p>
+<hr />
+<h3 id="file-append"><code>file-append</code></h3>
+<p>Appends string content to the end of a file. Creates the file if it
+does not exist.</p>
+<pre><code>(file-append path content)  →  ()
+</code></pre>
+<p>Both arguments must be strings. Returns an empty list on success.</p>
+<hr />
+<h3 id="file-exists"><code>file-exists?</code></h3>
+<p>Checks whether a file or directory exists at the given path.</p>
+<pre><code>(file-exists? path)  →  1.0 or 0.0
+</code></pre>
+<p><code>path</code> must be a string. Returns <code>1.0</code> if it
+exists, <code>0.0</code> otherwise.</p>
+<hr />
+<h3 id="file-delete"><code>file-delete</code></h3>
+<p>Deletes a file from the file system.</p>
+<pre><code>(file-delete path)  →  ()
+</code></pre>
+<p><code>path</code> must be a string. Returns an empty list on success,
+or raises an error if deletion fails.</p>
+<hr />
+<h3 id="shell"><code>shell</code></h3>
+<p>Executes a command via the system shell (<code>sh -c</code>), blocks
+until completion, and returns the captured standard output.</p>
+<pre><code>(shell cmd)  →  String
+</code></pre>
+<p><code>cmd</code> must be a command string. Standard error is ignored
+unless redirected within the command string.</p>
+<hr />
+<h3 id="shell-status"><code>shell-status</code></h3>
+<p>Executes a command via the system shell (<code>sh -c</code>), blocks
+until completion, and returns the exit status code.</p>
+<pre><code>(shell-status cmd)  →  Number
+</code></pre>
+<p><code>cmd</code> must be a command string. Returns the integer exit
+code (or <code>-1.0</code> if the process was terminated by a signal or
+the exit code cannot be retrieved) represented as a float.</p>
 <hr />
 <h2 id="cubical-type-theory">Cubical Type Theory</h2>
 <p>These builtins provide a surface-level Lisp API over the internal
@@ -729,6 +790,9 @@ definitionally equal, <code>0.0</code> otherwise.</p>
 <p>Assembles and JIT-executes a list of x86-64 instructions, returning
 the value left in <code>RAX</code> as a number.</p>
 <pre><code>(asm instructions)  →  Number</code></pre>
+<p>Reads, parses, assembles, and JIT-executes an external NASM-style
+x86-64 assembly file, returning the value left in RAX as a number.</p>
+<pre><code>(load-asm filename)  →  Number</code></pre>
 <p><code>instructions</code> must be a list of instruction lists. Each
 instruction list begins with a mnemonic symbol followed by its operands.
 The assembled machine code is written to executable memory and called
@@ -736,16 +800,16 @@ immediately; the <code>i64</code> value in <code>RAX</code> at the time
 of <code>ret</code> is returned as a Lisp <code>Number</code> (cast to
 <code>f64</code>).</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb57"><pre
-class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
 <h4 id="operand-forms">Operand forms</h4>
 <table>
 <colgroup>
