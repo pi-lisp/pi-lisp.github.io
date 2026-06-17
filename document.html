@@ -685,7 +685,8 @@
         and returns <code>else</code> (or <code>()</code> / nil when <code>else</code> is omitted).</p>
       <p><strong>Truthiness rules:</strong> <code>0</code>, the empty string <code>""</code>, and the empty list
         <code>()</code>
-        are falsy. Everything else — including every <code>CubicalTerm</code> — is truthy.</p>
+        are falsy. Everything else — including every <code>CubicalTerm</code> — is truthy.
+      </p>
       <pre>(<span class="kw">if</span> (<span class="sym">&gt;</span> <span class="sym">x</span> <span class="num">0</span>) <span class="str">"positive"</span> <span class="str">"non-positive"</span>)
 (<span class="kw">if</span> <span class="sym">flag</span> (<span class="sym">do-something</span>))   <span class="cmt">; else branch is optional → returns ()</span></pre>
 
@@ -708,10 +709,6 @@
         <span class="rule-lit">(lambda (</span><span class="rule-nt">param</span><span class="rule-opt">*</span><span
           class="rule-lit">)</span> <span class="rule-nt">body</span><span class="rule-lit">)</span>
       </div>
-      <p>Creates a closure that captures the current environment via a <em>weak reference</em>
-        (to avoid <code>Rc</code> cycles when the lambda is stored back into the same env).
-        When called, a new child environment is created with each parameter bound to the
-        corresponding argument value.</p>
       <pre>(<span class="kw">define</span> <span class="sym">add</span> (<span class="kw">lambda</span> (<span class="sym">a</span> <span class="sym">b</span>) (<span class="sym">+</span> <span class="sym">a</span> <span class="sym">b</span>)))
 (<span class="sym">add</span> <span class="num">3</span> <span class="num">4</span>)   <span class="cmt">; ⇒ 7</span>
 
