@@ -234,6 +234,105 @@
   </style>
 </head>
 <body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#builtin-functions-reference"
+id="toc-builtin-functions-reference">Builtin Functions Reference</a>
+<ul>
+<li><a href="#arithmetic" id="toc-arithmetic">Arithmetic</a>
+<ul>
+<li><a href="#section" id="toc-section"><code>+</code></a></li>
+<li><a href="#section-1" id="toc-section-1"><code>-</code></a></li>
+<li><a href="#section-2" id="toc-section-2"><code>*</code></a></li>
+<li><a href="#section-3" id="toc-section-3"><code>/</code></a></li>
+<li><a href="#section-4" id="toc-section-4"><code>%</code></a></li>
+</ul></li>
+<li><a href="#comparisons" id="toc-comparisons">Comparisons</a>
+<ul>
+<li><a href="#not" id="toc-not"><code>not</code></a></li>
+</ul></li>
+<li><a href="#lists" id="toc-lists">Lists</a>
+<ul>
+<li><a href="#list" id="toc-list"><code>list</code></a></li>
+<li><a href="#car" id="toc-car"><code>car</code></a></li>
+<li><a href="#cdr" id="toc-cdr"><code>cdr</code></a></li>
+<li><a href="#cons" id="toc-cons"><code>cons</code></a></li>
+<li><a href="#null" id="toc-null"><code>null?</code></a></li>
+<li><a href="#map" id="toc-map"><code>map</code></a></li>
+<li><a href="#filter" id="toc-filter"><code>filter</code></a></li>
+<li><a href="#fold" id="toc-fold"><code>fold</code></a></li>
+</ul></li>
+<li><a href="#strings" id="toc-strings">Strings</a>
+<ul>
+<li><a href="#string" id="toc-string"><code>string?</code></a></li>
+<li><a href="#string-append"
+id="toc-string-append"><code>string-append</code></a></li>
+<li><a href="#string-length"
+id="toc-string-length"><code>string-length</code></a></li>
+<li><a href="#string-comparisons" id="toc-string-comparisons">String
+comparisons</a></li>
+<li><a href="#string-number"
+id="toc-string-number"><code>string-&gt;number</code></a></li>
+<li><a href="#number-string"
+id="toc-number-string"><code>number-&gt;string</code></a></li>
+<li><a href="#string-symbol"
+id="toc-string-symbol"><code>string-&gt;symbol</code></a></li>
+<li><a href="#symbol-string"
+id="toc-symbol-string"><code>symbol-&gt;string</code></a></li>
+<li><a href="#string-upcase"
+id="toc-string-upcase"><code>string-upcase</code></a></li>
+<li><a href="#string-downcase"
+id="toc-string-downcase"><code>string-downcase</code></a></li>
+<li><a href="#substring"
+id="toc-substring"><code>substring</code></a></li>
+</ul></li>
+<li><a href="#miscellaneous" id="toc-miscellaneous">Miscellaneous</a>
+<ul>
+<li><a href="#print" id="toc-print"><code>print</code></a></li>
+<li><a href="#read-line"
+id="toc-read-line"><code>read-line</code></a></li>
+<li><a href="#file-read"
+id="toc-file-read"><code>file-read</code></a></li>
+<li><a href="#file-write"
+id="toc-file-write"><code>file-write</code></a></li>
+<li><a href="#file-append"
+id="toc-file-append"><code>file-append</code></a></li>
+<li><a href="#file-exists"
+id="toc-file-exists"><code>file-exists?</code></a></li>
+<li><a href="#file-delete"
+id="toc-file-delete"><code>file-delete</code></a></li>
+<li><a href="#shell" id="toc-shell"><code>shell</code></a></li>
+<li><a href="#shell-status"
+id="toc-shell-status"><code>shell-status</code></a></li>
+</ul></li>
+<li><a href="#cubical-type-theory" id="toc-cubical-type-theory">Cubical
+Type Theory</a>
+<ul>
+<li><a href="#interval-atoms" id="toc-interval-atoms">Interval
+Atoms</a></li>
+<li><a href="#variables-and-universes"
+id="toc-variables-and-universes">Variables and Universes</a></li>
+<li><a href="#functions" id="toc-functions">Functions</a></li>
+<li><a href="#path-types" id="toc-path-types">Path Types</a></li>
+<li><a href="#sigma-types-and-pairs"
+id="toc-sigma-types-and-pairs">Sigma Types and Pairs</a></li>
+<li><a href="#composition-and-transport"
+id="toc-composition-and-transport">Composition and Transport</a></li>
+<li><a href="#equivalences-and-univalence"
+id="toc-equivalences-and-univalence">Equivalences and
+Univalence</a></li>
+<li><a href="#glue-types" id="toc-glue-types">Glue Types</a></li>
+<li><a href="#evaluation-and-type-checking"
+id="toc-evaluation-and-type-checking">Evaluation and
+Type-Checking</a></li>
+</ul></li>
+<li><a href="#assembler" id="toc-assembler">Assembler</a>
+<ul>
+<li><a href="#asm" id="toc-asm"><code>asm</code></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
 <h1 id="builtin-functions-reference">Builtin Functions Reference</h1>
 <p>This document describes all builtin procedures registered in the
 global environment. Functions are grouped by category.</p>
@@ -561,9 +660,10 @@ interval).</p>
 <h3 id="functions">Functions</h3>
 <h4 id="lambda"><code>lambda</code></h4>
 <p>A term-level lambda abstraction.</p>
-<pre><code>(lambda name body)  →  TAbs(name, body)</code></pre>
+<pre><code>(clambda name body)  →  TAbs(name, body)</code></pre>
 <p><code>name</code> must be a symbol; <code>body</code> must be a
 cubical term.</p>
+<p>use clambda for prevent variable shadowinig</p>
 <hr />
 <h4 id="app"><code>app</code></h4>
 <p>Function application.</p>
