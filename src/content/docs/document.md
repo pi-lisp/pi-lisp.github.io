@@ -1,6 +1,8 @@
-# Grammar Reference
-
-📖 REFERENCE
+---
+title: Grammar Reference
+sidebar:
+  order: 1
+---
 
 A complete description of the reader syntax, expression types, and special forms recognised by the evaluator defined in `reader.rs`, `eval.rs`, and `macros.rs`.
 
@@ -242,16 +244,3 @@ Any list that does not match a special form is treated as a function call:
 The forms that produce `TailCall` are: the selected branch of `if`, the last expression of `begin` and `let`, every lambda application, the result of macro expansion, and explicit `(tailcall …)` calls.
 
 > **Macro vs. function:** if `operator` resolves to a `Macro`, the call is intercepted *before* argument evaluation — raw unevaluated expressions are substituted into the macro body, and the expanded form is returned as a `TailCall` so it is evaluated on the next trampoline iteration.
-
----
-
-## 5 · Built-in Functions
-
-The global environment is populated by `builtins::global_env()` (defined in `builtins`). Built-in functions are stored as `Expr::Func` values — ordinary callable values indistinguishable from lambdas at the call site.
-
-> **See the separate Built-in Function Reference** for the full list of arithmetic, comparison, list, string, I/O, and cubical type theory operators registered in the global environment.
-
----
-
-*Written in Rust · macros, lexical scoping & a cubical flavor*  
-[github.com/uwulisp ↗](https://github.com/uwulisp)

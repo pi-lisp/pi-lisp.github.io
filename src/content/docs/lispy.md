@@ -1,6 +1,10 @@
-![lispy the uwulisp mascot](lispy.jpg)  
+---
+title : Lispy, the Cubical Cat of uwulisp
+sidebar:
+  order: 3
+---
 
-# Lispy, the Cubical Cat of uwulisp
+![Lispy, the Cubical Cat of uwulisp](../../assets/lispy.jpg)  
 
 Long ago, deep inside the Memory Forest where forgotten programs wandered and unfinished functions dreamed, there lived a tiny white creature named **Lispy**.
 
