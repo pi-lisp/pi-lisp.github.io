@@ -290,6 +290,20 @@ last argument (not just between arguments).</p>
 <pre><code>(print x1 x2 ...)  →  ()</code></pre>
 <p>Strings are printed as raw text (without surrounding quotes); all
 other values use their debug representation.</p>
+<h3 id="thread-eval"><code>thread-eval</code></h3>
+<p>Evaluates a source string on a worker OS thread and returns the final
+expression result.</p>
+<pre><code>(thread-eval &quot;(+ 1 2)&quot;)  →  3</code></pre>
+<p>The worker gets a fresh global environment. It can use builtins and
+definitions included in the source string, but it does not share the
+caller’s current variables, functions, or GC heap. Returned values may
+be numbers, strings, symbols, or lists of those values.</p>
+<h3 id="parallel-eval"><code>parallel-eval</code></h3>
+<p>Evaluates a list of source strings concurrently, one worker thread
+per string, and returns the results in the same order as the inputs.</p>
+<pre><code>(parallel-eval (list &quot;(+ 1 2)&quot; &quot;(* 3 4)&quot;))  →  (3 12)</code></pre>
+<p>Each worker is isolated in the same way as
+<code>thread-eval</code>.</p>
 <h3 id="read-line"><code>read-line</code></h3>
 <p>Reads a single line of input from standard input.</p>
 <pre><code>(read-line)          →  String
@@ -678,16 +692,16 @@ immediately; the <code>i64</code> value in <code>RAX</code> at the time
 of <code>ret</code> is returned as a Lisp <code>Number</code> (cast to
 <code>f64</code>).</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb71"><pre
-class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
-<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
 <h4 id="operand-forms"><code>Operand forms</code></h4>
 <table>
 <colgroup>
