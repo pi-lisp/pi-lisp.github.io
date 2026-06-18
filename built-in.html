@@ -234,102 +234,6 @@
   </style>
 </head>
 <body>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#builtin-functions-reference"
-id="toc-builtin-functions-reference">Builtin Functions Reference</a>
-<ul>
-<li><a href="#arithmetic" id="toc-arithmetic">Arithmetic</a>
-<ul>
-<li><a href="#section" id="toc-section"><code>+</code></a></li>
-<li><a href="#section-1" id="toc-section-1"><code>-</code></a></li>
-<li><a href="#section-2" id="toc-section-2"><code>*</code></a></li>
-<li><a href="#section-3" id="toc-section-3"><code>/</code></a></li>
-<li><a href="#section-4" id="toc-section-4"><code>%</code></a></li>
-</ul></li>
-<li><a href="#comparisons" id="toc-comparisons">Comparisons</a>
-<ul>
-<li><a href="#not" id="toc-not"><code>not</code></a></li>
-</ul></li>
-<li><a href="#lists" id="toc-lists">Lists</a>
-<ul>
-<li><a href="#list" id="toc-list"><code>list</code></a></li>
-<li><a href="#car" id="toc-car"><code>car</code></a></li>
-<li><a href="#cdr" id="toc-cdr"><code>cdr</code></a></li>
-<li><a href="#cons" id="toc-cons"><code>cons</code></a></li>
-<li><a href="#null" id="toc-null"><code>null?</code></a></li>
-</ul></li>
-<li><a href="#strings" id="toc-strings">Strings</a>
-<ul>
-<li><a href="#string" id="toc-string"><code>string?</code></a></li>
-<li><a href="#string-append"
-id="toc-string-append"><code>string-append</code></a></li>
-<li><a href="#string-length"
-id="toc-string-length"><code>string-length</code></a></li>
-<li><a href="#string-comparisons" id="toc-string-comparisons">String
-comparisons</a></li>
-<li><a href="#string-number"
-id="toc-string-number"><code>string-&gt;number</code></a></li>
-<li><a href="#number-string"
-id="toc-number-string"><code>number-&gt;string</code></a></li>
-<li><a href="#string-symbol"
-id="toc-string-symbol"><code>string-&gt;symbol</code></a></li>
-<li><a href="#symbol-string"
-id="toc-symbol-string"><code>symbol-&gt;string</code></a></li>
-<li><a href="#string-upcase"
-id="toc-string-upcase"><code>string-upcase</code></a></li>
-<li><a href="#string-downcase"
-id="toc-string-downcase"><code>string-downcase</code></a></li>
-<li><a href="#substring"
-id="toc-substring"><code>substring</code></a></li>
-</ul></li>
-<li><a href="#miscellaneous" id="toc-miscellaneous">Miscellaneous</a>
-<ul>
-<li><a href="#print" id="toc-print"><code>print</code></a></li>
-<li><a href="#read-line"
-id="toc-read-line"><code>read-line</code></a></li>
-<li><a href="#file-read"
-id="toc-file-read"><code>file-read</code></a></li>
-<li><a href="#file-write"
-id="toc-file-write"><code>file-write</code></a></li>
-<li><a href="#file-append"
-id="toc-file-append"><code>file-append</code></a></li>
-<li><a href="#file-exists"
-id="toc-file-exists"><code>file-exists?</code></a></li>
-<li><a href="#file-delete"
-id="toc-file-delete"><code>file-delete</code></a></li>
-<li><a href="#shell" id="toc-shell"><code>shell</code></a></li>
-<li><a href="#shell-status"
-id="toc-shell-status"><code>shell-status</code></a></li>
-</ul></li>
-<li><a href="#cubical-type-theory" id="toc-cubical-type-theory">Cubical
-Type Theory</a>
-<ul>
-<li><a href="#interval-atoms" id="toc-interval-atoms">Interval
-Atoms</a></li>
-<li><a href="#variables-and-universes"
-id="toc-variables-and-universes">Variables and Universes</a></li>
-<li><a href="#functions" id="toc-functions">Functions</a></li>
-<li><a href="#path-types" id="toc-path-types">Path Types</a></li>
-<li><a href="#sigma-types-and-pairs"
-id="toc-sigma-types-and-pairs">Sigma Types and Pairs</a></li>
-<li><a href="#composition-and-transport"
-id="toc-composition-and-transport">Composition and Transport</a></li>
-<li><a href="#equivalences-and-univalence"
-id="toc-equivalences-and-univalence">Equivalences and
-Univalence</a></li>
-<li><a href="#glue-types" id="toc-glue-types">Glue Types</a></li>
-<li><a href="#evaluation-and-type-checking"
-id="toc-evaluation-and-type-checking">Evaluation and
-Type-Checking</a></li>
-</ul></li>
-<li><a href="#assembler" id="toc-assembler">Assembler</a>
-<ul>
-<li><a href="#asm" id="toc-asm"><code>asm</code></a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
 <h1 id="builtin-functions-reference">Builtin Functions Reference</h1>
 <p>This document describes all builtin procedures registered in the
 global environment. Functions are grouped by category.</p>
@@ -357,7 +261,8 @@ global environment. Functions are grouped by category.</p>
 <p>Requires at least one argument. Raises an error on division by
 zero.</p>
 <h3 id="section-4"><code>%</code></h3>
-<p>modulo operator (% 3 2) → Number</p>
+<p>modulo operator</p>
+<pre><code>(% 3 2) → Number</code></pre>
 <p>Requires two argument and return Number</p>
 <hr />
 <h2 id="comparisons">Comparisons</h2>
@@ -428,6 +333,17 @@ new list.</p>
 <p>Returns <code>1.0</code> if the argument is an empty list,
 <code>0.0</code> otherwise.</p>
 <pre><code>(null? x)  →  1.0 or 0.0</code></pre>
+<h3 id="map"><code>map</code></h3>
+<pre><code>(map f list)</code></pre>
+<p>applies <code>f</code> to each element, returns a new list of
+results</p>
+<h3 id="filter"><code>filter</code></h3>
+<pre><code>(filter pred list)</code></pre>
+<p>keeps elements where <code>pred</code> returns truthy</p>
+<h3 id="fold"><code>fold</code></h3>
+<pre><code>(fold f init list)</code></pre>
+<p>left fold, calling <code>f(acc, elem)</code> each step, seeded with
+<code>init</code></p>
 <hr />
 <h2 id="strings">Strings</h2>
 <h3 id="string"><code>string?</code></h3>
@@ -901,16 +817,16 @@ immediately; the <code>i64</code> value in <code>RAX</code> at the time
 of <code>ret</code> is returned as a Lisp <code>Number</code> (cast to
 <code>f64</code>).</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb67"><pre
-class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>(asm &#39;(</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  (mov rax <span class="dv">0</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  (label <span class="kw">loop</span>)</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  (add rax <span class="dv">1</span>)</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>  (cmp rax <span class="dv">5</span>)</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>  (jne <span class="kw">loop</span>)</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
 <h4 id="operand-forms">Operand forms</h4>
 <table>
 <colgroup>
