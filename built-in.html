@@ -6,151 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>builtins</title>
   <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #1a1a1a;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -232,107 +87,9 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#builtin-functions-reference"
-id="toc-builtin-functions-reference">Builtin Functions Reference</a>
-<ul>
-<li><a href="#arithmetic" id="toc-arithmetic">Arithmetic</a>
-<ul>
-<li><a href="#section" id="toc-section"><code>+</code></a></li>
-<li><a href="#section-1" id="toc-section-1"><code>-</code></a></li>
-<li><a href="#section-2" id="toc-section-2"><code>*</code></a></li>
-<li><a href="#section-3" id="toc-section-3"><code>/</code></a></li>
-<li><a href="#section-4" id="toc-section-4"><code>%</code></a></li>
-</ul></li>
-<li><a href="#comparisons" id="toc-comparisons">Comparisons</a>
-<ul>
-<li><a href="#not" id="toc-not"><code>not</code></a></li>
-</ul></li>
-<li><a href="#lists" id="toc-lists">Lists</a>
-<ul>
-<li><a href="#list" id="toc-list"><code>list</code></a></li>
-<li><a href="#car" id="toc-car"><code>car</code></a></li>
-<li><a href="#cdr" id="toc-cdr"><code>cdr</code></a></li>
-<li><a href="#cons" id="toc-cons"><code>cons</code></a></li>
-<li><a href="#null" id="toc-null"><code>null?</code></a></li>
-<li><a href="#map" id="toc-map"><code>map</code></a></li>
-<li><a href="#filter" id="toc-filter"><code>filter</code></a></li>
-<li><a href="#fold" id="toc-fold"><code>fold</code></a></li>
-</ul></li>
-<li><a href="#strings" id="toc-strings">Strings</a>
-<ul>
-<li><a href="#string" id="toc-string"><code>string?</code></a></li>
-<li><a href="#string-append"
-id="toc-string-append"><code>string-append</code></a></li>
-<li><a href="#string-length"
-id="toc-string-length"><code>string-length</code></a></li>
-<li><a href="#string-comparisons" id="toc-string-comparisons">String
-comparisons</a></li>
-<li><a href="#string-number"
-id="toc-string-number"><code>string-&gt;number</code></a></li>
-<li><a href="#number-string"
-id="toc-number-string"><code>number-&gt;string</code></a></li>
-<li><a href="#string-symbol"
-id="toc-string-symbol"><code>string-&gt;symbol</code></a></li>
-<li><a href="#symbol-string"
-id="toc-symbol-string"><code>symbol-&gt;string</code></a></li>
-<li><a href="#string-upcase"
-id="toc-string-upcase"><code>string-upcase</code></a></li>
-<li><a href="#string-downcase"
-id="toc-string-downcase"><code>string-downcase</code></a></li>
-<li><a href="#substring"
-id="toc-substring"><code>substring</code></a></li>
-</ul></li>
-<li><a href="#miscellaneous" id="toc-miscellaneous">Miscellaneous</a>
-<ul>
-<li><a href="#print" id="toc-print"><code>print</code></a></li>
-<li><a href="#read-line"
-id="toc-read-line"><code>read-line</code></a></li>
-<li><a href="#file-read"
-id="toc-file-read"><code>file-read</code></a></li>
-<li><a href="#file-write"
-id="toc-file-write"><code>file-write</code></a></li>
-<li><a href="#file-append"
-id="toc-file-append"><code>file-append</code></a></li>
-<li><a href="#file-exists"
-id="toc-file-exists"><code>file-exists?</code></a></li>
-<li><a href="#file-delete"
-id="toc-file-delete"><code>file-delete</code></a></li>
-<li><a href="#shell" id="toc-shell"><code>shell</code></a></li>
-<li><a href="#shell-status"
-id="toc-shell-status"><code>shell-status</code></a></li>
-</ul></li>
-<li><a href="#cubical-type-theory" id="toc-cubical-type-theory">Cubical
-Type Theory</a>
-<ul>
-<li><a href="#interval-atoms" id="toc-interval-atoms">Interval
-Atoms</a></li>
-<li><a href="#variables-and-universes"
-id="toc-variables-and-universes">Variables and Universes</a></li>
-<li><a href="#functions" id="toc-functions">Functions</a></li>
-<li><a href="#path-types" id="toc-path-types">Path Types</a></li>
-<li><a href="#sigma-types-and-pairs"
-id="toc-sigma-types-and-pairs">Sigma Types and Pairs</a></li>
-<li><a href="#composition-and-transport"
-id="toc-composition-and-transport">Composition and Transport</a></li>
-<li><a href="#equivalences-and-univalence"
-id="toc-equivalences-and-univalence">Equivalences and
-Univalence</a></li>
-<li><a href="#glue-types" id="toc-glue-types">Glue Types</a></li>
-<li><a href="#evaluation-and-type-checking"
-id="toc-evaluation-and-type-checking">Evaluation and
-Type-Checking</a></li>
-</ul></li>
-<li><a href="#assembler" id="toc-assembler">Assembler</a>
-<ul>
-<li><a href="#asm" id="toc-asm"><code>asm</code></a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
 <h1 id="builtin-functions-reference">Builtin Functions Reference</h1>
 <p>This document describes all builtin procedures registered in the
 global environment. Functions are grouped by category.</p>
@@ -458,7 +215,7 @@ results</p>
 <p>Returns the number of Unicode characters in a string.</p>
 <pre><code>(string-length s)  →  Number</code></pre>
 <hr />
-<h3 id="string-comparisons">String comparisons</h3>
+<h3 id="string-comparisons"><code>String comparisons</code></h3>
 <p>All string comparisons take exactly two string arguments and return
 <code>1.0</code> or <code>0.0</code>.</p>
 <table>
@@ -601,7 +358,7 @@ cubical type theory (CTT) kernel. Every cubical builtin returns an
 <code>Expr::CubicalTerm</code> wrapping the corresponding
 <code>Term</code> variant. Arguments that are expected to be cubical
 terms must themselves be <code>Expr::CubicalTerm</code> values.</p>
-<h3 id="interval-atoms">Interval Atoms</h3>
+<h3 id="interval-atoms"><code>Interval Atoms</code></h3>
 <h4 id="interval-zero"><code>interval-zero</code></h4>
 <p>The interval endpoint <code>0</code>.</p>
 <pre><code>(interval-zero)  →  TInterval(I0)</code></pre>
@@ -640,7 +397,8 @@ immediately.</p>
 <p>Argument must be a <code>TInterval</code> term. Passing a
 pre-normalised <code>TCube</code> is an error.</p>
 <hr />
-<h3 id="variables-and-universes">Variables and Universes</h3>
+<h3
+id="variables-and-universes"><code>Variables and Universes</code></h3>
 <h4 id="var"><code>var</code></h4>
 <p>A de Bruijn-indexed term variable.</p>
 <pre><code>(var n)  →  TVar(n)</code></pre>
@@ -657,7 +415,7 @@ interval).</p>
 <pre><code>(interval-type)  →  TIntervalTy</code></pre>
 <p>No arguments.</p>
 <hr />
-<h3 id="functions">Functions</h3>
+<h3 id="functions"><code>Functions</code></h3>
 <h4 id="lambda"><code>lambda</code></h4>
 <p>A term-level lambda abstraction.</p>
 <pre><code>(clambda name body)  →  TAbs(name, body)</code></pre>
@@ -676,7 +434,7 @@ cubical term.</p>
 <p><code>name</code> must be a symbol; <code>domain</code> and
 <code>codomain</code> must be cubical terms.</p>
 <hr />
-<h3 id="path-types">Path Types</h3>
+<h3 id="path-types"><code>Path Types</code></h3>
 <h4 id="path-type"><code>path-type</code></h4>
 <p>The identity/path type between two terms over a given type.</p>
 <pre><code>(path-type A a b)  →  TPath(A, a, b)</code></pre>
@@ -693,7 +451,7 @@ cubical term.</p>
 <pre><code>(path-app p i)  →  PApp(p, i)</code></pre>
 <p>Both arguments must be cubical terms.</p>
 <hr />
-<h3 id="sigma-types-and-pairs">Sigma Types and Pairs</h3>
+<h3 id="sigma-types-and-pairs"><code>Sigma Types and Pairs</code></h3>
 <h4 id="sigma"><code>sigma</code></h4>
 <p>A dependent pair type (Σ-type).</p>
 <pre><code>(sigma name domain codomain)  →  TSigma(name, domain, codomain)</code></pre>
@@ -715,7 +473,8 @@ cubical term.</p>
 <pre><code>(snd p)  →  TSnd(p)</code></pre>
 <p><code>p</code> must be a cubical term.</p>
 <hr />
-<h3 id="composition-and-transport">Composition and Transport</h3>
+<h3
+id="composition-and-transport"><code>Composition and Transport</code></h3>
 <h4 id="hcomp"><code>hcomp</code></h4>
 <p>Homogeneous composition. Fills a cube with a given face
 constraint.</p>
@@ -754,7 +513,8 @@ constraint.</p>
 <p>Both arguments must be cubical terms. <code>path</code> is a path in
 a universe; <code>x</code> is the element to transport.</p>
 <hr />
-<h3 id="equivalences-and-univalence">Equivalences and Univalence</h3>
+<h3
+id="equivalences-and-univalence"><code>Equivalences and Univalence</code></h3>
 <h4 id="equiv"><code>equiv</code></h4>
 <p>The type of equivalences between two types.</p>
 <pre><code>(equiv A B)  →  TEquiv(A, B)</code></pre>
@@ -810,7 +570,7 @@ a universe; <code>x</code> is the element to transport.</p>
 <p><code>e</code> must be a cubical term representing an
 equivalence.</p>
 <hr />
-<h3 id="glue-types">Glue Types</h3>
+<h3 id="glue-types"><code>Glue Types</code></h3>
 <p>Glue types are used to implement the computational content of
 univalence.</p>
 <h4 id="glue"><code>glue</code></h4>
@@ -876,7 +636,8 @@ terms.</p>
 </table>
 <p>All three arguments must be cubical terms.</p>
 <hr />
-<h3 id="evaluation-and-type-checking">Evaluation and Type-Checking</h3>
+<h3
+id="evaluation-and-type-checking"><code>Evaluation and Type-Checking</code></h3>
 <h4 id="ctt-eval"><code>ctt-eval</code></h4>
 <p>Normalises a closed cubical term.</p>
 <pre><code>(ctt-eval t)  →  CubicalTerm</code></pre>
@@ -900,7 +661,7 @@ type-checking failure.</p>
 <p>Returns <code>1.0</code> if <code>t</code> and <code>u</code> are
 definitionally equal, <code>0.0</code> otherwise.</p>
 <hr />
-<h2 id="assembler">Assembler</h2>
+<h2 id="assembler"><code>Assembler</code></h2>
 <h3 id="asm"><code>asm</code></h3>
 <p>Assembles and JIT-executes a list of x86-64 instructions, returning
 the value left in <code>RAX</code> as a number.</p>
@@ -927,7 +688,7 @@ class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb71-1"><a
 <span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>  (ret)</span>
 <span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>))</span>
 <span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co">; → 5.0</span></span></code></pre></div>
-<h4 id="operand-forms">Operand forms</h4>
+<h4 id="operand-forms"><code>Operand forms</code></h4>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -960,12 +721,12 @@ class="sourceCode lisp"><code class="sourceCode commonlisp"><span id="cb71-1"><a
 </tbody>
 </table>
 <p>Immediate values must fit in a signed 32-bit integer.</p>
-<h4 id="supported-registers">Supported registers</h4>
+<h4 id="supported-registers"><code>Supported registers</code></h4>
 <p><code>rax</code>, <code>rcx</code>, <code>rdx</code>,
 <code>rbx</code>, <code>rsp</code>, <code>rbp</code>, <code>rsi</code>,
 <code>rdi</code>, <code>r8</code>–<code>r15</code>
 (case-insensitive).</p>
-<h4 id="supported-instructions">Supported instructions</h4>
+<h4 id="supported-instructions"><code>Supported instructions</code></h4>
 <p><strong>Data movement</strong></p>
 <table>
 <thead>
