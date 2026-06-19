@@ -4,7 +4,7 @@ sidebar:
   order: 10
 ---
 
-![Lispy, the Cubical Cat of uwulisp](../../assets/lispy.jpg)  
+![Lispy, the Cubical Cat of uwulisp](../../assets/lispy.png)  
 
 Long ago, deep inside the Memory Forest where forgotten programs wandered and unfinished functions dreamed, there lived a tiny white creature named **Lispy**.
 
