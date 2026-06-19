@@ -2,45 +2,269 @@
 title: uwulisp
 sidebar:
   order: 0
-description: A lightweight, experimental Lisp interpreter written in Rust — with paths, intervals, Π-types, Σ-types, and Glue types.
+description: A tiny Lisp in Rust for playful experiments with cubical type theory, dependent types, and native x86-64 assembly.
 template: splash
 hero:
-  tagline: ✨ cubical type theory, uwu style. All the cubical goodies, tied up with a pretty purple bandana.
+  tagline: A small experimental Lisp where S-expressions can wander into intervals, paths, Π-types, Σ-types, Glue types, and native assembly.
   image:
     file: ../../assets/lispy.png
-    alt: uwulisp mascot — a cute purple cat wearing a bandana with a parenthesis symbol
+    alt: Lispy, the uwulisp mascot, wearing a purple bandana with a parenthesis symbol
   actions:
-    - text: View on GitHub
-      link: https://github.com/uwulisp
-      icon: external
+    - text: Read the grammar
+      link: /document/
+      icon: right-arrow
       variant: primary
+    - text: Browse builtins
+      link: /builtins/builtin/
+      icon: document
+    - text: Meet Lispy
+      link: /lispy/
+      icon: heart
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<section class="landing-intro" aria-label="uwulisp overview">
+  <div class="intro-copy">
+    <p class="eyebrow">Rust interpreter · Lisp reader · cubical playground</p>
+    <h2>Small syntax for strange, precise ideas.</h2>
+    <p>
+      uwulisp is a compact Lisp interpreter for exploring ordinary S-expressions,
+      evaluator mechanics, cubical type theory primitives, and a native assembly
+      escape hatch from one playful language surface.
+    </p>
+  </div>
+
+  <div class="terminal-card" aria-label="uwulisp sample">
+    <div class="terminal-bar" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <pre><code>{`(define square (lambda (x) (* x x)))
+(square 9)
+; => 81
+
+(define i (interval-var 0))
+(define j (interval-var 1))
+
+(interval-meet i j)
+; => i ∧ j, normalised by the cubical builtins`}</code></pre>
+  </div>
+</section>
+
+<section class="route-strip" aria-label="Documentation paths">
+  <a href="/document/">
+    <strong>Grammar</strong>
+    <span>Reader syntax, expressions, special forms, evaluation, and macros.</span>
+  </a>
+  <a href="/builtins/builtin/">
+    <strong>Builtins</strong>
+    <span>Arithmetic, lists, strings, comparisons, cubical forms, and assembly.</span>
+  </a>
+  <a href="/lispy/">
+    <strong>Lispy</strong>
+    <span>The small cubical cat guarding the parentheses of uwulisp.</span>
+  </a>
+</section>
 
 ## Why uwulisp?
 
 <CardGrid>
-  <Card title="Cubical Type Theory" icon="setting">
-    Features an internal cubical type theory (CTT) kernel accessible via a surface-level Lisp API . Includes advanced type constructs like intervals, dependent functions (Π-types), dependent pairs (Σ-types), path types, composition, and Glue types.
+  <Card title="Lisp at the surface" icon="seti:default">
+    Write definitions, lambdas, conditionals, quotes, macros, lists, strings,
+    numbers, and evaluator experiments using familiar parenthesized forms.
   </Card>
-  <Card title="JIT Assembly Execution" icon="rocket">
-    Assembles and JIT-executes inline x86-64 NASM-style instruction lists or external assembly files directly from the evaluator, returning computed results from the RAX register natively as Lisp numbers.
+  <Card title="Cubical ideas inside" icon="puzzle">
+    Work with intervals, path types, composition, dependent functions,
+    dependent pairs, universes, variables, and Glue types.
   </Card>
-  <Card title="S-Expression Syntax" icon="codePen">
-    Powered by a simple grammar that builds an expression tree supporting common primitives . Includes traditional Lisp structures such as quotes, definitions, conditional evaluation, and textually-substituted macros .
+  <Card title="Assembly when needed" icon="rocket">
+    Use inline x86-64 NASM-style instruction lists or external assembly files
+    and receive the value returned through RAX.
   </Card>
-  <Card title="UwU Style" icon="heart">
-    Brings a cute, expressive perspective to intensive mathematical logic . All of the foundational cubical mechanics and type-checking capabilities come wrapped up neatly in a friendly, purple-bandana-wearing cat aesthetic .
+  <Card title="A mascot with lore" icon="heart">
+    Lispy gives the project a softer edge: part guide, part guardian, and
+    fully committed to balanced parentheses.
   </Card>
 </CardGrid>
 
-## Get started
+## Start here
 
-Make sure you have Rust and Cargo installed. Clone the repository and run the test harness containing the sample expressions:
+<CardGrid>
+  <LinkCard
+    title="Read the language guide"
+    href="/document/"
+    description="Learn how source text is tokenized, parsed, evaluated, and extended with special forms."
+  />
+  <LinkCard
+    title="Use the builtin reference"
+    href="/builtins/builtin/"
+    description="Find the functions available in the global environment, grouped by category."
+  />
+  <LinkCard
+    title="Explore cubical builtins"
+    href="/builtins/cubical/"
+    description="Jump straight into intervals, paths, universes, dependent types, and cubical operations."
+  />
+  <LinkCard
+    title="Meet Lispy"
+    href="/lispy/"
+    description="Read the story of uwulisp's cubical cat mascot and its purple syntax scarf."
+  />
+</CardGrid>
 
-```bash
-git clone https://github.com/uwulisp/uwulisp.git
-cd uwulisp
-cargo run
-```
+<Aside type="tip" title="Run the interpreter">
+  Clone the interpreter repository and start it with Cargo:
+
+  ```bash
+  git clone https://github.com/uwulisp/uwulisp.git
+  cd uwulisp
+  cargo run
+  ```
+</Aside>
+
+<style>{`
+  .landing-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 1.1fr);
+    align-items: stretch;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-block: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .intro-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 4px solid var(--sl-color-accent);
+    padding-inline-start: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .eyebrow {
+    color: var(--sl-color-accent-high);
+    font-size: var(--sl-text-sm);
+    font-weight: 700;
+    letter-spacing: 0;
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .intro-copy h2 {
+    color: var(--sl-color-white);
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .intro-copy p:last-child {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-lg);
+    line-height: 1.7;
+    margin-block-end: 0;
+  }
+
+  .terminal-card {
+    background:
+      linear-gradient(145deg, rgba(128, 86, 255, 0.16), transparent 38%),
+      var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    box-shadow: var(--sl-shadow-lg);
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    align-items: center;
+    background: var(--sl-color-gray-6);
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    display: flex;
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding-inline: 1rem;
+  }
+
+  .terminal-bar span {
+    background: var(--sl-color-gray-3);
+    border-radius: 50%;
+    display: block;
+    height: 0.72rem;
+    width: 0.72rem;
+  }
+
+  .terminal-bar span:nth-child(1) {
+    background: var(--sl-color-red);
+  }
+
+  .terminal-bar span:nth-child(2) {
+    background: var(--sl-color-orange);
+  }
+
+  .terminal-bar span:nth-child(3) {
+    background: var(--sl-color-green);
+  }
+
+  .terminal-card pre {
+    background: transparent;
+    border: 0;
+    margin: 0;
+    overflow-x: auto;
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .terminal-card code {
+    font-size: clamp(0.86rem, 1.2vw, 1rem);
+    line-height: 1.75;
+  }
+
+  .route-strip {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-block: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .route-strip a {
+    background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 8px;
+    min-width: 0;
+    padding: 1rem;
+    text-decoration: none;
+  }
+
+  .route-strip a:hover,
+  .route-strip a:focus-visible {
+    border-color: var(--sl-color-accent-high);
+  }
+
+  .route-strip strong,
+  .route-strip span {
+    display: block;
+  }
+
+  .route-strip strong {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-lg);
+    margin-block-end: 0.35rem;
+  }
+
+  .route-strip span {
+    color: var(--sl-color-gray-2);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 52rem) {
+    .landing-intro,
+    .route-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .intro-copy {
+      border-left: 0;
+      border-top: 4px solid var(--sl-color-accent);
+      padding: 1rem 0 0;
+    }
+  }
+`}</style>
