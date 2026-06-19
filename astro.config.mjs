@@ -7,10 +7,8 @@ export default defineConfig({
         starlight({
             title: 'uwulisp',
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/uwulisp/uwulisp' }],
-            
-            defaultLocale: 'en',
             locales: {
-                en: {
+                root: {
                     label: 'English',
                     lang: 'en-US',
                 },
