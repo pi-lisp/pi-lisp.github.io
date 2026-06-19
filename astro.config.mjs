@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
     integrations: [
         starlight({
-            title: 'auwulisp',
+            title: 'uwulisp',
             social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/uwulisp/uwulisp' }],
         }),
     ],
