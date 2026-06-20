@@ -8,7 +8,7 @@ hero:
   tagline: A small experimental Lisp where S-expressions can wander into intervals, paths, Π-types, Σ-types, Glue types, and native assembly.
   image:
     file: ../../assets/lispy.png
-    alt: Lispy, the uwulisp mascot, wearing a purple bandana with a parenthesis symbol
+    alt: Lispy, the uwulisp cat mascot, wearing a purple bandana with a parenthesis symbol, saying UWU
   actions:
     - text: Read the grammar
       link: /document/
@@ -17,12 +17,15 @@ hero:
     - text: Browse builtins
       link: /builtins/builtin/
       icon: document
-    - text: Meet Lispy
-      link: /lispy/
+    - text: Meet the mascots
+      link: /lispy_lispoo/
       icon: heart
 ---
 
 import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+import lispooImg from '../../assets/lispoo.png';
+import lispyImg from '../../assets/lispy.png';
 
 <section class="landing-intro" aria-label="uwulisp overview">
   <div class="intro-copy">
@@ -62,9 +65,9 @@ import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     <strong>Builtins</strong>
     <span>Arithmetic, lists, strings, comparisons, cubical forms, and assembly.</span>
   </a>
-  <a href="/lispy/">
-    <strong>Lispy</strong>
-    <span>The small cubical cat guarding the parentheses of uwulisp.</span>
+  <a href="/lispy_lispoo/">
+    <strong>Lispy & Lispoo</strong>
+    <span>The cubical cat and her puppy friend, guardians of the parentheses.</span>
   </a>
 </section>
 
@@ -83,11 +86,37 @@ import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     Use inline x86-64 NASM-style instruction lists or external assembly files
     and receive the value returned through RAX.
   </Card>
-  <Card title="A mascot with lore" icon="heart">
-    Lispy gives the project a softer edge: part guide, part guardian, and
-    fully committed to balanced parentheses.
+  <Card title="Two mascots, one language" icon="heart">
+    Lispy the cat and Lispoo the puppy give the project its softer edge:
+    part guides, part guardians, fully committed to balanced parentheses.
   </Card>
 </CardGrid>
+
+<section class="mascot-duo" aria-label="Meet the mascots">
+  <div class="mascot-card">
+    <Image src={lispyImg} alt="Lispy the cat, uwulisp's original mascot, wearing a purple bandana with parentheses" />
+    <div class="mascot-info">
+      <h3>Lispy <span class="mascot-tag">the cat</span></h3>
+      <p>
+        The original guardian of uwulisp. Lispy keeps watch over every open
+        parenthesis, nudges stray S-expressions back into shape, and whispers
+        <em>UWU</em> whenever a type checks.
+      </p>
+    </div>
+  </div>
+  <div class="mascot-divider" aria-hidden="true">&</div>
+  <div class="mascot-card mascot-card--reverse">
+    <Image src={lispooImg} alt="Lispoo the puppy, uwulisp's energetic co-mascot, wearing a purple bandana with parentheses, waving a paw" />
+    <div class="mascot-info">
+      <h3>Lispoo <span class="mascot-tag">the puppy</span></h3>
+      <p>
+        Lispy's enthusiastic companion. Lispoo arrived when cubical types got
+        complicated — one paw raised, always ready to remind you that
+        even dependent pairs can be fun.
+      </p>
+    </div>
+  </div>
+</section>
 
 ## Start here
 
@@ -108,9 +137,9 @@ import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     description="Jump straight into intervals, paths, universes, dependent types, and cubical operations."
   />
   <LinkCard
-    title="Meet Lispy"
-    href="/lispy/"
-    description="Read the story of uwulisp's cubical cat mascot and its purple syntax scarf."
+    title="Meet Lispy & Lispoo"
+    href="/lispy_lispoo/"
+    description="Read the story of uwulisp's cubical cat and her puppy companion, and their purple syntax scarves."
   />
 </CardGrid>
 
@@ -193,17 +222,9 @@ import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     width: 0.72rem;
   }
 
-  .terminal-bar span:nth-child(1) {
-    background: var(--sl-color-red);
-  }
-
-  .terminal-bar span:nth-child(2) {
-    background: var(--sl-color-orange);
-  }
-
-  .terminal-bar span:nth-child(3) {
-    background: var(--sl-color-green);
-  }
+  .terminal-bar span:nth-child(1) { background: var(--sl-color-red); }
+  .terminal-bar span:nth-child(2) { background: var(--sl-color-orange); }
+  .terminal-bar span:nth-child(3) { background: var(--sl-color-green); }
 
   .terminal-card pre {
     background: transparent;
@@ -255,6 +276,83 @@ import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     line-height: 1.55;
   }
 
+  /* ── Mascot duo section ── */
+  .mascot-duo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-block: clamp(2rem, 6vw, 4rem);
+    position: relative;
+  }
+
+  .mascot-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: center;
+    gap: 2rem;
+    background: linear-gradient(135deg, rgba(128, 86, 255, 0.08), transparent 60%),
+                var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    transition: border-color 0.2s;
+  }
+
+  .mascot-card:hover {
+    border-color: var(--sl-color-accent-high);
+  }
+
+  .mascot-card--reverse {
+    grid-template-columns: 1fr 180px;
+  }
+
+  .mascot-card--reverse img {
+    order: 2;
+  }
+
+  .mascot-card--reverse .mascot-info {
+    order: 1;
+    text-align: right;
+  }
+
+  .mascot-card img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    border-radius: 8px;
+    drop-shadow: 0 4px 16px rgba(128, 86, 255, 0.2);
+  }
+
+  .mascot-info h3 {
+    color: var(--sl-color-white);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+
+  .mascot-tag {
+    color: var(--sl-color-accent-high);
+    font-size: var(--sl-text-sm);
+    font-weight: 400;
+    margin-inline-start: 0.4em;
+  }
+
+  .mascot-info p {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-base);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .mascot-divider {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--sl-color-accent-high);
+    opacity: 0.5;
+    line-height: 1;
+    margin-block: -0.5rem;
+  }
+
   @media (max-width: 52rem) {
     .landing-intro,
     .route-strip {
@@ -265,6 +363,24 @@ import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
       border-left: 0;
       border-top: 4px solid var(--sl-color-accent);
       padding: 1rem 0 0;
+    }
+
+    .mascot-card,
+    .mascot-card--reverse {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .mascot-card img,
+    .mascot-card--reverse img {
+      order: 0;
+      max-width: 140px;
+      margin-inline: auto;
+    }
+
+    .mascot-card--reverse .mascot-info {
+      order: 1;
+      text-align: center;
     }
   }
 `}</style>
