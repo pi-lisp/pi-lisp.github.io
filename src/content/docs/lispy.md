@@ -1,7 +1,7 @@
 ---
 title : Lispy, the Cubical Cat of uwulisp
 sidebar:
-  order: 10
+  order: 11
 ---
 
 ![Lispy, the Cubical Cat of uwulisp](../../assets/lispy.png)  
