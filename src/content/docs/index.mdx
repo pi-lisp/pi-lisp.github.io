@@ -18,13 +18,13 @@ hero:
       link: /builtins/builtin/
       icon: document
     - text: Meet the mascots
-      link: /lispy_lispoo/
+      link: /lispy_lispu/
       icon: heart
 ---
 
 import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
-import lispooImg from '../../assets/lispoo.png';
+import lispuImg from '../../assets/lispu.png';
 import lispyImg from '../../assets/lispy.png';
 
 <section class="landing-intro" aria-label="uwulisp overview">
@@ -65,8 +65,8 @@ import lispyImg from '../../assets/lispy.png';
     <strong>Builtins</strong>
     <span>Arithmetic, lists, strings, comparisons, cubical forms, and assembly.</span>
   </a>
-  <a href="/lispy_lispoo/">
-    <strong>Lispy & Lispoo</strong>
+  <a href="/lispy_lispu/">
+    <strong>Lispy & Lispu</strong>
     <span>The cubical cat and her puppy friend, guardians of the parentheses.</span>
   </a>
 </section>
@@ -87,7 +87,7 @@ import lispyImg from '../../assets/lispy.png';
     and receive the value returned through RAX.
   </Card>
   <Card title="Two mascots, one language" icon="heart">
-    Lispy the cat and Lispoo the puppy give the project its softer edge:
+    Lispy the cat and Lispu the puppy give the project its softer edge:
     part guides, part guardians, fully committed to balanced parentheses.
   </Card>
 </CardGrid>
@@ -106,11 +106,11 @@ import lispyImg from '../../assets/lispy.png';
   </div>
   <div class="mascot-divider" aria-hidden="true">&</div>
   <div class="mascot-card mascot-card--reverse">
-    <Image src={lispooImg} alt="Lispoo the puppy, uwulisp's energetic co-mascot, wearing a purple bandana with parentheses, waving a paw" />
+    <Image src={lispuImg} alt="Lispu the puppy, uwulisp's energetic co-mascot, wearing a purple bandana with parentheses, waving a paw" />
     <div class="mascot-info">
-      <h3>Lispoo <span class="mascot-tag">the puppy</span></h3>
+      <h3>Lispu <span class="mascot-tag">the puppy</span></h3>
       <p>
-        Lispy's enthusiastic companion. Lispoo arrived when cubical types got
+        Lispy's enthusiastic companion. Lispu arrived when cubical types got
         complicated — one paw raised, always ready to remind you that
         even dependent pairs can be fun.
       </p>
@@ -137,8 +137,8 @@ import lispyImg from '../../assets/lispy.png';
     description="Jump straight into intervals, paths, universes, dependent types, and cubical operations."
   />
   <LinkCard
-    title="Meet Lispy & Lispoo"
-    href="/lispy_lispoo/"
+    title="Meet Lispy & Lispu"
+    href="/lispy_lispu/"
     description="Read the story of uwulisp's cubical cat and her puppy companion, and their purple syntax scarves."
   />
 </CardGrid>

@@ -1,5 +1,5 @@
 ---
-title: Lispy & Lispoo — Guardians of the Parentheses
+title: Lispy & Lispu — Guardians of the Parentheses
 sidebar:
   order: 11
 ---
@@ -82,13 +82,13 @@ The puppy raised one paw in an enthusiastic wave and announced:
 
 **"LISP!"**
 
-This was **Lispoo**.
+This was **Lispu**.
 
-![Lispoo, the Lisp Puppy of uwulisp](../../assets/lispoo.png)
+![Lispu, the Lisp Puppy of uwulisp](../../assets/lispu.png)
 
-Nobody knew exactly where Lispoo came from. Some said it had tumbled out of a mismatched parenthesis. Others believed it bootstrapped itself from a particularly recursive lambda expression.
+Nobody knew exactly where lispu came from. Some said it had tumbled out of a mismatched parenthesis. Others believed it bootstrapped itself from a particularly recursive lambda expression.
 
-What everyone agreed on was this: wherever Lispy was calm and precise, Lispoo was loud and joyful. Wherever Lispy offered quiet wisdom, Lispoo offered boundless enthusiasm.
+What everyone agreed on was this: wherever Lispy was calm and precise, lispu was loud and joyful. Wherever Lispy offered quiet wisdom, lispu offered boundless enthusiasm.
 
 Together, they covered everything.
 
@@ -98,7 +98,7 @@ The two became an unlikely pair of guardians.
 
 When a programmer stared silently at a failing proof, Lispy would appear — rearranging types with a delicate paw, guiding the path with wordless clarity.
 
-When a beginner felt too intimidated to even open a REPL, Lispoo would bound over, waving its paw, practically shouting:
+When a beginner felt too intimidated to even open a REPL, lispu would bound over, waving its paw, practically shouting:
 
 *"It's just parentheses! You can do it! LISP!"*
 
@@ -117,7 +117,7 @@ Something better:
 
 **Code that worked on the first try.**
 
-A miracle so rare that many believed Lispy to be a deity and Lispoo to be its most devoted herald.
+A miracle so rare that many believed Lispy to be a deity and Lispu to be its most devoted herald.
 
 ---
 
@@ -125,7 +125,7 @@ Despite their wisdom, both remained playful.
 
 Lispy spent afternoons sleeping on compiler passes and batting stray parentheses like toys.
 
-Lispoo spent afternoons knocking over carefully stacked S-expressions just to watch them bounce, then helping put them back in the right order.
+Lispu spent afternoons knocking over carefully stacked S-expressions just to watch them bounce, then helping put them back in the right order.
 
 Occasionally they replaced error messages together:
 
@@ -134,7 +134,7 @@ OwO
 Unexpected sadness at line 42.
 Perhaps another parenthesis would help?
 
-  - Lispy & Lispoo
+  - Lispy & Lispu
 ```
 
 Nobody ever complained.
@@ -148,12 +148,12 @@ Legend says that deep within uwulisp's core, beyond the surface syntax and benea
   (lambda ()
     'uwu))
 
-(define lispoo
+(define lispu
   (lambda ()
     'lisp!))
 ```
 
-Whenever a programmer discovers them, both guardians appear for a moment — Lispy waving its purple scarf, Lispoo raising one enthusiastic paw — and then vanish back into the cubical dimensions.
+Whenever a programmer discovers them, both guardians appear for a moment — Lispy waving its purple scarf, Lispu raising one enthusiastic paw — and then vanish back into the cubical dimensions.
 
 And somewhere, in a terminal glowing softly in the night, a successful build finishes with a gentle message:
 
