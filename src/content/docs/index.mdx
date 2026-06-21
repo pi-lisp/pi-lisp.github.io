@@ -143,6 +143,30 @@ import lispyImg from '../../assets/lispy.png';
   />
 </CardGrid>
 
+## Editor support
+
+<CardGrid>
+  <LinkCard
+    title="uwulisp for VS Code"
+    href="https://marketplace.visualstudio.com/items?itemName=uwulisp.uwulisp"
+    description="Syntax highlighting, bracket matching, and language support for .uwu files in Visual Studio Code."
+  />
+  <LinkCard
+    title="uwulisp_cubical for VS Code"
+    href="https://marketplace.visualstudio.com/items?itemName=uwulisp.uwulisp-cubical"
+    description="Extended language support for .uwuc files — cubical type theory forms, paths, intervals, and dependent types."
+  />
+</CardGrid>
+
+<Aside type="note" title="File extensions">
+  uwulisp uses two file extensions depending on which language features you need:
+
+  - **`.uwu`** — standard uwulisp source files (S-expressions, lambdas, macros, builtins, assembly).
+  - **`.uwuc`** — uwulisp_cubical source files, for code that uses cubical type theory primitives such as intervals, path types, composition, Π-types, Σ-types, and Glue types.
+
+  Both extensions are recognised by their respective VS Code extensions above.
+</Aside>
+
 <Aside type="tip" title="Run the interpreter">
   Clone the interpreter repository and start it with Cargo:
 
