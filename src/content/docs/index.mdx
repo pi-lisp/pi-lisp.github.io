@@ -76,7 +76,7 @@ import lispyImg from '../../assets/lispy.png';
 <CardGrid>
   <Card title="Lisp at the surface" icon="seti:default">
     Write definitions, lambdas, conditionals, quotes, macros, lists, strings,
-    numbers, and evaluator experiments using familiar parenthesized forms.
+    integers, floats, booleans, and evaluator experiments using familiar parenthesized forms.
   </Card>
   <Card title="Cubical ideas inside" icon="puzzle">
     Work with intervals, path types, composition, dependent functions,
@@ -164,7 +164,7 @@ import lispyImg from '../../assets/lispy.png';
   - **`.pi`** — standard pi-lisp source files (S-expressions, lambdas, macros, builtins, assembly).
   - **`.pic`** — pi-lisp_cubical source files, for code that uses cubical type theory primitives such as intervals, path types, composition, Π-types, Σ-types, and Glue types.
 
-  Both extensions are recognised by their respective VS Code extensions above.
+  File extension is autodetected — a `.pic` file is automatically run in cubical mode without needing a `--cubical` flag. Both extensions are recognised by their respective VS Code extensions above.
 </Aside>
 
 <Aside type="tip" title="Run the interpreter">
@@ -179,4 +179,3 @@ import lispyImg from '../../assets/lispy.png';
   pi-lisp
   ```
 </Aside>
-

@@ -18,7 +18,7 @@ Source text is scanned character-by-character by `tokenize()` in `reader.rs`. Th
 | `RParen` | `)` | Closes a list form. |
 | `Quote` | `'` | Reader shorthand; expands to `(quote …)`. |
 | `Str(s)` | `"…"` | String literal. Supports `\n \t \r \" \\`; may span multiple lines. |
-| `Atom(s)` | any other run of non-delimiter chars | Parsed into a `Number` if it is a valid `f64`, otherwise a `Symbol`. |
+| `Atom(s)` | any other run of non-delimiter chars | Parsed in order: `#t`/`#f` → `Bool`; integer (valid `i64`) → `Int`; floating-point (valid `f64`) → `Float`; otherwise → `Symbol`. |
 
 **Whitespace** (spaces, tabs, newlines, carriage returns) is only a token separator — it carries no structural meaning.
 
@@ -28,19 +28,24 @@ Source text is scanned character-by-character by `tokenize()` in `reader.rs`. Th
 ; this is a comment — everything after ; is ignored
 'x              ; reader shorthand → (quote x)
 "hello\nworld"  ; a two-line string literal
-3.14            ; number atom
-my-symbol       ; symbol atom
+42              ; integer atom  → Expr::Int(42)
+3.14            ; float atom    → Expr::Float(3.14)
+#t              ; boolean atom  → Expr::Bool(true)
+#f              ; boolean atom  → Expr::Bool(false)
+my-symbol       ; symbol atom   → Expr::Symbol("my-symbol")
 ```
 
 ---
 
 ## 2 · Expression Types
 
-After scanning, `parse()` in `reader.rs` builds an `Expr` tree. There are seven variants (defined in `expr.rs`):
+After scanning, `parse()` in `reader.rs` builds an `Expr` tree. There are nine variants (defined in `expr.rs`):
 
 | Variant | Source syntax | Self-evaluates? |
 |---------|--------------|-----------------|
-| `Number(f64)` | `42`, `-1.5`, `3.14e2` | ✅ yes |
+| `Int(i64)` | `42`, `-7`, `0` | ✅ yes |
+| `Float(f64)` | `3.14`, `-1.5e2` | ✅ yes |
+| `Bool(bool)` | `#t`, `#f` | ✅ yes |
 | `Str(String)` | `"hello"` | ✅ yes |
 | `CubicalTerm` | opaque — produced by cubical builtins | ✅ yes |
 | `Symbol(String)` | `x`, `my-var`, `+` | ❌ looks up name in the current environment |
@@ -51,7 +56,7 @@ After scanning, `parse()` in `reader.rs` builds an `Expr` tree. There are seven 
 **Grammar rule:**
 
 ```
-expr ::= number | string | symbol | 'expr | ( expr* )
+expr ::= integer | float | bool | string | symbol | 'expr | ( expr* )
 ```
 
 ---
@@ -103,7 +108,7 @@ Produces a list template in which most sub-forms are left unevaluated, but `(unq
 
 Evaluates `cond`. If truthy, evaluates and returns `then`; otherwise evaluates and returns `else` (or `()` / nil when `else` is omitted).
 
-**Truthiness rules:** `0`, the empty string `""`, and the empty list `()` are falsy. Everything else — including every `CubicalTerm` — is truthy.
+**Truthiness rules:** `#f` / `Bool(false)`, integer `0`, float `0.0`, the empty string `""`, and the empty list `()` are all falsy. Everything else — including every `CubicalTerm` — is truthy.
 
 ```lisp
 (if (> x 0) "positive" "non-positive")
@@ -216,7 +221,7 @@ Iterates over a numeric range or a list, binding `var` on each iteration and eva
 | Shape | Semantics |
 |-------|-----------|
 | `(for var coll body*)` — **4 elements total** | List iteration: evaluate `coll`, bind `var` to each element in order, run `body*` |
-| `(for var start end body*)` — **5+ elements**, and both `start` and `end` evaluate to numbers | Numeric range: `var` runs from `start` up to but **not including** `end`, stepping by `1.0` |
+| `(for var start end body*)` — **5+ elements**, and both `start` and `end` evaluate to integers | Numeric range: `var` runs from `start` up to but **not including** `end`, stepping by `1` |
 | `(for var arg body*)` — **5+ elements**, but `start`/`end` are not both numbers | List iteration: `arg` is the collection, `body*` starts at the fourth argument |
 
 The loop variable and any internal state live in a child environment that is discarded when the loop finishes — `var` is not visible outside the form.
