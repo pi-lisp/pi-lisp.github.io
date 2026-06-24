@@ -32,7 +32,6 @@ export default defineConfig({
                         { label: 'List', slug: 'builtins/list' },
                         { label: 'String', slug: 'builtins/string' },
                         { label: 'Miscellaneous', slug: 'builtins/miscellaneous' },
-                        { label: 'Cubical Type Theory', slug: 'builtins/cubical' },
                         { label: 'Assembly', slug: 'builtins/asm' },
                         { label: 'Network', slug: 'builtins/network' },
                     ],
