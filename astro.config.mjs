@@ -37,7 +37,6 @@ export default defineConfig({
                     ],
                 },
                 { label: 'Cubical Surface Language', slug: 'dcubical' },
-                { label: 'How Code is Executed', slug: 'code_map' },
                 { label: 'Lispy & Lispu', slug: 'lispy_lispu' },
             ],
         }),
