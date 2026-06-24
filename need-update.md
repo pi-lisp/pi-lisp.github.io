@@ -1,2 +1,2 @@
-mentioning VS Code uwulisp and uwulisp_cubical extension 
-mentioning .uwu and .uwuc for uwulisp code and uwulisp_cubical code
+mentioning VS Code pi-lisp and pi-lisp_cubical extension 
+mentioning .pi and .pic for pi-lisp code and pi-lisp_cubical code

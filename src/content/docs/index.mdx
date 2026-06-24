@@ -1,5 +1,5 @@
 ---
-title: uwulisp
+title: pi-lisp
 sidebar:
   order: 0
 description: A tiny Lisp in Rust for playful experiments with cubical type theory, dependent types, and native x86-64 assembly.
@@ -8,7 +8,7 @@ hero:
   tagline: A small experimental Lisp where S-expressions can wander into intervals, paths, Π-types, Σ-types, Glue types, and native assembly.
   image:
     file: ../../assets/lispy.png
-    alt: Lispy, the uwulisp cat mascot, wearing a purple bandana with a parenthesis symbol, saying UWU
+    alt: Lispy, the pi-lisp cat mascot, wearing a purple bandana with a parenthesis symbol, saying UWU
   actions:
     - text: Read the grammar
       link: /document/
@@ -27,18 +27,18 @@ import { Image } from 'astro:assets';
 import lispuImg from '../../assets/lispu.png';
 import lispyImg from '../../assets/lispy.png';
 
-<section class="landing-intro" aria-label="uwulisp overview">
+<section class="landing-intro" aria-label="pi-lisp overview">
   <div class="intro-copy">
     <p class="eyebrow">Rust interpreter · Lisp reader · cubical playground</p>
     <h2>Small syntax for strange, precise ideas.</h2>
     <p>
-      uwulisp is a compact Lisp interpreter for exploring ordinary S-expressions,
+      pi-lisp is a compact Lisp interpreter for exploring ordinary S-expressions,
       evaluator mechanics, cubical type theory primitives, and a native assembly
       escape hatch from one playful language surface.
     </p>
   </div>
 
-  <div class="terminal-card" aria-label="uwulisp sample">
+  <div class="terminal-card" aria-label="pi-lisp sample">
     <div class="terminal-bar" aria-hidden="true">
       <span></span>
       <span></span>
@@ -71,7 +71,7 @@ import lispyImg from '../../assets/lispy.png';
   </a>
 </section>
 
-## Why uwulisp?
+## Why pi-lisp?
 
 <CardGrid>
   <Card title="Lisp at the surface" icon="seti:default">
@@ -94,11 +94,11 @@ import lispyImg from '../../assets/lispy.png';
 
 <section class="mascot-duo" aria-label="Meet the mascots">
   <div class="mascot-card">
-    <Image src={lispyImg} alt="Lispy the cat, uwulisp's original mascot, wearing a purple bandana with parentheses" />
+    <Image src={lispyImg} alt="Lispy the cat, pi-lisp's original mascot, wearing a purple bandana with parentheses" />
     <div class="mascot-info">
       <h3>Lispy <span class="mascot-tag">the cat</span></h3>
       <p>
-        The original guardian of uwulisp. Lispy keeps watch over every open
+        The original guardian of pi-lisp. Lispy keeps watch over every open
         parenthesis, nudges stray S-expressions back into shape, and whispers
         <em>UWU</em> whenever a type checks.
       </p>
@@ -106,7 +106,7 @@ import lispyImg from '../../assets/lispy.png';
   </div>
   <div class="mascot-divider" aria-hidden="true">&</div>
   <div class="mascot-card mascot-card--reverse">
-    <Image src={lispuImg} alt="Lispu the puppy, uwulisp's energetic co-mascot, wearing a purple bandana with parentheses, waving a paw" />
+    <Image src={lispuImg} alt="Lispu the puppy, pi-lisp's energetic co-mascot, wearing a purple bandana with parentheses, waving a paw" />
     <div class="mascot-info">
       <h3>Lispu <span class="mascot-tag">the puppy</span></h3>
       <p>
@@ -139,7 +139,7 @@ import lispyImg from '../../assets/lispy.png';
   <LinkCard
     title="Meet Lispy & Lispu"
     href="/lispy_lispu/"
-    description="Read the story of uwulisp's cubical cat and her puppy companion, and their purple syntax scarves."
+    description="Read the story of pi-lisp's cubical cat and her puppy companion, and their purple syntax scarves."
   />
 </CardGrid>
 
@@ -147,22 +147,22 @@ import lispyImg from '../../assets/lispy.png';
 
 <CardGrid>
   <LinkCard
-    title="uwulisp for VS Code"
-    href="https://marketplace.visualstudio.com/items?itemName=uwulisp.uwulisp"
-    description="Syntax highlighting, bracket matching, and language support for .uwu files in Visual Studio Code."
+    title="pi-lisp for VS Code"
+    href="https://marketplace.visualstudio.com/items?itemName=pi-lisp.pi-lisp"
+    description="Syntax highlighting, bracket matching, and language support for .pi files in Visual Studio Code."
   />
   <LinkCard
-    title="uwulisp_cubical for VS Code"
-    href="https://marketplace.visualstudio.com/items?itemName=uwulisp.uwulisp-cubical"
-    description="Extended language support for .uwuc files — cubical type theory forms, paths, intervals, and dependent types."
+    title="pi-lisp_cubical for VS Code"
+    href="https://marketplace.visualstudio.com/items?itemName=pi-lisp.pi-lisp-cubical"
+    description="Extended language support for .pic files — cubical type theory forms, paths, intervals, and dependent types."
   />
 </CardGrid>
 
 <Aside type="note" title="File extensions">
-  uwulisp uses two file extensions depending on which language features you need:
+  pi-lisp uses two file extensions depending on which language features you need:
 
-  - **`.uwu`** — standard uwulisp source files (S-expressions, lambdas, macros, builtins, assembly).
-  - **`.uwuc`** — uwulisp_cubical source files, for code that uses cubical type theory primitives such as intervals, path types, composition, Π-types, Σ-types, and Glue types.
+  - **`.pi`** — standard pi-lisp source files (S-expressions, lambdas, macros, builtins, assembly).
+  - **`.pic`** — pi-lisp_cubical source files, for code that uses cubical type theory primitives such as intervals, path types, composition, Π-types, Σ-types, and Glue types.
 
   Both extensions are recognised by their respective VS Code extensions above.
 </Aside>
@@ -171,12 +171,12 @@ import lispyImg from '../../assets/lispy.png';
   Clone the interpreter repository and start it with Cargo:
 
   ```bash
-  git clone https://github.com/uwulisp/uwulisp.git
-  cd uwulisp
+  git clone https://github.com/pi-lisp/pi-lisp.git
+  cd pi-lisp
   cargo run
   # if use nix
-  nix shell github:uwulisp/uwulisp
-  uwulisp
+  nix shell github:pi-lisp/pi-lisp
+  pi-lisp
   ```
 </Aside>
 

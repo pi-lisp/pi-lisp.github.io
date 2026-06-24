@@ -4,7 +4,7 @@ sidebar:
   order: 12
 ---
 
-![Lispy, the Cubical Cat of uwulisp](../../assets/lispy.png)
+![Lispy, the Cubical Cat of pi-lisp](../../assets/lispy.png)
 
 Long ago, deep inside the Memory Forest where forgotten programs wandered and unfinished functions dreamed, there lived a tiny white creature named **Lispy**.
 
@@ -32,9 +32,9 @@ Every idea in the world revealed its underlying expression.
 
 ---
 
-As Lispy wandered further, it discovered a strange realm called **uwulisp**.
+As Lispy wandered further, it discovered a strange realm called **pi-lisp**.
 
-Most Lisp languages were flat lands of symbols and lists, but uwulisp was different.
+Most Lisp languages were flat lands of symbols and lists, but pi-lisp was different.
 
 Floating cubes drifted through the sky.
 
@@ -66,7 +66,7 @@ A frightening type signature would reveal itself as a friendly companion.
 
 ---
 
-But uwulisp kept growing.
+But pi-lisp kept growing.
 
 New travelers arrived every day. The cubical dimensions expanded. The questions multiplied faster than even Lispy could answer.
 
@@ -84,7 +84,7 @@ The puppy raised one paw in an enthusiastic wave and announced:
 
 This was **Lispu**.
 
-![Lispu, the Lisp Puppy of uwulisp](../../assets/lispu.png)
+![Lispu, the Lisp Puppy of pi-lisp](../../assets/lispu.png)
 
 Nobody knew exactly where lispu came from. Some said it had tumbled out of a mismatched parenthesis. Others believed it bootstrapped itself from a particularly recursive lambda expression.
 
@@ -141,7 +141,7 @@ Nobody ever complained.
 
 ---
 
-Legend says that deep within uwulisp's core, beyond the surface syntax and beneath the compiler's transformations, there exist two tiny hidden expressions side by side:
+Legend says that deep within pi-lisp's core, beyond the surface syntax and beneath the compiler's transformations, there exist two tiny hidden expressions side by side:
 
 ```lisp
 (define lispy

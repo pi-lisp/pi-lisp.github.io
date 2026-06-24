@@ -25,11 +25,11 @@ Relative paths are resolved against the directory of the file containing the `im
 Example:
 
 ```
--- nat.uwuc
+-- nat.pic
 data Nat = | zero : Nat | suc : Nat -> Nat
 
--- main.uwuc
-import "nat.uwuc"
+-- main.pic
+import "nat.pic"
 
 def main : Nat -> Nat = \n. n
 ```
@@ -432,13 +432,13 @@ atom     ::= ident | '0' | '1' | '(' term ')'
 
 ## Python transpilation
 
-The `transpile` module (`transpile.rs`) converts `.uwuc` files to type-erased Python via:
+The `transpile` module (`transpile.rs`) converts `.pic` files to type-erased Python via:
 
 ```
-uwulisp --cubical-transpile <file.uwuc> [-o <output-dir>]
+pi-lisp --cubical-transpile <file.pic> [-o <output-dir>]
 ```
 
-The transpiler is self-contained in `src/cubical` — no external runtime or prelude is needed. To run the output, the root `.uwuc` file must explicitly define `def main : <showable-type> = ...`. The transpiler then emits `main.py` that calls `module.main` (filling in Pi arguments with demo values such as `nat.Suc(nat.Suc(nat.Zero))` for `Nat`). If no `main` definition exists, no `main.py` is generated.
+The transpiler is self-contained in `src/cubical` — no external runtime or prelude is needed. To run the output, the root `.pic` file must explicitly define `def main : <showable-type> = ...`. The transpiler then emits `main.py` that calls `module.main` (filling in Pi arguments with demo values such as `nat.Suc(nat.Suc(nat.Zero))` for `Nat`). If no `main` definition exists, no `main.py` is generated.
 
 Run:
 
