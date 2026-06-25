@@ -1,7 +1,7 @@
 ---
 title : Cubical Surface Language — Syntax Reference
 sidebar:
-  order: 11
+  order: 12
 ---
 
 This document describes the concrete syntax of the cubical surface language parsed by `parser.rs` and compiled by `transpile.rs`. The language is a dependently-typed calculus with cubical type theory extensions: path types, interval expressions, Glue types, and higher inductive types.

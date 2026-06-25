@@ -1,7 +1,7 @@
 ---
 title: Lispy & Lispu — Guardians of the Parentheses
 sidebar:
-  order: 12
+  order: 13
 ---
 
 ![Lispy, the Cubical Cat of pi-lisp](../../assets/lispy.png)
