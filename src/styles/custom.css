@@ -1,21 +1,24 @@
-/* ── pi-lisp brand palette ── */
+/* ── pi-lisp brand palette (favicon: black / white Π) ── */
 :root {
-  --uwu-purple: #7c5cfc;
-  --uwu-purple-bright: #9b7eff;
-  --uwu-purple-dim: #5a3fd6;
-  --uwu-purple-glow: rgba(124, 92, 252, 0.15);
+  --color-accent-mid: #666666;
+  --color-glow: rgba(0, 0, 0, 0.08);
 }
 
-/* ── Starlight accent overrides ── */
 :root {
-  --sl-color-accent: var(--uwu-purple);
-  --sl-color-accent-high: var(--uwu-purple-bright);
-  --sl-color-accent-low: var(--uwu-purple-dim);
+  --sl-color-accent: #333333;
+  --sl-color-accent-high: #000000;
+  --sl-color-accent-low: #e8e8e8;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent: #cccccc;
+  --sl-color-accent-high: #ffffff;
+  --sl-color-accent-low: #2a2a2a;
 }
 
 /* ── Code blocks ── */
 .sl-markdown-content :not(pre) > code {
-  color: var(--uwu-purple-bright);
+  color: var(--sl-color-accent);
 }
 
 /* ── Landing: intro section ── */
@@ -61,7 +64,7 @@
 /* ── Landing: terminal card ── */
 .terminal-card {
   background:
-    linear-gradient(145deg, var(--uwu-purple-glow), transparent 38%),
+    linear-gradient(145deg, var(--color-glow), transparent 38%),
     var(--sl-color-bg-nav);
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 8px;
@@ -157,7 +160,7 @@
   grid-template-columns: 180px 1fr;
   align-items: center;
   gap: 2rem;
-  background: linear-gradient(135deg, var(--uwu-purple-glow), transparent 60%),
+  background: linear-gradient(135deg, var(--color-glow), transparent 60%),
               var(--sl-color-bg-nav);
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 12px;
@@ -187,7 +190,7 @@
   max-width: 180px;
   height: auto;
   border-radius: 8px;
-  drop-shadow: 0 4px 16px var(--uwu-purple-glow);
+  filter: drop-shadow(0 4px 16px var(--color-glow));
 }
 
 .mascot-info h3 {

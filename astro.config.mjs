@@ -12,7 +12,7 @@ export default defineConfig({
                 baseUrl: 'https://github.com/pi-lisp/pi-lisp.github.io/edit/main/',
             },
             logo: {
-                src: './src/assets/lispy.png',
+                src: './public/favicon.svg',
                 alt: 'pi-lisp',
                 replacesTitle: false,
             },
