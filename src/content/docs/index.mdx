@@ -44,7 +44,15 @@ import lispyImg from '../../assets/lispy.png';
       <span></span>
       <span></span>
     </div>
-    <pre><code>{'(print "hello, world")'}</code></pre>
+    <pre><code>{`(define square (lambda (x) (* x x)))
+(square 9)
+; => 81
+
+(define i (interval-var 0))
+(define j (interval-var 1))
+
+(interval-meet i j)
+; => i ∧ j, normalised by the cubical builtins`}</code></pre>
   </div>
 </section>
 

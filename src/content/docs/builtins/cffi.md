@@ -1,7 +1,7 @@
 ---
 title : C FFI
 sidebar:
-  order: 10
+  order: 9
 ---
 
 ### `lisp-dlopen`

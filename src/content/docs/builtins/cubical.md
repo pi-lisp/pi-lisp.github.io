@@ -1,7 +1,7 @@
 ---
 title: Cubical Type Theory
 sidebar:
-  order: 11
+  order: 8
 ---
 
 Builtins for loading and evaluating cubical type theory files (`.ctt` / `.pic`). Implemented in `src/builtins/mod.rs:79–128` and `src/cubical/mod.rs`.
